@@ -1,10 +1,10 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "community-access",
-  "description": "Accessibility enforcement plugins for Claude Code",
   "owner": {
-    "name": "Community Access",
-    "url": "https://github.com/Community-Access"
+    "name": "Community Access"
+  },
+  "metadata": {
+    "description": "Accessibility enforcement plugins for Claude Code"
   },
   "plugins": [
     {
