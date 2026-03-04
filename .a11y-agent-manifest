@@ -34,6 +34,7 @@ agents/markdown-scanner.md
 agents/mobile-accessibility.md
 agents/modal-specialist.md
 agents/nexus.md
+agents/nvda-addon-specialist.md
 agents/office-scan-config.md
 agents/pdf-accessibility.md
 agents/pdf-scan-config.md
@@ -91,6 +92,7 @@ copilot-agents/markdown-scanner.agent.md
 copilot-agents/mobile-accessibility.agent.md
 copilot-agents/modal-specialist.agent.md
 copilot-agents/nexus.agent.md
+copilot-agents/nvda-addon-specialist.agent.md
 copilot-agents/office-scan-config.agent.md
 copilot-agents/pdf-accessibility.agent.md
 copilot-agents/pdf-scan-config.agent.md
@@ -236,6 +238,7 @@ gemini/skills/markdown-scanner/SKILL.md
 gemini/skills/mobile-accessibility/SKILL.md
 gemini/skills/modal-specialist/SKILL.md
 gemini/skills/nexus/SKILL.md
+gemini/skills/nvda-addon-specialist/SKILL.md
 gemini/skills/office-scan-config/SKILL.md
 gemini/skills/pdf-accessibility/SKILL.md
 gemini/skills/pdf-scan-config/SKILL.md
