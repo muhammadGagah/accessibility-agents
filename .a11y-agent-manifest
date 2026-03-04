@@ -126,6 +126,7 @@ copilot-prompts/a11y-update.prompt.md
 copilot-prompts/add-collaborator.prompt.md
 copilot-prompts/address-comments.prompt.md
 copilot-prompts/audit-changed-documents.prompt.md
+copilot-prompts/audit-desktop-a11y.prompt.md
 copilot-prompts/audit-document-folder.prompt.md
 copilot-prompts/audit-markdown.prompt.md
 copilot-prompts/audit-single-document.prompt.md
@@ -158,6 +159,7 @@ copilot-prompts/my-prs.prompt.md
 copilot-prompts/my-stats.prompt.md
 copilot-prompts/notifications.prompt.md
 copilot-prompts/onboard-repo.prompt.md
+copilot-prompts/package-python-app.prompt.md
 copilot-prompts/pr-author-checklist.prompt.md
 copilot-prompts/pr-comment.prompt.md
 copilot-prompts/pr-report.prompt.md
@@ -169,12 +171,16 @@ copilot-prompts/react.prompt.md
 copilot-prompts/refine-issue.prompt.md
 copilot-prompts/release-prep.prompt.md
 copilot-prompts/review-pr.prompt.md
+copilot-prompts/review-text-quality.prompt.md
+copilot-prompts/scaffold-nvda-addon.prompt.md
+copilot-prompts/scaffold-wxpython-app.prompt.md
 copilot-prompts/security-dashboard.prompt.md
 copilot-prompts/setup-document-cicd.prompt.md
 copilot-prompts/setup-github-scanner.prompt.md
 copilot-prompts/setup-lighthouse-scanner.prompt.md
 copilot-prompts/sprint-review.prompt.md
 copilot-prompts/team-dashboard.prompt.md
+copilot-prompts/test-desktop-a11y.prompt.md
 copilot-prompts/triage.prompt.md
 copilot-skills/accessibility-rules/SKILL.md
 copilot-skills/cognitive-accessibility/SKILL.md
@@ -260,3 +266,4 @@ gemini/skills/web-issue-fixer/SKILL.md
 gemini/skills/web-scanning/SKILL.md
 gemini/skills/web-severity-scoring/SKILL.md
 gemini/skills/word-accessibility/SKILL.md
+gemini/skills/wxpython-specialist/SKILL.md
