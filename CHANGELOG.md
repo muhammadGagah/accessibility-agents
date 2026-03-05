@@ -8,25 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Marketplace Plugin Packaging** - Created `plugin.yaml` manifest for VS Code Marketplace (awesome-copilot registry)
+  - Bundled 56 agents, 17 skills, 60+ prompts, 5 workspace instructions for one-click discovery
+  - Marketplace installation guide added to README
+  - Ready for immediate submission to awesome-copilot and copilot-plugins registries
+  
+- **Marketplace Installation Instructions** - Quick-start section in README for Extensions marketplace discovery
+  - One-click install for GitHub Copilot (VS Code) users
+  - Script installation alternatives (macOS/Linux/Windows)
+  - Clear platform parity information (Copilot fully supported, Claude Code/Gemini community-maintained)
 
-- **Debug Panel Workflow Guide** - Added user-facing troubleshooting guide for VS Code Agent Debug Panel workflows in `docs/guides/debug-panel-workflows.md`
-  - Covers instruction loading checks, handoff validation, tool failure triage, and browser verification troubleshooting
-  - Includes a reproducible issue report checklist for deterministic debugging
+### In Progress
+- **Lifecycle Hooks** - Session startup, tool execution, agent selection hooks (targetv3.1.0)
+- **Agentic Browser Tools Phase 3-4** - Advanced verification scenarios and failure mode handling (target v3.1.0)
 
 ### Changed
-
-- **Source Verification Coverage** - Expanded source verification workflow triggers to include:
-  - `claude-code-plugin/agents/**/*.md`
-  - `scripts/verify-sources.py`
-  - `.github/agents/SOURCE_REGISTRY.json`
-- **Source Currency Automation** - `source-currency-check.yml` now runs on relevant `pull_request` and `push` events in addition to weekly schedule
-- **Source Validation Performance** - Added URL-level caching in `scripts/verify-sources.py` to avoid duplicate network calls during large scans
-
-### Fixed
-
-- **Operational Citation Backlog** - Added missing `## Authoritative Sources` sections to all remaining Claude-side agent files:
-  - `.claude/agents/*.md` now fully covered
-  - `claude-code-plugin/agents/web-csv-reporter.md` now aligned
+- **Documentation** - Updated README marketplace section, prd.md with stable/marketplace-ready status
+  - Added browser-tool-usage.md to advanced guides table
+  - Clarified installation methods and marketplace availability
 
 ## [3.0.0] - 2026-03-04
 

@@ -87,6 +87,25 @@ The installer is designed to be additive and non-destructive:
 
 To reinstall a specific agent from scratch, delete it first and rerun the installer (or update script).
 
+## Install from VS Code Marketplace (Recommended)
+
+**GitHub Copilot users (VS Code):** Install Accessibility Agents directly from the Extensions marketplace.
+
+1. **Open Extensions** - Press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (Mac)
+2. **Search** - Type "accessibility-agents"
+3. **Click Install** - One-click install of all 56 agents, 17 skills, 60+ prompts, and workspace instructions
+4. **Configure** - Create scan config files for your project (instructions included in README)
+
+**What you get:**
+- ✅ 56 fully-integrated agents in GitHub Copilot (VS Code and CLI)
+- ✅ 17 reusable accessibility skills (WCAG rules, severity scoring, scanning patterns)
+- ✅ 60+ custom prompts for web audits, document audits, GitHub workflows
+- ✅ 5 workspace instructions (automatic WCAG AA enforcement on every chat)
+- ✅ 100% source citation coverage (all agents cite authoritative standards)
+- ✅ Auto-update mechanism (new agents and features arrive automatically)
+
+For other platforms (Claude Code, Gemini, Claude Desktop, Codex), see [Getting Started](docs/getting-started.md).
+
 ## The Team
 
 The following agents make up the accessibility enforcement team, each owning one domain.
@@ -188,6 +207,7 @@ The following guides cover advanced configuration, cross-platform handoff, and d
 | [Cross-Platform Handoff](docs/advanced/cross-platform-handoff.md) | Seamless handoff between Claude Code and Copilot |
 | [Advanced Scanning Patterns](docs/advanced/advanced-scanning-patterns.md) | Background scanning, worktree isolation, large libraries |
 | [Debug Panel Workflows](docs/guides/debug-panel-workflows.md) | Troubleshoot agent loading, handoffs, tool calls, and browser verification |
+| [Browser Tool Usage](docs/guides/browser-tool-usage.md) | Agentic browser verification: agents autonomously verify fixes in integrated browser |
 | [Plugin Packaging](docs/advanced/plugin-packaging.md) | Packaging and distributing agents for different environments |
 | [Platform References](docs/advanced/platform-references.md) | External documentation sources with feature-to-source mapping |
 | [Research Sources](docs/RESEARCH-SOURCES.md) | Authoritative sources (W3C APG, WebAIM, WCAG 2.2, Deque) that informed every agent rule |
