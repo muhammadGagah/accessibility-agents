@@ -2,7 +2,8 @@
 """
 Verify authoritative sources in accessibility agents.
 
-Scans all markdown files in .claude/agents/, .github/agents/, and docs/
+Scans all markdown files in .claude/agents/, .github/agents/,
+claude-code-plugin/agents/, and docs/
 for URLs and validates that they return HTTP 200 (or acceptable status codes
 like 301/302 for redirects or 403 for temporary blocks).
 
@@ -98,6 +99,8 @@ def validate_url(url: str) -> Tuple[int, str | None]:
 
 def main():
     """Main validation function."""
+    url_cache: Dict[str, Tuple[int, str | None]] = {}
+
     results = {
         'valid': 0,
         'redirects': 0,
@@ -132,7 +135,11 @@ def main():
         urls = extract_urls(file_path)
         
         for url, line_num in urls:
-            status, final_url = validate_url(url)
+            if url in url_cache:
+                status, final_url = url_cache[url]
+            else:
+                status, final_url = validate_url(url)
+                url_cache[url] = (status, final_url)
             
             if status == -1:
                 # Skipped

@@ -187,6 +187,7 @@ The following guides cover advanced configuration, cross-platform handoff, and d
 |-------|---------------|
 | [Cross-Platform Handoff](docs/advanced/cross-platform-handoff.md) | Seamless handoff between Claude Code and Copilot |
 | [Advanced Scanning Patterns](docs/advanced/advanced-scanning-patterns.md) | Background scanning, worktree isolation, large libraries |
+| [Debug Panel Workflows](docs/guides/debug-panel-workflows.md) | Troubleshoot agent loading, handoffs, tool calls, and browser verification |
 | [Plugin Packaging](docs/advanced/plugin-packaging.md) | Packaging and distributing agents for different environments |
 | [Platform References](docs/advanced/platform-references.md) | External documentation sources with feature-to-source mapping |
 | [Research Sources](docs/RESEARCH-SOURCES.md) | Authoritative sources (W3C APG, WebAIM, WCAG 2.2, Deque) that informed every agent rule |
@@ -246,6 +247,7 @@ Want to add custom skills, domain-specific rules, or vertical market guidance? T
 
 **Key guides:**
 - [Browser Tool Usage](docs/guides/browser-tool-usage.md) - Autonomous verification with integrated browser
+- [Debug Panel Workflows](docs/guides/debug-panel-workflows.md) - Troubleshoot agent behavior and tool execution traces
 - [Creating Custom Skills](docs/guides/create-custom-skills.md) - Build reusable accessibility knowledge domains
 - [Authoritative Sources](docs/guides/authoritative-sources.md) - Cite accessibility standards correctly
 - [Context Management](docs/guides/context-management.md) - Managing long conversation contexts in audits

@@ -64,7 +64,8 @@ Key capabilities added since v2.0:
 - **Gemini platform support** - Full agent parity via `.gemini/extensions/a11y-agents/skills/` with 57 skill files
 - **Codex CLI platform support** - Agent configuration via `.codex/AGENTS.md`
 - **Source Citation Policy** - Mandatory 6-tier authority hierarchy with inline source citations, enforced via shared-instructions.md across all 57 agents
-- **Automated Source Currency Checks** - Weekly GitHub Actions workflow that verifies authoritative sources haven't changed, with SHA-256 fingerprinting and auto-issue creation
+- **Automated Source Currency Checks** - Weekly GitHub Actions workflow with PR and push verification for source registry changes, SHA-256 fingerprinting, and auto-issue creation
+- **Agent Debug Panel Guidance** - User-facing troubleshooting workflows for instruction loading, handoffs, tool failures, and browser verification traces
 - **EPUB accessibility agents** - epub-accessibility and epub-scan-config for digital publication accessibility
 - **Markdown accessibility agents** - Full markdown audit pipeline (markdown-a11y-assistant, markdown-scanner, markdown-fixer, markdown-csv-reporter) with 9 audit domains
 - **Cognitive accessibility agent** - WCAG 2.2 cognitive guidelines, clear language, consistent navigation

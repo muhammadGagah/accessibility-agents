@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Debug Panel Workflow Guide** - Added user-facing troubleshooting guide for VS Code Agent Debug Panel workflows in `docs/guides/debug-panel-workflows.md`
+  - Covers instruction loading checks, handoff validation, tool failure triage, and browser verification troubleshooting
+  - Includes a reproducible issue report checklist for deterministic debugging
+
+### Changed
+
+- **Source Verification Coverage** - Expanded source verification workflow triggers to include:
+  - `claude-code-plugin/agents/**/*.md`
+  - `scripts/verify-sources.py`
+  - `.github/agents/SOURCE_REGISTRY.json`
+- **Source Currency Automation** - `source-currency-check.yml` now runs on relevant `pull_request` and `push` events in addition to weekly schedule
+- **Source Validation Performance** - Added URL-level caching in `scripts/verify-sources.py` to avoid duplicate network calls during large scans
+
+### Fixed
+
+- **Operational Citation Backlog** - Added missing `## Authoritative Sources` sections to all remaining Claude-side agent files:
+  - `.claude/agents/*.md` now fully covered
+  - `claude-code-plugin/agents/web-csv-reporter.md` now aligned
+
 ## [3.0.0] - 2026-03-04
 
 ### Added
