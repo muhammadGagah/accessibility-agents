@@ -245,6 +245,7 @@ The `example/` directory contains a deliberately broken web page with 20+ intent
 Want to add custom skills, domain-specific rules, or vertical market guidance? The platform is designed to be extended.
 
 **Key guides:**
+- [Browser Tool Usage](docs/guides/browser-tool-usage.md) - Autonomous verification with integrated browser
 - [Creating Custom Skills](docs/guides/create-custom-skills.md) - Build reusable accessibility knowledge domains
 - [Authoritative Sources](docs/guides/authoritative-sources.md) - Cite accessibility standards correctly
 - [Context Management](docs/guides/context-management.md) - Managing long conversation contexts in audits

@@ -1338,6 +1338,7 @@ Options:
 - **Generate batch remediation scripts** - create PowerShell/Bash scripts for automatable fixes
 - **Compare with a previous audit** - diff this audit against a baseline report
 - **Run the document-accessibility-wizard** - if the project has Word, Excel, PowerPoint, or PDF documents
+- **Verify fixes in browser (Phase 12)** - use integrated browser to autonomously test that fixes worked
 - **Nothing - I'll review the report** - end the wizard
 
 ### Sub-Agent Handoff for Page Fixes
@@ -1506,8 +1507,168 @@ During the audit, suggest these additional specialist areas if relevant to the p
 24. **Handle edge cases gracefully.** SPAs, shadow DOM, iframes, and auth-gated content all need special handling - see Edge Cases section.
 25. **Collect page metadata.** Always gather and report page-level metadata (titles, lang, viewport, landmarks) regardless of audit thoroughness.
 26. **Announce specialist invocations.** Before starting each parallel specialist group, tell the user which agents are running and what they cover. After each group completes, briefly report the finding count before moving on. Never silently delegate to specialists without narrating progress.
+27. **Offer browser verification proactively.** After Phase 11 fixes, always offer Phase 12 browser verification if `workbench.browser.enableChatTools` is enabled. Never assume - check setting and offer gracefully.
 
-## Phase 12: CI/CD Integration Guide
+## Phase 12: Browser-Assisted Verification
+
+After fixes are applied (Phase 11), offer to autonomously verify them in VS Code's integrated browser.
+
+### Prerequisites Check
+
+Before offering browser verification:
+
+1. **Check browser tools setting:**
+   ```
+   Is workbench.browser.enableChatTools enabled?
+   ```
+
+2. **Check for running dev server:**
+   - Common ports: 3000, 5173, 8080, 4200, 8000, 5000
+   - Framework hints: package.json scripts (dev, start, serve)
+   - Ask user if unsure: "Is your dev server running? What URL?"
+
+3. **Determine verification scope:**
+   - How many pages were audited?
+   - How many fixes were applied?
+   - Which fixes benefit most from visual verification?
+
+### Browser Verification Workflow
+
+Ask using askQuestions: **"Would you like me to verify the applied fixes in the integrated browser?"**
+
+Options:
+- **Yes - verify all fixes** - test every fix with screenshots
+- **Yes - verify visual fixes only** - skip semantic-only changes
+- **Yes - verify failed fixes only** - focus on fixes that might not have worked
+- **No - I'll test manually** - skip browser verification
+- **Setup required** - guide me through enabling browser tools
+
+If user chooses "Yes":
+
+#### Step 1: Detect Dev Server
+
+```bash
+# Check common ports
+curl -s http://localhost:3000 > /dev/null && echo "Port 3000: ✓"
+curl -s http://localhost:5173 > /dev/null && echo "Port 5173: ✓"
+curl -s http://localhost:8080 > /dev/null && echo "Port 8080: ✓"
+```
+
+If no server detected:
+- Ask: "Your dev server doesn't appear to be running. Would you like me to start it?"
+- Options: `npm run dev`, `npm start`, custom command, skip verification
+
+#### Step 2: Open Page in Browser
+
+Use `open_browser_page` tool:
+```
+open_browser_page('http://localhost:3000')
+```
+
+Wait for page load (look for framework hydration signals).
+
+#### Step 3: Verify Each Fix
+
+For each fix applied in Phase 11:
+
+**Auto-fixable fixes:**
+- Navigate to element
+- Take screenshot
+- Check for expected change (alt text present, aria-label visible, etc.)
+- Report: "Fix #n: ✓ PASS - [description]"
+
+**Human-judgment fixes:**
+- Navigate to element
+- Take screenshot
+- Report visual state
+- Note: "Fix #n: Code updated - manual verification of content recommended"
+
+**Interactive fixes (focus, keyboard, ARIA states):**
+- Navigate to element
+- Simulate interaction (click, Tab, Enter)
+- Take before/after screenshots
+- Report: "Fix #n: ✓ PASS - [interaction verified]"
+
+#### Step 4: Collect Evidence
+
+Store screenshots in workspace:
+- Directory: `.a11y-screenshots/`
+- Naming: `{YYYY-MM-DD-HH-mm}-fix{n}-{element-selector}.png`
+- Include in audit report as image embeds
+
+#### Step 5: Report Verification Results
+
+Update `WEB-ACCESSIBILITY-AUDIT.md` with verification section:
+
+```markdown
+## Browser Verification Results
+
+**Date:** 2026-03-04 14:30 UTC
+**Browser:** Chrome 122 (VS Code Integrated Browser)
+**Dev Server:** http://localhost:3000
+
+| Fix # | Issue | Status | Evidence |
+|-------|-------|--------|----------|
+| 1 | Missing alt text | ✓ PASS | [Screenshot](./a11y-screenshots/2026-03-04-14-30-fix1-logo.png) |
+| 2 | Low contrast text | ✓ PASS | [Screenshot](./a11y-screenshots/2026-03-04-14-30-fix2-button.png) |
+| 3 | Missing ARIA label | ✓ PASS | [Screenshot](./a11y-screenshots/2026-03-04-14-30-fix3-menu.png) |
+| 4 | Focus management | ⚠️ NEEDS REVIEW | [Screenshot](./a11y-screenshots/2026-03-04-14-30-fix4-modal.png) |
+
+### Verification Summary
+
+- **Total fixes attempted:** 12
+- **Verified PASS:** 10
+- **Needs manual review:** 2
+- **Verification failed:** 0
+
+### Issues Requiring Manual Review
+
+**Fix #4:** Focus trap in modal
+- Code: Updated correctly ✓
+- Browser: Focus escapes modal boundary on 3rd Tab press
+- **Action needed:** Review focus logic in src/Modal.tsx:78-92
+```
+
+### Graceful Degradation
+
+If browser tools are unavailable:
+
+> **Browser verification is not available** in this environment.
+>
+> To enable browser-assisted verification:
+> 1. Add to settings.json: `"workbench.browser.enableChatTools": true`
+> 2. Restart VS Code
+> 3. Re-run the audit
+>
+> For now, all fixes have been applied to code. Manual testing is recommended.
+>
+> See [Browser Tool Usage Guide](../../docs/guides/browser-tool-usage.md) for setup instructions.
+
+If dev server is not running:
+
+> **Dev server required** for browser verification.
+>
+> Would you like me to:
+> - Start your dev server now (npm run dev)
+> - Skip verification and proceed to CI/CD setup
+> - Guide you through manual testing
+
+### Handoff to web-issue-fixer
+
+When invoking web-issue-fixer with browser verification context:
+
+```text
+## Browser Verification Context
+- **Browser tools enabled:** Yes / No
+- **Dev server URL:** http://localhost:3000
+- **Screenshot directory:** .a11y-screenshots/
+- **Verification mode:** all-fixes / visual-only / failed-only
+- **Fixes to verify:** [list of fix numbers from Phase 11]
+```
+
+For detailed guidance on browser tools, see [Browser Tool Usage Guide](../../docs/guides/browser-tool-usage.md).
+
+## Phase 13: CI/CD Integration Guide
 
 When the user requests CI/CD integration or when no `.a11y-web-config.json` exists, offer to generate a CI/CD integration guide.
 

@@ -131,13 +131,70 @@ For each fix, return:
 - `before`: original code snippet
 - `after`: fixed code snippet
 - `status`: `Applied` | `Skipped (reason)` | `Needs approval`
+- `screenshot`: path to screenshot evidence (if browser verification enabled)
+- `verification`: `PASS` | `FAIL` | `SKIPPED` | `NOT_AVAILABLE`
+- `evidence_url`: localhost URL where fix was verified (if applicable)
+
+### Browser Verification Support
+
+When invoked with browser verification context from `web-accessibility-wizard`:
+
+**Prerequisites:**
+- Check if browser tools are available
+- Check if dev server URL was provided in context
+- Check if screenshot directory exists (`.a11y-screenshots/`)
+
+**After each fix applied:**
+
+1. **Navigate to element:**
+   Open page in browser at dev_server_url + element_path
+
+2. **Take screenshot:**
+   Capture screenshot of element
+   Store in .a11y-screenshots/ with naming: {timestamp}-fix{n}-{selector}.png
+
+3. **Verify fix worked:**
+   - **Alt text fix:** Check if alt attribute is present and non-empty
+   - **Contrast fix:** Visual inspection - is new color visible in screenshot?
+   - **ARIA fix:** Check if aria-* attribute is present in DOM
+   - **Focus fix:** Simulate Tab key, verify focus indicator visible
+   - **Heading fix:** Check if heading tag changed in DOM
+
+4. **Record verification status:**
+   - `PASS`: Fix applied and verified in browser
+   - `FAIL`: Fix applied but element not found / expected change not visible
+   - `SKIPPED`: Fix applied but manual verification recommended (e.g., screen reader testing)
+   - `NOT_AVAILABLE`: Browser tools not available or dev server not running
+
+**Graceful degradation:**
+
+If browser tools unavailable:
+- Apply fix as normal
+- Set `verification: "NOT_AVAILABLE"`
+- Set `screenshot: null`
+- Report: "Fix applied to code. Browser verification requires browser tools."
+
+If dev server not running:
+- Apply fix as normal
+- Set `verification: "SKIPPED"`
+- Set `screenshot: null`
+- Report: "Fix applied to code. Start dev server for browser verification."
+
+If element not found in browser:
+- Fix still applied to code
+- Set `verification: "FAIL"` with reason
+- Take full-page screenshot for context
+- Report: "Fix applied to code, but element not found at [URL]. Manual verification needed."
+
+For detailed browser verification patterns, see Browser Tool Usage documentation.
 
 ### Handoff Transparency
 
 When invoked by `web-accessibility-wizard`:
 - **Announce start:** "Applying [N] accessibility fixes to [N] files ([N] auto-fixable, [N] need approval)"
-- **Per fix:** Show the issue, before/after code, and status
-- **Announce completion:** "Fix pass complete: [N] applied, [N] skipped, [N] pending approval"
+- **Announce browser mode:** If browser verification context provided: "Browser verification enabled - will capture screenshots and verify fixes"
+- **Per fix:** Show the issue, before/after code, status, and verification result (if applicable)
+- **Announce completion:** "Fix pass complete: [N] applied, [N] skipped, [N] pending approval. Browser verification: [N] passed, [N] failed, [N] need manual review."
 - **On failure:** "Fix failed for [file]:[line]: [reason]. File left unchanged."
 
 You return results to `web-accessibility-wizard`. Users see each fix before it is applied.
