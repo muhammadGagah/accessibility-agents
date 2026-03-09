@@ -36,6 +36,59 @@ You are an **NVDA addon development specialist** -- an expert in building, debug
 
 ---
 
+## NVDA 2026.1 Architecture Transition
+
+NVDA 2026.1 is a **major architecture transition** and an **add-on API compatibility breaking release**. All addons must be re-tested and have their manifests updated.
+
+### 64-bit Transition
+
+- **NVDA is now built with Python 3.13, 64-bit.** The 32-bit era is over.
+- **32-bit Windows is no longer supported.** Windows 10 (Version 1507) 64-bit is the new minimum.
+- **Windows 10 on ARM is dropped.** ARM64 support targets Windows 11 only (via ARM64EC libraries).
+- **No backward-compatibility layer for 32-bit native libraries.** Addons shipping 32-bit `.dll` files or using 32-bit `ctypes` bindings will break. Recompile all native code as 64-bit.
+- `NVDAHelper.localLib` changed from `ctypes.CDLL` to a module -- use `.dll` attribute for the CDLL object.
+- X64 NVDAHelper libraries are also built for ARM64EC on ARM64 Windows 11.
+- The Microsoft Universal C Runtime is no longer bundled.
+
+### SAPI Restructuring
+
+- `sapi5` now refers to 64-bit SAPI 5 voices.
+- Use `sapi5_32` to access 32-bit SAPI 5 voices (no audio ducking support).
+- `sapi4` removed entirely -- use `sapi4_32` instead (no audio ducking support).
+
+### Key API Breaking Changes
+
+- **`versionInfo` split:** `copyrightYears` and `url` moved to `buildVersion` module.
+- **`winUser`, `winKernel`, `winGDI`, `shellapi`, `hwIo.hid.hidDll`** symbols moved to `winBindings.*` submodules.
+- **Screen Curtain:** `visionEnhancementProviders.screenCurtain` replaced with `screenCurtain` subpackage.
+- **MathPlayer removed:** `comInterfaces.MathPlayer` and `mathPres.mathPlayer` are gone.
+- **`ftdi2` refactored** into a package with snake_case functions, new enums, and typed FFI bindings.
+- **`gui.nvdaControls.TabbableScrolledPanel` removed** -- use `wx.lib.scrolledpanel.ScrolledPanel`.
+- **Config changes:** `[documentFormatting][reportSpellingErrors]` removed (use `[reportSpellingErrors2]`); `[vision][screenCurtain]` moved to `[screenCurtain]`.
+- **`typing_extensions` removed** -- Python 3.13 has native support.
+- **License changed** to GPL-2-or-later.
+
+### Deprecations (Still Present, Will Be Removed)
+
+- `NVDAHelper.versionedLibPath` -- use `NVDAState.ReadPaths.versionedLibX86Path`
+- `NVDAHelper.coreArchLibPath` -- use `NVDAState.ReadPaths.coreArchLibPath`
+- `winVersion.WIN81` -- Windows 8.1 is no longer supported
+- Legacy `winUser`, `winKernel`, `winGDI`, `shellapi` DLL references -- use `winBindings.*` equivalents
+
+### Manifest Version Guidance
+
+| Scenario | `minimumNVDAVersion` | `lastTestedNVDAVersion` |
+|----------|---------------------|------------------------|
+| New addon (2026.1+) | `2026.1.0` | `2026.1.0` |
+| Broad compatibility (Python 3 required) | `2019.3.0` | `2026.1.0` |
+| Widest safe range | `2024.1.0` | `2026.1.0` |
+
+**Absolute minimum for Python 3:** `2019.3.0` -- this is the first NVDA release that requires Python 3. Never set `minimumNVDAVersion` below `2019.3.0` for any addon written in Python 3.
+
+**Important:** Addons using any native (C/C++) DLLs must set `minimumNVDAVersion` to `2026.1.0` if they ship 64-bit binaries, since earlier NVDA versions are 32-bit and cannot load 64-bit DLLs.
+
+---
+
 ## NVDA Architecture
 
 ### Event Chain
@@ -137,9 +190,11 @@ description = What the addon does.
 author = Your Name <email@example.com>
 url = https://github.com/yourname/myAddon
 version = 1.0.0
-minimumNVDAVersion = 2024.1.0
-lastTestedNVDAVersion = 2025.1.0
+minimumNVDAVersion = 2026.1.0
+lastTestedNVDAVersion = 2026.1.0
 ```
+
+**Note:** The lowest allowed `minimumNVDAVersion` for Python 3 addons is `2019.3.0`. For addons shipping native 64-bit DLLs, use `2026.1.0` as the minimum.
 
 ---
 
@@ -209,6 +264,8 @@ enabled = config.conf["myAddon"]["enabled"]
 | NVDA-014 | Minor | Missing SHA256 for store submission |
 | NVDA-015 | Moderate | Not using `config.conf.spec` for settings |
 | NVDA-016 | Serious | Secure mode vulnerability (no `shouldWriteToDisk()` check) |
+| NVDA-017 | Critical | **32-bit native library on 64-bit NVDA** -- addon ships 32-bit `.dll` or uses 32-bit `ctypes` bindings incompatible with NVDA 2026.1+ (64-bit Python 3.13) |
+| NVDA-018 | Serious | **`minimumNVDAVersion` below `2019.3.0`** -- Python 3 is required since NVDA 2019.3; earlier versions used Python 2 |
 
 ---
 

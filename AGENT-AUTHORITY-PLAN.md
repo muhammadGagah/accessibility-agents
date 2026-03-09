@@ -713,7 +713,7 @@ Key concepts:
 
 ### 3.6 Addon File Structure
 
-Based on the official [NVDA Community Addon Template](https://github.com/nvdaaddons/AddonTemplate):
+Based on the official [NVDA Addon Template](https://github.com/nvaccess/addonTemplate):
 
 ```
 myAddon/
@@ -748,7 +748,7 @@ myAddon/
   LICENSE
 ```
 
-**Source:** [nvdaaddons/AddonTemplate](https://github.com/nvdaaddons/AddonTemplate)
+**Source:** [nvaccess/addonTemplate](https://github.com/nvaccess/addonTemplate)
 
 #### manifest.ini Format
 
@@ -759,11 +759,11 @@ description = A longer description of what the addon does.
 author = Your Name <email@example.com>
 url = https://github.com/yourname/myAddon
 version = 1.0.0
-minimumNVDAVersion = 2024.1.0
-lastTestedNVDAVersion = 2025.1.0
+minimumNVDAVersion = 2026.1.0
+lastTestedNVDAVersion = 2026.1.0
 ```
 
-**Source:** [addonHandler/__init__.py](https://github.com/nvaccess/nvda/blob/master/source/addonHandler/__init__.py), [AddonTemplate buildVars.py](https://github.com/nvdaaddons/AddonTemplate/blob/master/buildVars.py)
+**Source:** [addonHandler/__init__.py](https://github.com/nvaccess/nvda/blob/master/source/addonHandler/__init__.py), [addonTemplate buildVars.py](https://github.com/nvaccess/addonTemplate/blob/master/buildVars.py)
 
 #### installTasks.py / uninstallTasks.py
 
@@ -810,7 +810,7 @@ The SCons build system:
 4. Converts `readme.md` to `readme.html`
 5. Packages everything into a `.nvda-addon` ZIP file
 
-**Source:** [AddonTemplate sconstruct](https://github.com/nvdaaddons/AddonTemplate/blob/master/sconstruct)
+**Source:** [addonTemplate sconstruct](https://github.com/nvaccess/addonTemplate/blob/master/sconstruct)
 
 #### GitHub Actions CI
 
@@ -825,7 +825,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.13'
       - run: pip install scons markdown
       - run: scons
       - uses: actions/upload-artifact@v4
@@ -1163,7 +1163,7 @@ threading.Thread(target=_fetch_data, daemon=True).start()
 |---------|----------|----------------|
 | NVDA-001 | Critical | **Missing `nextHandler()` call** -- Event handler (e.g., `event_gainFocus`) does not call `nextHandler()`, blocking all downstream event processing. ([technicalDesignOverview.md - Events](https://github.com/nvaccess/nvda/blob/master/projectDocs/design/technicalDesignOverview.md)) |
 | NVDA-002 | Critical | **Main thread blocking** -- Synchronous I/O, `time.sleep()`, or blocking network calls in a script or event handler. Freezes all of NVDA. ([technicalDesignOverview.md - Core](https://github.com/nvaccess/nvda/blob/master/projectDocs/design/technicalDesignOverview.md)) |
-| NVDA-003 | Serious | **Missing `addonHandler.initTranslation()`** -- Module uses `_()` for strings but never calls `initTranslation()`. All translated strings will raise `NameError`. ([AddonTemplate](https://github.com/nvdaaddons/AddonTemplate)) |
+| NVDA-003 | Serious | **Missing `addonHandler.initTranslation()`** -- Module uses `_()` for strings but never calls `initTranslation()`. All translated strings will raise `NameError`. ([addonTemplate](https://github.com/nvaccess/addonTemplate)) |
 | NVDA-004 | Serious | **Missing `terminate()` cleanup** -- GlobalPlugin or AppModule creates timers, threads, or registered callbacks but has no `terminate()` method to clean them up on exit/reload. ([globalPluginHandler.py](https://github.com/nvaccess/nvda/blob/master/source/globalPluginHandler.py)) |
 | NVDA-005 | Serious | **Incorrect manifest version format** -- `minimumNVDAVersion` or `lastTestedNVDAVersion` uses wrong format. Must be `YYYY.N.P` (e.g., `2024.1.0`). ([addon-datastore-validation](https://github.com/nvaccess/addon-datastore-validation)) |
 | NVDA-006 | Moderate | **Monkey-patching core modules** -- Addon replaces functions on core NVDA modules (`speech.speak`, `braille.handler.message`, etc.) instead of using event handlers or extension points. Fragile, conflicts with other addons. ([technicalDesignOverview.md](https://github.com/nvaccess/nvda/blob/master/projectDocs/design/technicalDesignOverview.md)) |
@@ -1247,7 +1247,7 @@ Every recommendation from this agent is grounded in these official sources:
 | NVDA Source Code | [github.com/nvaccess/nvda](https://github.com/nvaccess/nvda) | Primary reference -- all architectural claims verified here |
 | Technical Design Overview | [technicalDesignOverview.md](https://github.com/nvaccess/nvda/blob/master/projectDocs/design/technicalDesignOverview.md) | Official architecture documentation |
 | NVDA Developer Guide | [nvdaaddons/DevGuide wiki](https://github.com/nvdaaddons/devguide/wiki/NVDA%20Add-on%20Development%20Guide) | Community development guide |
-| NVDA Community Addon Template | [nvdaaddons/AddonTemplate](https://github.com/nvdaaddons/AddonTemplate) | Official addon scaffolding |
+| NVDA Addon Template | [nvaccess/addonTemplate](https://github.com/nvaccess/addonTemplate) | Official addon scaffolding |
 | NVDA Add-on Store (addon-datastore) | [nvaccess/addon-datastore](https://github.com/nvaccess/addon-datastore) | Store submission infrastructure |
 | Addon Submission Guide | [submissionGuide.md](https://github.com/nvaccess/addon-datastore/blob/master/docs/submitters/submissionGuide.md) | Step-by-step submission process |
 | JSON Metadata Schema | [jsonMetadata.md](https://github.com/nvaccess/addon-datastore/blob/master/docs/submitters/jsonMetadata.md) | Store metadata field definitions |
@@ -1277,7 +1277,7 @@ Every recommendation from this agent is grounded in these official sources:
 1. **Always cite the NVDA source file** when explaining internal behavior. Link to the specific file on GitHub.
 2. **Verify API compatibility** against `minimumNVDAVersion` and `lastTestedNVDAVersion` before recommending APIs.
 3. **Warn about breaking changes** between NVDA versions. NVDA's API can change between major releases.
-4. **Test recommendations against the official addon template** -- if the pattern does not work with the [AddonTemplate](https://github.com/nvdaaddons/AddonTemplate) build system, note that.
+4. **Test recommendations against the official addon template** -- if the pattern does not work with the [addonTemplate](https://github.com/nvaccess/addonTemplate) build system, note that.
 5. **Prefer the `@script` decorator** over legacy `__gestures` dicts for all new code.
 6. **Never recommend monkey-patching** unless there is truly no alternative, and if so, document the fragility.
 7. **Always recommend `terminate()` cleanup** when the plugin creates persistent resources.

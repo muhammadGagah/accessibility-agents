@@ -13,6 +13,7 @@
 - Migrating from legacy `__gestures` dicts to `@script` decorators
 - Adding settings panels, configuration persistence, or extension points
 - Reviewing addon code for common anti-patterns (main thread blocking, monkey-patching, missing nextHandler)
+- Migrating addons to NVDA 2026.1 (64-bit Python 3.13 transition, 32-bit DLL recompilation, API breaking changes)
 
 ## What It Does NOT Do
 
@@ -23,7 +24,7 @@
 
 ## Accessibility Audit Mode
 
-When asked to audit NVDA addon code, the agent uses 16 structured detection rules (NVDA-001 through NVDA-016) covering:
+When asked to audit NVDA addon code, the agent uses 18 structured detection rules (NVDA-001 through NVDA-018) covering:
 
 | Rule Range | What It Covers |
 |---|---|
@@ -33,6 +34,8 @@ When asked to audit NVDA addon code, the agent uses 16 structured detection rule
 | NVDA-010 | Serious: Background thread UI updates without wx.CallAfter() |
 | NVDA-011..012 | Moderate/Minor: Missing check() on drivers, bare except clauses |
 | NVDA-013..016 | Serious/Minor/Moderate: Incompatible versions, missing SHA256, wrong config pattern, secure mode vulnerability |
+| NVDA-017 | Critical: 32-bit native library on 64-bit NVDA (2026.1+) |
+| NVDA-018 | Serious: minimumNVDAVersion below 2019.3.0 (Python 3 floor) |
 
 Returns a structured report with NVDA source file references, expected behavior, and specific code fixes.
 
@@ -47,6 +50,7 @@ Returns a structured report with NVDA source file references, expected behavior,
 - "Migrate my addon from the legacy __gestures dict to @script decorators"
 - "Add internationalization support to my addon"
 - "My addon works in NVDA 2024.1 but crashes in 2025.1"
+- "My addon ships a 32-bit DLL -- how do I migrate to NVDA 2026.1?"
 - "Write a braille display driver stub for a new HID device"
 
 ## Skills Used
