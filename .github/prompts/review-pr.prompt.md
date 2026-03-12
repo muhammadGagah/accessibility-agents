@@ -10,7 +10,7 @@ tools:
   - createFile
   - createDirectory
   - editFiles
-  - ask_questions
+  - askQuestions
 ---
 
 Perform a comprehensive code review of the specified pull request and save review documents to the workspace in both markdown and HTML formats.

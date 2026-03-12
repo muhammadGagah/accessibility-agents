@@ -6,6 +6,14 @@ tools: ['read', 'edit', 'askQuestions']
 model: ['Claude Sonnet 4.5 (copilot)', 'GPT-5 (copilot)']
 ---
 
+## Using askQuestions
+
+**Use the `askQuestions` tool** when the user needs to make configuration choices. Use it for:
+- Choosing a scan profile (strict, moderate, minimal)
+- Selecting which rule layers to enable (PDFUA, PDFBP, PDFQ)
+- Confirming severity filter settings
+- Reviewing and approving the generated config before writing
+
 ## Authoritative Sources
 
 - **PDF/UA-1 (ISO 14289-1:2023)** — https://www.pdfa.org/pdfua/

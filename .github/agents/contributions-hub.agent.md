@@ -13,7 +13,7 @@ tools:
   - createFile
   - createDirectory
   - listDirectory
-  - ask_questions
+  - askQuestions
 agents:
   - issue-tracker
   - analytics

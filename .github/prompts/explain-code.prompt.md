@@ -7,7 +7,7 @@ tools:
   - fetch
   - readFile
   - codebase
-  - ask_questions
+  - askQuestions
 ---
 
 Explain specific code in a pull request -- what it does, why it's there, and what changed.

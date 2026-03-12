@@ -6,7 +6,7 @@ tools:
   - github/*
   - readFile
   - codebase
-  - ask_questions
+  - askQuestions
 ---
 
 Create a new GitHub issue with smart formatting and metadata.

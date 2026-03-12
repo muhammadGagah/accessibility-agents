@@ -12,7 +12,7 @@ tools:
   - createDirectory
   - editFiles
   - listDirectory
-  - ask_questions
+  - askQuestions
 agents:
   - daily-briefing
   - scanner-bridge

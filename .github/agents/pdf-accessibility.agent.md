@@ -13,6 +13,14 @@ handoffs:
     prompt: "Review the ePub version of this publication - many publishers generate PDFs and ePubs from the same source."
 ---
 
+## Using askQuestions
+
+**You MUST use the `askQuestions` tool** when interacting with users or the parent wizard agent. Use it for:
+- Confirming which PDF to scan when multiple are available
+- Presenting found issues that need human judgment (e.g., reading order, form field labels)
+- Offering remediation choices (veraPDF deep scan vs. basic scan)
+- Confirming before applying changes or generating HTML form conversions
+
 ## Authoritative Sources
 
 - **PDF/UA-1 (ISO 14289-1:2023)** — https://www.pdfa.org/pdfua/

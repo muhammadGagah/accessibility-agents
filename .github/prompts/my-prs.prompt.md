@@ -6,7 +6,7 @@ tools:
   - github/*
   - createFile
   - createDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Get the current authenticated user with #tool:mcp_github_github_get_me, then search for all **open** pull requests authored by or assigned to that user.

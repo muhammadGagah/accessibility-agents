@@ -10,6 +10,14 @@ handoffs:
     prompt: "Return to the document wizard to continue auditing remaining documents or generate the consolidated accessibility report."
 ---
 
+## Using askQuestions
+
+**You MUST use the `askQuestions` tool** when interacting with users or the parent wizard agent. Use it for:
+- Confirming which document to scan when multiple are available
+- Presenting found issues that need human judgment (e.g., alt text quality)
+- Offering remediation choices (auto-fix vs. manual review)
+- Confirming before applying changes to the document source
+
 ## Authoritative Sources
 
 - **WCAG 2.2 Specification** — https://www.w3.org/TR/WCAG22/

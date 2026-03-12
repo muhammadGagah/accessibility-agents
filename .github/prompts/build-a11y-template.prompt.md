@@ -8,7 +8,7 @@ tools:
   - createFile
   - createDirectory
   - listDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Generate a production-ready accessibility bug report template for your GitHub repository.

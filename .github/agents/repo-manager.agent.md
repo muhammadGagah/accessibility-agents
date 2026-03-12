@@ -16,7 +16,7 @@ tools:
   - createDirectory
   - listDirectory
   - runInTerminal
-  - ask_questions
+  - askQuestions
   - fileSearch
 handoffs:
   - label: Back to GitHub Hub

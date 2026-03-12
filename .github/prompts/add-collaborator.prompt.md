@@ -4,7 +4,7 @@ description: "Add a user to a repository as a collaborator with a specified role
 agent: repo-admin
 tools:
   - github/*
-  - ask_questions
+  - askQuestions
 ---
 
 Add a GitHub user as a collaborator to a repository.

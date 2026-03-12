@@ -7,7 +7,7 @@ tools:
   - readFile
   - codebase
   - editFiles
-  - ask_questions
+  - askQuestions
 ---
 
 Help me systematically address all review comments on a pull request.

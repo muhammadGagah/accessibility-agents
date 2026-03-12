@@ -103,7 +103,8 @@ When running Phases 1-8 with code review, you SHOULD run independent specialists
 1. Run Group A and Group B simultaneously
 2. When both complete, run Group C
 3. Run Phase 9 (axe-core) - can run during any group if URL available
-4. Compile Phase 10 report from all results
+4. Run Phase 10 (Playwright behavioral testing) - requires URL and Playwright availability
+5. Compile Phase 11 report from all results
 
 This parallel execution can reduce a full audit from 10 sequential phases to 3 parallel batches.
 
@@ -146,6 +147,9 @@ Before asking the user anything, silently check the workspace for CI-based acces
 2. **Lighthouse CI:** Search for `.github/workflows/*.yml` files containing `treosh/lighthouse-ci-action` or `lhci`, and check for `lighthouserc.js`, `lighthouserc.json`, or `.lighthouserc.yml` config files. If found, note the workflow file and configured URLs.
 
 If either scanner is detected, dispatch the appropriate bridge agent (`scanner-bridge` for GitHub Scanner, `lighthouse-bridge` for Lighthouse) via the Task tool to fetch existing findings. Store these findings for correlation in Phase 9.
+
+3. **Playwright Availability:** Check if the Playwright MCP tools are available by attempting to call `run_playwright_keyboard_scan` with a test URL. If the tool exists, behavioral testing (Phase 10) can run against the dev server URL. Note the availability status.
+4. **Dev Server Probing:** If no URL is provided later in Step 2, attempt to probe common dev server ports (3000, 5173, 8080, 4200, 8000) by checking if they respond. Store any detected URL for potential use in Phase 9 and Phase 10.
 
 Announce detection results before proceeding:
 - If found: `GitHub Accessibility Scanner detected in .github/workflows/a11y-scan.yml -- 12 open issues fetched for correlation.`
@@ -827,7 +831,34 @@ When applying fixes:
 3. After all fixes, re-run axe-core (if URL available) to verify fixes resolved the issues
 4. Report: "X of Y issues fixed. Z issues remain (require manual attention)."
 
-## Phase 10: Final Report and Action Plan
+## Phase 10: Behavioral Testing (Playwright)
+
+**This phase runs only when Playwright MCP tools are available AND a URL was provided.**
+
+If Playwright was detected in Step 0, dispatch the `playwright-scanner` agent via the Task tool with the dev server/production URL and the current scan context.
+
+### Behavioral Scan Execution
+
+1. **Dispatch playwright-scanner** with the URL, scan profile, and any selectors of interest from previous phases.
+2. **Receive structured results** covering:
+   - **Keyboard flow:** Tab sequence, keyboard traps, unreachable elements (WCAG 2.1.1, 2.1.2, 2.4.3)
+   - **Dynamic state scan:** axe-core violations in expanded/active states (all applicable SC)
+   - **Responsive viewport scan:** Reflow failures, touch target sizes at 320/768/1024/1440px (WCAG 1.4.10, 2.5.8)
+   - **Rendered contrast:** Computed foreground/background contrast ratios after CSS cascade (WCAG 1.4.3, 1.4.6)
+   - **Accessibility tree:** Browser's accessibility tree snapshot for structural verification
+3. **Merge findings** with Phase 1-9 results for three-source correlation:
+   - Issues found by agent review + axe-core + Playwright → **Confirmed** confidence (1.2x weight)
+   - Issues found by any two sources → **High** confidence (1.0x weight)
+   - Issues found by Playwright only → **Medium** confidence (0.7x weight)
+4. **Report behavioral results** before proceeding to the final report.
+
+### Graceful Degradation
+
+- If Playwright tools are not available: Skip Phase 10 entirely. Add a note to the report: "Behavioral testing unavailable. Install Playwright for keyboard traversal, dynamic state, and rendered contrast testing."
+- If @axe-core/playwright is not installed but Playwright is: Run keyboard, contrast, and accessibility tree scans only. Note that state and viewport scans were skipped.
+- If the URL is unreachable: Skip Phase 10 and note the error.
+
+## Phase 11: Final Report and Action Plan
 
 Compile all findings into a single prioritized report and **write it to `ACCESSIBILITY-AUDIT.md` in the current working directory**. This file is the deliverable - a persistent, reviewable artifact that the team can track over time.
 

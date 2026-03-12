@@ -6,7 +6,7 @@ tools:
   - github/*
   - createFile
   - createDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Generate a security dashboard showing Dependabot alerts, security advisories, and dependency update PRs across your repos.

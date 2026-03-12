@@ -139,7 +139,7 @@ Create a focused package with only the agents you need:
   alt-text-headings.agent.md
   tables-data-specialist.agent.md
   link-checker.agent.md
-  web-accessibility-wizard.agent.md
+  accessibility-wizard.agent.md
   testing-coach.agent.md
   wcag-guide.agent.md
 ```
@@ -208,5 +208,3 @@ Approximate sizes for planning distribution:
 | VS Code config | 4 files | ~5 KB |
 | Documentation | Various | ~120 KB |
 | **Total** | **~70 files** | **~1 MB** |
-
-

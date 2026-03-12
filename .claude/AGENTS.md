@@ -92,7 +92,7 @@ This file defines coordinated multi-agent workflows for enterprise accessibility
 **Hidden Helpers:**
 - `cross-page-analyzer` - Cross-page pattern detection, severity scoring, remediation tracking
 - `web-issue-fixer` - Automated and guided accessibility fix application
-- `web-csv-reporter` - Exports web audit findings to CSV with Accessibility Insights help links
+- `web-csv-reporter` - Exports web audit findings to CSV with Deque University help links
 - `scanner-bridge` - Bridges GitHub Accessibility Scanner CI data into the agent ecosystem
 - `lighthouse-bridge` - Bridges Lighthouse CI accessibility audit data into the agent ecosystem
 
@@ -341,5 +341,3 @@ At every handoff:
 - Each agent operates on its defined scope. Parallel groups work on distinct concerns.
 - Same inputs produce same structured outputs (idempotent).
 - Output format changes must be backward-compatible.
-
-

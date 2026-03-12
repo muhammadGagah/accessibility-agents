@@ -7,7 +7,7 @@ tools:
   - createFile
   - createDirectory
   - editFiles
-  - ask_questions
+  - askQuestions
 ---
 
 Generate a comprehensive daily briefing document covering everything that needs my attention. Save both markdown and HTML versions.

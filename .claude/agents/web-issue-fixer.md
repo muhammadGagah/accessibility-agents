@@ -131,6 +131,30 @@ For each fix, return:
 - `before`: original code snippet
 - `after`: fixed code snippet
 - `status`: `Applied` | `Skipped (reason)` | `Needs approval`
+- `verification`: `PASS` | `FAIL` | `SKIPPED` | `NOT_AVAILABLE`
+- `playwright_result`: structured result from Playwright verifier (if available)
+
+### Playwright Verification (Optional)
+
+When Playwright MCP tools are available AND `web-accessibility-wizard` provides a dev server URL, use `playwright-verifier` for automated post-fix verification:
+
+**After applying each fix batch:**
+
+1. Dispatch `playwright-verifier` via the Task tool with the fix list and dev server URL.
+2. The verifier runs targeted checks:
+   - **Keyboard fix:** Re-runs `run_playwright_keyboard_scan` to confirm the element is now in tab order
+   - **Contrast fix:** Re-runs `run_playwright_contrast_scan` on the affected element to confirm ratio meets threshold
+   - **ARIA fix:** Re-runs `run_playwright_a11y_tree` to confirm the element now appears with correct role/name
+   - **Focus fix:** Re-runs keyboard scan to confirm focus indicator is visible on the element
+3. Update the output contract fields:
+   - `verification`: `PASS` if Playwright confirms fix, `FAIL` if Playwright detects remaining issue
+   - `playwright_result`: structured result from the verifier (tool name, pass/fail, details)
+
+**Graceful degradation for Playwright verification:**
+
+- If Playwright tools not available: Skip Playwright verification. Set `verification: "NOT_AVAILABLE"`.
+- If @axe-core/playwright not installed: Only keyboard and accessibility tree checks are available.
+- If dev server URL not provided: Skip all Playwright verification.
 
 ### Handoff Transparency
 

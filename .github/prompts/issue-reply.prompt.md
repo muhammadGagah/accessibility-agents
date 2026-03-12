@@ -4,7 +4,7 @@ description: "Draft and post a context-aware reply to a GitHub issue with full t
 agent: issue-tracker
 tools:
   - github/*
-  - ask_questions
+  - askQuestions
 ---
 
 Help the user reply to a GitHub issue with full context awareness.

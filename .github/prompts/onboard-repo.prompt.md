@@ -8,7 +8,7 @@ tools:
   - textSearch
   - createFile
   - createDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Run a comprehensive first-time scan of a repository to understand its health, activity, and what needs attention. Save both markdown and HTML versions.

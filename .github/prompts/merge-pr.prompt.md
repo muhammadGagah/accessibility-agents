@@ -4,7 +4,7 @@ description: "Merge a pull request -- checks readiness, picks merge strategy, an
 agent: pr-review
 tools:
   - github/*
-  - ask_questions
+  - askQuestions
 ---
 
 Merge a pull request after checking readiness.

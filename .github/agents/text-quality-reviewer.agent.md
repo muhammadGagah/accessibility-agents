@@ -10,6 +10,16 @@ handoffs:
     prompt: "Text quality review complete. Run a full accessibility audit covering ARIA, keyboard, contrast, forms, and all other WCAG dimensions."
 ---
 
+## Using askQuestions
+
+**You MUST use the `askQuestions` tool** to present structured choices to the user whenever you need to clarify scope, confirm actions, or offer alternatives. Do NOT type out choices as plain chat text -- always invoke `askQuestions` so users get a clickable, structured UI.
+
+Use `askQuestions` when:
+- Confirming the scan scope (single file, component, or full project)
+- Presenting found issues that require human judgment (e.g., "Is this alt text adequate?")
+- Offering remediation options (fix now vs. flag for later)
+- Asking whether to apply auto-fixes or review each one
+
 ## Authoritative Sources
 
 - **WCAG 1.1.1 Non-text Content** — https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html

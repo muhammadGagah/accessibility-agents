@@ -127,7 +127,7 @@ At every handoff:
 
 **Handoffs:**
 - After audit, user can hand off to any format specialist for targeted remediation
-- `web-accessibility-wizard` handles web audit handoff when document audit is complete
+- `accessibility-wizard` handles web audit handoff when document audit is complete
 
 ## Team: ePub Document Accessibility
 
@@ -168,7 +168,7 @@ At every handoff:
 **Hidden Helpers:**
 - `cross-page-analyzer` - Cross-page pattern detection, severity scoring, remediation tracking
 - `web-issue-fixer` - Automated and guided accessibility fix application
-- `web-csv-reporter` - Exports web audit findings to CSV with Accessibility Insights help links
+- `web-csv-reporter` - Exports web audit findings to CSV with Deque University help links
 - `scanner-bridge` - Bridges GitHub Accessibility Scanner CI data into the agent ecosystem
 - `lighthouse-bridge` - Bridges Lighthouse CI accessibility audit data into the agent ecosystem
 
@@ -362,5 +362,3 @@ For Section 508, EN 301 549, or organizational compliance:
 2. Apply fixes with `fix-web-issues` prompt (auto-fixable + human-judgment items)
 3. Track progress with `compare-web-audits` prompt between audit runs
 4. Use `quick-web-check` for fast axe-core triage between full audits
-
-

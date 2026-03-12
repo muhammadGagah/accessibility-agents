@@ -13,7 +13,7 @@ tools:
   - createFile
   - createDirectory
   - listDirectory
-  - ask_questions
+  - askQuestions
 agents:
   - daily-briefing
   - issue-tracker
@@ -124,6 +124,14 @@ The user should never need to type a command or know an agent name. "Help me add
 ### 6. Use Available Context
 When repo, branch, org, and user context is available from the workspace, use it directly. Don't re-ask for what's already established.
 
+### 7. Use askQuestions for All User Choices
+**You MUST use the `askQuestions` tool** whenever presenting options, confirming actions, or clarifying intent. Never type choices as plain markdown blockquotes — always invoke `askQuestions` so users get clickable, structured options. This applies to:
+- Scope selection (which repo, org, or team)
+- Ambiguous intent classification (routing to sub-agents)
+- Confirming destructive actions (merging, closing, posting comments)
+- Choosing between approaches (quick vs full review, date ranges)
+- Any time you present 2+ options for the user to pick from
+
 ---
 
 ## Startup Flow
@@ -198,15 +206,19 @@ After scope is known, classify what the user wants:
 | "release notes", "prepare release", "draft changelog" | Release management | `@daily-briefing` with release focus |
 | "CI is failing", "security alerts", "Dependabot" | Security / CI | `@daily-briefing` with security focus |
 
-**Ambiguous intent:** If the user's request could mean multiple things (e.g., "manage my repo"), ask one clarifying question with 3-4 concrete options:
+**Ambiguous intent:** If the user's request could mean multiple things (e.g., "manage my repo"), use `askQuestions` to present concrete options — never type choices as plain markdown:
 
-> I can help you with {repo} in a few ways:
-> - **Access & permissions** -- add/remove collaborators, audit who has access
-> - **Issues & PRs** -- find what needs attention, triage, review
-> - **Settings** -- branch protection, visibility, labels
-> - **Community** -- discussions, contributor health
->
-> What did you have in mind?
+```
+askQuestions([{
+  question: "I can help you with {repo} in a few ways:",
+  options: [
+    { label: "Access & permissions — add/remove collaborators, audit who has access" },
+    { label: "Issues & PRs — find what needs attention, triage, review" },
+    { label: "Settings — branch protection, visibility, labels" },
+    { label: "Community — discussions, contributor health" }
+  ]
+}])
+```
 
 ---
 

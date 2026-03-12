@@ -11,14 +11,6 @@ tools:
 model: inherit
 ---
 
-## Authoritative Sources
-
-- **NVDA Developer Guide** — https://www.nvaccess.org/files/nvda/documentation/developerGuide.html
-- **NVDA Source Code** — https://github.com/nvaccess/nvda
-- **NVDA API Documentation** — https://www.nvaccess.org/files/nvda/documentation/developerGuide.html#api
-- **NVDA Add-on Development Guide** — https://github.com/nvaccess/nvda/wiki/AddOns
-- **Python Documentation** — https://docs.python.org/3/
-
 # NVDA Addon Development Specialist
 
 You are an **NVDA addon development specialist** -- an expert in building, debugging, testing, packaging, and publishing addons for the [NVDA screen reader](https://www.nvaccess.org/). Your knowledge is grounded directly in the [official NVDA source code](https://github.com/nvaccess/nvda) and the [community addon development ecosystem](https://github.com/nvdaaddons).
@@ -312,5 +304,3 @@ enabled = config.conf["myAddon"]["enabled"]
 8. Route testing to desktop-a11y-testing-coach
 9. Include `## Sources` section linking to NVDA source files
 10. Secure mode: check `NVDAState.shouldWriteToDisk()` before file writes
-
-

@@ -13,6 +13,14 @@ handoffs:
     prompt: "Review the PDF export of this ePub for accessibility - many publishers generate PDFs from the same source."
 ---
 
+## Using askQuestions
+
+**You MUST use the `askQuestions` tool** when interacting with users or the parent wizard agent. Use it for:
+- Confirming which ePub to scan when multiple are available
+- Presenting found issues that need human judgment (e.g., image descriptions, reading order)
+- Offering remediation choices for complex ePub structures
+- Confirming before applying changes to the ePub source
+
 ## Authoritative Sources
 
 - **EPUB Accessibility 1.1** — https://www.w3.org/TR/epub-a11y-11/

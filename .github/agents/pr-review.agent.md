@@ -16,7 +16,7 @@ tools:
   - createDirectory
   - listDirectory
   - runInTerminal
-  - ask_questions
+  - askQuestions
 agents:
   - issue-tracker
   - daily-briefing

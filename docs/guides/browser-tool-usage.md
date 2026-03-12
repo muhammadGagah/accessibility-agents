@@ -306,6 +306,49 @@ Browser verification results are included in audit reports:
 - Date verified: 2026-03-04 12:45 UTC
 ```
 
+## Playwright Integration
+
+In addition to VS Code's built-in browser tools, the agent ecosystem includes **Playwright-based behavioral testing** via dedicated MCP tools. Playwright provides deeper automated verification than screenshot-based checking:
+
+| Tool | What It Does |
+|------|--------------|
+| `run_playwright_keyboard_scan` | Records complete tab-order sequence, detects keyboard traps |
+| `run_playwright_state_scan` | Clicks triggers, runs axe-core on revealed dynamic content |
+| `run_playwright_viewport_scan` | Tests at multiple viewports, measures touch targets, detects reflow |
+| `run_playwright_contrast_scan` | Computes actual rendered contrast ratios after CSS cascade |
+| `run_playwright_a11y_tree` | Captures the browser accessibility tree snapshot |
+
+### When Playwright Runs
+
+- **Phase 10** of the web-accessibility-wizard (behavioral testing)
+- **Fix verification** by the playwright-verifier agent after each applied fix
+- **Cross-page analysis** when comparing accessibility tree structure across pages
+
+### Playwright vs Browser Tools
+
+| Capability | VS Code Browser Tools | Playwright |
+|------------|----------------------|------------|
+| Visual screenshots | Yes | No (text-based output) |
+| Keyboard traversal automation | No | Yes |
+| Dynamic state scanning | No | Yes |
+| Multi-viewport testing | No | Yes |
+| Computed contrast measurement | No | Yes |
+| Accessibility tree inspection | No | Yes |
+| axe-core in-context scanning | No | Yes |
+| Requires VS Code 1.110+ | Yes | No |
+| Requires separate install | No | Yes (npm install playwright) |
+
+Both approaches complement each other. Browser tools provide visual evidence; Playwright provides structured programmatic assertions.
+
+### Install Playwright
+
+```bash
+npm install -D playwright @axe-core/playwright
+npx playwright install chromium
+```
+
+See [Playwright Integration](../tools/playwright-integration.md) for full documentation.
+
 ## Future Enhancements
 
 Planned improvements to browser-assisted verification:

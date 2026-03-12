@@ -77,20 +77,83 @@ Additional per-repo filters:
 - `paths` -- only trigger for changes in these file paths (for PRs/CI)
 - `assignees` -- filter to specific assignees (empty = all)
 
-## Clarification with Structured Questions
+## Interactive Questions with askQuestions
 
-Use #tool:ask_questions **sparingly** - only when you genuinely can't infer intent. When you do use it:
+**You MUST use the `askQuestions` tool** to present structured choices to the user. Do NOT type out questions as plain chat text — always invoke `askQuestions` so users get a clickable, structured UI they can respond to in one click.
+
+### When to Use askQuestions
+
+| Situation | Action |
+|-----------|--------|
+| **Startup / scope selection** | Present repos, orgs, or project types as selectable options |
+| **Ambiguous intent** | Present 3-4 concrete options (not open-ended "what do you want?") |
+| **Before destructive actions** | Confirm with recommended option: Post / Edit / Cancel |
+| **Multiple matches** | Present matching repos, issues, or PRs as selectable list |
+| **Phase transitions** | Before moving to next phase of multi-step workflows |
+| **Handoff decisions** | When routing could go to 2+ specialist agents |
+| **Configuration choices** | Scan depth, output format, scope narrowing |
+
+### How to Use askQuestions Well
 
 - **Always mark a recommended option** so the user can confirm in one click.
 - **Batch related questions** into a single call (up to 4 questions).
 - **Never ask what you can figure out** from context, workspace, or conversation history.
-- **Never ask for simple yes/no** - just propose and do it, mentioning what you assumed.
+- **Never ask simple yes/no** — just propose and do it, mentioning what you assumed.
+- **Never type choices as plain markdown** — always use the `askQuestions` tool for clickable options.
+- **Present choices, not open questions** — "Which of these?" not "What would you like to do?"
 
-Good uses:
-- Multiple repos match and you can't tell which one.
-- User wants to post a comment -> preview + confirm with Post/Edit/Cancel.
-- Choosing between review depths (Quick/Full/Specific Files).
-- Selecting which of several matching issues/PRs to focus on.
+### Pattern: Startup Flow
+
+Every agent that interacts with users MUST begin with an `askQuestions` call if the intent is ambiguous:
+
+```
+askQuestions([
+  {
+    question: "What would you like to work on?",
+    options: [
+      { label: "Option A (recommended)", isRecommended: true },
+      { label: "Option B" },
+      { label: "Option C" },
+      { label: "Something else — describe it" }
+    ]
+  }
+])
+```
+
+### Pattern: Confirm Before Acting
+
+Before any action that modifies state (posting comments, merging PRs, creating issues, applying fixes):
+
+```
+askQuestions([
+  {
+    question: "Ready to proceed?",
+    options: [
+      { label: "Post (recommended)", isRecommended: true },
+      { label: "Edit first" },
+      { label: "Cancel" }
+    ]
+  }
+])
+```
+
+### Pattern: Handoff Routing
+
+When the user's request could route to multiple specialists:
+
+```
+askQuestions([
+  {
+    question: "I can help with {project} in a few ways:",
+    options: [
+      { label: "Debug — crash analysis, error diagnosis" },
+      { label: "Build & Package — PyInstaller, distribution" },
+      { label: "GUI — wxPython layout, controls" },
+      { label: "Architecture — code review, refactoring" }
+    ]
+  }
+])
+```
 
 ---
 

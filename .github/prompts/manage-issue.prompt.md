@@ -4,7 +4,7 @@ description: "Manage an issue -- edit, label, assign, close, reopen, lock, set m
 agent: issue-tracker
 tools:
   - github/*
-  - ask_questions
+  - askQuestions
 ---
 
 Manage a GitHub issue -- edit, label, assign, close, or perform any administrative action.

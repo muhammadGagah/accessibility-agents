@@ -6,7 +6,7 @@ tools:
   - github/*
   - createFile
   - createDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Show the status of a GitHub Project board -- items per column, blocked items, stale items, and team workload.

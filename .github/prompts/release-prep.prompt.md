@@ -7,7 +7,7 @@ tools:
   - createFile
   - createDirectory
   - editFiles
-  - ask_questions
+  - askQuestions
 ---
 
 Run a complete release preparation workflow. This guides you through every step needed before publishing a release.

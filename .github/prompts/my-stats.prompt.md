@@ -6,7 +6,7 @@ tools:
   - github/*
   - createFile
   - createDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Generate a personal contribution and review metrics report for the authenticated user. Save both markdown and HTML versions.

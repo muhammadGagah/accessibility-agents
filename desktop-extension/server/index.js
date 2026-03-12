@@ -2,6 +2,9 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { execFile } from "node:child_process";
+import { registerPlaywrightTools } from "./playwright-tools.js";
+import { registerVeraPdfTools } from "./verapdf-tools.js";
+import { registerPdfFormTools } from "./pdf-form-tools.js";
 import { readFile as fsReadFile, writeFile as fsWriteFile, unlink, stat } from "node:fs/promises";
 import { realpathSync, existsSync } from "node:fs";
 import { tmpdir, homedir } from "node:os";
@@ -3290,6 +3293,18 @@ ${code}`,
     ],
   })
 );
+
+// --- Playwright Tools (optional — degrade gracefully if not installed) ---
+
+registerPlaywrightTools(server);
+
+// --- veraPDF Tools (optional — degrade gracefully if not installed) ---
+
+registerVeraPdfTools(server);
+
+// --- PDF Form Tools (optional — degrade gracefully if pdf-lib not installed) ---
+
+registerPdfFormTools(server);
 
 // --- Start Server ---
 

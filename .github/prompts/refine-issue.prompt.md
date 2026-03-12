@@ -4,7 +4,7 @@ description: "Refine an issue with acceptance criteria, technical considerations
 agent: issue-tracker
 tools:
   - github/*
-  - ask_questions
+  - askQuestions
 ---
 
 Help refine a GitHub issue to make it actionable and well-defined.

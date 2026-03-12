@@ -6,7 +6,7 @@ tools:
   - github/*
   - createFile
   - createDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Generate a triage dashboard document and save it to the workspace in both markdown and HTML formats.

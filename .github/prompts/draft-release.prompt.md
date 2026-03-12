@@ -7,7 +7,7 @@ tools:
   - createFile
   - createDirectory
   - editFiles
-  - ask_questions
+  - askQuestions
 ---
 
 Draft release notes for the next release based on merged PRs since the last release. Save both markdown and HTML versions.

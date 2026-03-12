@@ -11,6 +11,7 @@ description: Severity scoring, scorecard computation, confidence levels, and rem
 Page Score = 100 - (sum of weighted findings)
 
 Weights:
+  Critical (confirmed, all three sources):   -18 points
   Critical (high confidence, both sources):  -15 points
   Critical (high confidence, single source): -10 points
   Critical (medium confidence):               -7 points
@@ -40,6 +41,7 @@ Floor: 0 (minimum score)
 
 | Level | Weight | When to Use |
 |-------|--------|-------------|
+| Confirmed | 120% | Validated by all three sources: axe-core + agent review + Playwright behavioral testing |
 | High | 100% | Confirmed by axe-core + agent, or definitively structural (missing alt, no labels, no lang) |
 | Medium | 70% | Found by one source, likely issue (heading edge cases, questionable ARIA, possible keyboard traps) |
 | Low | 30% | Possible issue, needs human review (alt text quality, reading order, context-dependent link text) |
@@ -47,6 +49,13 @@ Floor: 0 (minimum score)
 ### Source Correlation
 
 Issues found by both axe-core AND agent review are automatically upgraded to **high confidence** regardless of individual confidence ratings.
+
+Issues found by all three sources (axe-core + agent review + Playwright behavioral testing) are upgraded to **confirmed confidence** with a 1.2x weight multiplier. This applies when:
+- axe-core reports a violation
+- Agent code review identifies the same issue
+- Playwright behavioral scan confirms the issue at runtime (e.g., keyboard trap confirmed by actual Tab traversal, contrast failure confirmed by rendered CSS computation)
+
+When Playwright is not available, the maximum achievable confidence remains **High (100%)**. The confirmed tier is additive — it never downgrades findings.
 
 ## Scorecard Format
 

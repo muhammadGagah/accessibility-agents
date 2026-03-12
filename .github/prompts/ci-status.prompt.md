@@ -6,7 +6,7 @@ tools:
   - github/*
   - createFile
   - createDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Generate a CI/CD health dashboard showing workflow status, failures, and health across your repos.

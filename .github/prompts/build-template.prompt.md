@@ -8,7 +8,7 @@ tools:
   - createFile
   - createDirectory
   - listDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Build a GitHub template interactively. Answer questions and get a production-ready YAML or Markdown template.

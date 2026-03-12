@@ -6,7 +6,7 @@ tools:
   - github/*
   - createFile
   - createDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Generate an end-of-sprint review summary with completed work, carryover items, velocity metrics, and team contributions. Save both markdown and HTML versions.

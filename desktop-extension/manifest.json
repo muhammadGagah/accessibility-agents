@@ -81,6 +81,34 @@
     {
       "name": "scan_pdf_document",
       "description": "Scan a PDF file for accessibility issues using PDF/UA (Matterhorn Protocol) conformance checks and best-practice rules. Checks tagging, structure tree, language, alt text, bookmarks, forms, and more."
+    },
+    {
+      "name": "run_playwright_keyboard_scan",
+      "description": "Press Tab repeatedly on a live page and record the complete keyboard navigation sequence. Detects keyboard traps and broken tab order. Requires Playwright (optional)."
+    },
+    {
+      "name": "run_playwright_state_scan",
+      "description": "Click interactive triggers and run axe-core against revealed dynamic content. Catches violations that only exist in expanded/active states. Requires Playwright and @axe-core/playwright (optional)."
+    },
+    {
+      "name": "run_playwright_viewport_scan",
+      "description": "Run axe-core at multiple viewport widths. Measures touch target sizes and detects horizontal scroll overflow. Requires Playwright and @axe-core/playwright (optional)."
+    },
+    {
+      "name": "run_playwright_contrast_scan",
+      "description": "Extract computed foreground and background colors for every text element after full CSS cascade resolution. Calculates actual contrast ratios. Requires Playwright (optional)."
+    },
+    {
+      "name": "run_playwright_a11y_tree",
+      "description": "Capture the full accessibility tree as seen by the browser's accessibility API. Returns roles, names, values, and tree structure. Requires Playwright (optional)."
+    },
+    {
+      "name": "run_verapdf_scan",
+      "description": "Run veraPDF — the reference PDF/UA validator — against a PDF file. Returns deep structural validation findings mapped to Matterhorn Protocol checkpoints. Requires veraPDF CLI and Java 11+ (optional)."
+    },
+    {
+      "name": "convert_pdf_form_to_html",
+      "description": "Extract AcroForm fields from a PDF and generate an accessible HTML5 form with proper labels, fieldsets, ARIA attributes, and keyboard-friendly styling. Requires pdf-lib (optional)."
     }
   ],
   "tools_generated": false,

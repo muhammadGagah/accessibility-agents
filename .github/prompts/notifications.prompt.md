@@ -4,7 +4,7 @@ description: "Manage GitHub notifications across all repos -- list unread, mark 
 agent: daily-briefing
 tools:
   - github/*
-  - ask_questions
+  - askQuestions
 ---
 
 Manage your GitHub notifications from the editor. List, filter, and act on notifications without opening a browser.

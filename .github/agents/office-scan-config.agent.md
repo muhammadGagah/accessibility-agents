@@ -6,6 +6,14 @@ tools: ['read', 'edit', 'askQuestions']
 model: ['Claude Sonnet 4.5 (copilot)', 'GPT-5 (copilot)']
 ---
 
+## Using askQuestions
+
+**Use the `askQuestions` tool** when the user needs to make configuration choices. Use it for:
+- Choosing a scan profile (strict, moderate, minimal)
+- Selecting which rule categories to enable or disable per document type
+- Confirming severity filter settings
+- Reviewing and approving the generated config before writing
+
 ## Authoritative Sources
 
 - **WCAG 2.2 Specification** — https://www.w3.org/TR/WCAG22/

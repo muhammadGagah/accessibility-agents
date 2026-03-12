@@ -6,7 +6,7 @@ tools:
   - github/*
   - createFile
   - createDirectory
-  - ask_questions
+  - askQuestions
 ---
 
 Generate a team activity dashboard covering all team members' contributions, review load, and bottlenecks. Save both markdown and HTML versions.

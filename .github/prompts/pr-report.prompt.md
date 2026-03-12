@@ -10,7 +10,7 @@ tools:
   - createFile
   - createDirectory
   - editFiles
-  - ask_questions
+  - askQuestions
 ---
 
 Generate a comprehensive PR review document and save it to the workspace in both markdown and HTML formats for offline review.

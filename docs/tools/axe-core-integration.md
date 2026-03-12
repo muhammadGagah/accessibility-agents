@@ -104,3 +104,40 @@ npm install --save-dev jest-axe               # Jest (React)
 
 **Agents** catch ~70% of issues during code generation. **axe-core** catches some of the remaining issues by testing the rendered DOM. **Manual testing** covers what tools cannot.
 
+## Playwright + axe-core (Layer 3)
+
+The `@axe-core/playwright` package enables axe-core scanning within Playwright, creating a third assessment layer that catches defects in **dynamic states** that the CLI cannot reach:
+
+### MCP Tools
+
+| Tool | axe-core Usage |
+|------|---------------|
+| `run_playwright_state_scan` | Clicks triggers, runs `AxeBuilder` on revealed content |
+| `run_playwright_viewport_scan` | Runs `AxeBuilder` at each viewport width |
+
+### What Playwright + axe-core Catches
+
+| Scenario | axe-core CLI | Playwright + axe-core |
+|----------|-------------|----------------------|
+| Static page violations | Yes | Yes |
+| Violations in expanded accordions | No | Yes |
+| Violations in open menus | No | Yes |
+| Violations in modal dialogs | No | Yes |
+| Viewport-specific violations | No | Yes |
+| Touch target size at mobile widths | No | Yes |
+
+### Three-Source Confidence
+
+When an issue is found by all three sources (agent code review + axe-core CLI + Playwright behavioral scan), it receives **Confirmed** confidence with a 1.2x weight multiplier in severity scoring.
+
+### Installation
+
+```bash
+npm install -D playwright @axe-core/playwright
+npx playwright install chromium
+```
+
+Playwright is optional. Without it, the CLI-based workflow continues as before.
+
+See [Playwright Integration](playwright-integration.md) for full details.
+

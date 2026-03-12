@@ -13,7 +13,7 @@ tools:
   - createFile
   - createDirectory
   - listDirectory
-  - ask_questions
+  - askQuestions
 agents:
   - team-manager
   - daily-briefing

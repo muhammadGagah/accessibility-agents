@@ -90,6 +90,30 @@ When baseline report data is provided, every finding is classified:
 
 The `compare-web-audits` prompt surfaces this classification to users as a progress overview: "12 Fixed, 3 New, 8 Persistent, 1 Regressed."
 
+## Playwright-Enhanced Analysis
+
+When Playwright behavioral testing data is available from `playwright-scanner`, the cross-page analyzer gains two additional capabilities:
+
+### Accessibility Tree Diffing
+
+Compares browser accessibility tree snapshots across pages to detect:
+
+- **Landmark consistency** — Same landmarks present on every page (banner, navigation, main, contentinfo)
+- **Heading level consistency** — Same content types use consistent heading levels across pages
+- **ARIA label consistency** — Same landmarks labeled consistently (not "Main navigation" on one page, "Nav" on another)
+- **Role drift** — Same components maintaining consistent roles across pages
+
+Produces a **structural consistency score** (0-100) where 100 means all pages share identical structure.
+
+### Keyboard Flow Comparison
+
+Compares tab-order sequences across pages to detect:
+
+- **Navigation order consistency** — Shared nav elements in same relative tab order
+- **Trap aggregation** — Keyboard traps classified as systemic vs page-specific
+- **Tab count variance** — Pages with dramatically different tab stop counts flagged
+- **Focus management patterns** — How focus handles route changes across pages
+
 ## Connections
 
 | Component | Role |

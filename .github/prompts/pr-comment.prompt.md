@@ -5,7 +5,7 @@ agent: pr-review
 tools:
   - github/*
   - readFile
-  - ask_questions
+  - askQuestions
 ---
 
 Add targeted review comments to specific lines in a pull request.

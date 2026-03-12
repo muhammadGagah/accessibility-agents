@@ -95,17 +95,20 @@ This file defines coordinated multi-agent workflows for enterprise accessibility
 - `web-csv-reporter` - Exports web audit findings to CSV with Accessibility Insights help links
 - `scanner-bridge` - Bridges GitHub Accessibility Scanner CI data into the agent ecosystem
 - `lighthouse-bridge` - Bridges Lighthouse CI accessibility audit data into the agent ecosystem
+- `playwright-scanner` - Behavioral accessibility scanning via Playwright (keyboard, dynamic state, viewport, contrast, a11y tree)
+- `playwright-verifier` - Post-fix verification via Playwright (confirms fixes work at runtime)
 
 **Workflow:**
 1. `web-accessibility-wizard` receives the user request and runs Phase 0 (discovery)
-2. Phase 0 Step 0: Auto-detects CI scanners (GitHub Scanner, Lighthouse) and dispatches `scanner-bridge` and `lighthouse-bridge` to fetch findings
+2. Phase 0 Step 0: Auto-detects CI scanners (GitHub Scanner, Lighthouse), Playwright availability, and dev server URL
 3. Parallel specialist scanning groups execute based on content:
    - **Group 1:** `aria-specialist` + `keyboard-navigator` + `forms-specialist`
    - **Group 2:** `contrast-master` + `alt-text-headings` + `link-checker`
    - **Group 3:** `modal-specialist` + `live-region-controller` + `tables-data-specialist`
 3. `cross-page-analyzer` detects cross-page patterns, computes severity scores, and tracks remediation
 4. `web-issue-fixer` applies auto-fixable corrections and presents human-judgment items
-5. `web-accessibility-wizard` compiles the final report with scorecard and follow-up options
+5. `playwright-scanner` runs behavioral testing (keyboard, state, viewport, contrast) if Playwright is available
+6. `web-accessibility-wizard` compiles the final report with scorecard and follow-up options
 6. `testing-coach` provides manual testing instructions for issues that require human verification
 
 **Handoffs:**

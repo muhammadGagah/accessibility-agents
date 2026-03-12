@@ -7,7 +7,7 @@ tools:
   - readFile
   - textSearch
   - codebase
-  - ask_questions
+  - askQuestions
 ---
 
 Run a pre-submit self-review checklist for a PR you authored. Checks CI, description quality, reviewers, and common issues before requesting review.

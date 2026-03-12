@@ -59,6 +59,26 @@ Floor: 0
 | Template | Same issue on pages sharing a component | Fix the shared component |
 | Page-specific | Unique to one page | Fix individually |
 
+### Accessibility Tree Diffing
+
+When Playwright accessibility tree snapshots are available from `playwright-scanner`, compare structural consistency across pages:
+
+1. **Landmark consistency** — Verify the same landmark roles (banner, navigation, main, contentinfo) appear on every page. Flag pages where a landmark is missing that exists on all other pages.
+2. **Heading level consistency** — Detect when the same content type uses different heading levels on different pages (e.g., page title is H1 on homepage but H2 on subpages).
+3. **ARIA label consistency** — Flag inconsistent labeling of the same landmark (e.g., `aria-label="Main navigation"` on some pages but `aria-label="Nav"` on others).
+4. **Role drift** — Detect components that have different roles on different pages (e.g., `role="navigation"` on homepage but `role="list"` on subpages for the same nav component).
+
+Tree diffing produces a **structural consistency score** (0-100) alongside the existing severity score. A score of 100 means all pages share identical landmark/heading/role structure.
+
+### Keyboard Flow Comparison
+
+When Playwright keyboard scan results are available, compare tab-order sequences across pages:
+
+1. **Navigation order consistency** — Check that shared navigation elements (header nav, skip links, footer links) appear in the same relative tab order across all pages.
+2. **Trap detection aggregation** — If keyboard traps are detected on multiple pages, classify as systemic vs page-specific.
+3. **Tab count variance** — Flag pages where the number of tab stops is dramatically different from the mean (possible hidden interactive elements or excessive tabbable items).
+4. **Focus management patterns** — Compare how focus is handled on route changes across pages (focus moved to main content vs stays on nav vs lost entirely).
+
 ### Remediation Tracking
 
 When baseline report data is provided:
@@ -92,6 +112,8 @@ Your output MUST include:
 - `overall_score`: average score and grade
 - `scorecard`: table with page URL, score, grade, issue counts by severity
 - `remediation_delta`: (if baseline provided) fixed/new/persistent/regressed counts
+- `tree_diff`: (if Playwright data available) structural consistency score, landmark/heading/role inconsistencies
+- `keyboard_comparison`: (if Playwright data available) tab-order consistency, trap aggregation, focus management patterns
 
 ### Handoff Transparency
 

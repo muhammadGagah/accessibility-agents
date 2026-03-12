@@ -208,58 +208,6 @@ See the full [Getting Started Guide](docs/getting-started.md) for all installati
 curl -fsSL https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/uninstall.sh | bash
 ```
 
-## Troubleshooting
-
-### Agents Not Loading or Triggering
-
-**Verify agents are loaded:**  
-VS Code 1.110+: Open **Agent Debug Panel** (Command Palette → "Developer: Open Agent Debug Panel"). Check that all 57 agents appear in the loaded agents list.
-
-If agents are missing:
-- Verify `.github/agents/*.agent.md` files exist in your workspace
-- Check `.github/copilot-instructions.md` or `CLAUDE.md` is present
-- Reload VS Code window (Command Palette → "Developer: Reload Window")
-- Update GitHub Copilot extensions to latest versions
-
-**Three-hook enforcement not working:**  
-Check the Agent Debug Panel for:
-- **UserPromptSubmit hook events** - Should fire on every prompt in web projects
-- **PreToolUse hook events** - Look for `permissionDecision: "deny"` on blocked UI file edits
-- **PostToolUse hook events** - Should create session marker after accessibility-lead completes
-
-If hooks are not firing:
-- Verify hooks are enabled in settings (`github.copilot.chat.hooks.enabled: true`)
-- Check workspace is trusted (hooks disabled in untrusted workspaces)
-- Update VS Code and Copilot extensions to 1.110 or later
-
-See the complete [Agent Debug Panel Guide](docs/guides/agent-debug-panel.md) and [Hooks Guide](docs/hooks-guide.md) for detailed troubleshooting.
-
-### False Edit Gate Blocks
-
-If the edit gate blocks a non-UI file (e.g., `src/utils/api.ts`), this is a false positive. The hook uses file extensions and path patterns to detect UI files - occasionally non-UI files match these patterns.
-
-**Workaround:** Create the session marker manually to unlock editing:
-```bash
-touch /tmp/a11y-reviewed-$(cat /tmp/claude-session-id)
-```
-
-**Report:** [Open an issue](https://github.com/Community-Access/accessibility-agents/issues) with the falsely blocked file path so we can refine the detection patterns.
-
-### Skills Not Loading
-
-Verify skill files have valid YAML frontmatter:
-```bash
-grep -l "^---" .github/skills/**/SKILL.md
-```
-
-Each skill needs:
-- Valid YAML frontmatter with `name` and `description` fields
-- No syntax errors in frontmatter
-- File named exactly `SKILL.md` (case-sensitive)
-
-Check the Agent Debug Panel for skill loading errors.
-```
-
 **Windows (PowerShell):**
 
 ```powershell
@@ -313,7 +261,7 @@ The following agents make up the accessibility enforcement team, each owning one
 | **alt-text-headings** | Alt text, SVGs, icons, heading hierarchy, landmarks, page titles. |
 | **tables-data-specialist** | Table markup, scope, caption, headers, sortable columns, ARIA grids. |
 | **link-checker** | Ambiguous link text, "click here" detection, missing new-tab warnings. |
-| **web-accessibility-wizard** | Interactive guided web audit across all eleven accessibility domains. |
+| **accessibility-wizard** | Interactive guided web audit across all eleven accessibility domains. |
 | **testing-coach** | Screen reader testing, keyboard testing, automated testing guidance. |
 | **wcag-guide** | WCAG 2.2 criteria in plain language, conformance levels, what changed. |
 | **word-accessibility** | Microsoft Word (DOCX) document accessibility scanning. |
@@ -397,8 +345,6 @@ The following guides cover advanced configuration, cross-platform handoff, and d
 |-------|---------------|
 | [Cross-Platform Handoff](docs/advanced/cross-platform-handoff.md) | Seamless handoff between Claude Code and Copilot |
 | [Advanced Scanning Patterns](docs/advanced/advanced-scanning-patterns.md) | Background scanning, worktree isolation, large libraries |
-| [Debug Panel Workflows](docs/guides/debug-panel-workflows.md) | Troubleshoot agent loading, handoffs, tool calls, and browser verification |
-| [Browser Tool Usage](docs/guides/browser-tool-usage.md) | Agentic browser verification: agents autonomously verify fixes in integrated browser |
 | [Plugin Packaging](docs/advanced/plugin-packaging.md) | Packaging and distributing agents for different environments |
 | [Platform References](docs/advanced/platform-references.md) | External documentation sources with feature-to-source mapping |
 | [Experimental Codex Multi-Agent Roles](docs/guides/codex-experimental-multi-agent.md) | Optional TOML-based Codex roles layered on top of the stable AGENTS.md baseline |
@@ -453,28 +399,7 @@ The `example/` directory contains a deliberately broken web page with 20+ intent
 
 ## Contributing
 
-### Extending the Platform
-
-Want to add custom skills, domain-specific rules, or vertical market guidance? The platform is designed to be extended.
-
-**Key guides:**
-- [Browser Tool Usage](docs/guides/browser-tool-usage.md) - Autonomous verification with integrated browser
-- [Debug Panel Workflows](docs/guides/debug-panel-workflows.md) - Troubleshoot agent behavior and tool execution traces
-- [Creating Custom Skills](docs/guides/create-custom-skills.md) - Build reusable accessibility knowledge domains
-- [Authoritative Sources](docs/guides/authoritative-sources.md) - Cite accessibility standards correctly
-- [Context Management](docs/guides/context-management.md) - Managing long conversation contexts in audits
-
-**Quick examples:**
-- Adding a fintech accessibility skill
-- Creating a healthcare-specific compliance rule set
-- Building Svelte 5+ framework guidance
-- Defining custom WCAG AAA rules for your team
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contribution workflow.
-
-### Reporting Issues & Gaps
-
-This project exists because the community shows up. Every feature in v3.0 -- the NVDA Addon Specialist, the Text Quality Reviewer, the source citation policy, the wxPython screen reader documentation, the agentic browser tools, the lifecycle hooks strategy -- started as a community conversation. Not a roadmap item. A real person saying "this is what I need."
+This project exists because the community shows up. Every feature in v2.5 -- the NVDA Addon Specialist, the Text Quality Reviewer, the source citation policy, the wxPython screen reader documentation -- started as a community conversation. Not a roadmap item. A real person saying "this is what I need."
 
 Whether you are a developer, accessibility specialist, screen reader user, or just someone who cares about inclusive software - there is a place for you here.
 
@@ -522,5 +447,3 @@ MIT
 **Accessibility Agents** was founded by [Taylor Arndt](https://github.com/taylorarndt) (COO at [Techopolis](https://github.com/techopolis-group)) and [Jeff Bishop](https://github.com/jeffreybishop) because accessibility is how they work, not something bolted on at the end. When AI coding tools consistently failed at accessibility, they built the team they wished existed - and opened it to the world.
 
 This is a community project. The more perspectives, lived experiences, and domain knowledge that go into it, the better it serves the blind and low vision community. If you have ideas, open a discussion. If you have fixes, open a PR. Every contribution matters.
-
-

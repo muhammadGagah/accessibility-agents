@@ -107,5 +107,3 @@ The Agent Skills in `.github/skills/` serve as platform-independent knowledge:
 
 Claude Code agents access this knowledge through their agent instructions.
 Copilot agents access it through the Skills framework (auto-resolved from `SKILL.md` descriptions).
-
-

@@ -4,7 +4,7 @@ description: "Branch management -- list branches with activity, detect stale bra
 agent: pr-review
 tools:
   - github/*
-  - ask_questions
+  - askQuestions
 ---
 
 Manage branches in a repository -- list, compare, clean up stale branches, and check protection rules.

@@ -4,7 +4,7 @@ description: "Add emoji reactions to issues, PRs, and comments -- thumbs up, hea
 agent: issue-tracker
 tools:
   - github/*
-  - ask_questions
+  - askQuestions
 ---
 
 Add an emoji reaction to an issue, PR, or specific comment.

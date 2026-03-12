@@ -73,6 +73,8 @@ These agents are not meant to be invoked directly by users. They are used intern
 | document-csv-reporter | Exports document audit findings to CSV with Microsoft Office and Adobe PDF help links - invoked by document-accessibility-wizard |
 | scanner-bridge | Bridges GitHub Accessibility Scanner CI data into the agent ecosystem - invoked by web-accessibility-wizard Phase 0 |
 | lighthouse-bridge | Bridges Lighthouse CI accessibility audit data into the agent ecosystem - invoked by web-accessibility-wizard Phase 0 |
+| playwright-scanner | Behavioral accessibility scanning via Playwright - keyboard traversal, dynamic state, viewport, contrast, a11y tree |
+| playwright-verifier | Post-fix verification via Playwright - confirms fixes work at runtime by re-running targeted scans |
 
 ## Knowledge Domains
 
