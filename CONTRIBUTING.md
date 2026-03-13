@@ -39,6 +39,17 @@ Clearer docs, better examples, typo fixes - all welcome.
 4. Test on your system (run the installer, verify agents load)
 5. Open a PR with a clear description of what changed and why
 
+### Windows: Enable Symlinks
+
+This repo uses symlinks inside `claude-code-plugin/` to avoid duplicating docs and templates. Git on Windows defaults to `core.symlinks=false`, which converts symlinks to text stub files. To get real symlinks:
+
+1. Enable **Developer Mode** in Windows Settings (Settings > System > For developers).
+2. Clone with symlinks enabled:
+   ```
+   git clone -c core.symlinks=true https://github.com/Community-Access/accessibility-agents.git
+   ```
+   Or set it globally: `git config --global core.symlinks true`
+
 ## Testing Requirements
 
 > ⚠️ **CRITICAL:** Always test contributions with the **latest versions** of all relevant tools. Agent behavior depends on current platform APIs, model capabilities, and bug fixes.
