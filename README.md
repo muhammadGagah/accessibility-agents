@@ -55,7 +55,7 @@ All agents run on:
 - **Claude Subscription:** Pro, Max, or Team plan
 
 **For Gemini CLI:**
-- **Gemini CLI:** Latest version ([Installation](https://github.com/google/generative-ai-cli))
+- **Gemini CLI:** Latest version ([Installation](https://github.com/google-gemini/gemini-cli))
 - **Google AI Studio API Key:** Active key ([Get Started](https://ai.google.dev/))
 
 **For Claude Desktop:**
@@ -283,16 +283,11 @@ The installer is designed to be additive and non-destructive:
 
 To reinstall a specific agent from scratch, delete it first and rerun the installer (or update script).
 
-## Install from VS Code Marketplace (Recommended)
+## Install from VS Code Marketplace (Coming Soon)
 
-**GitHub Copilot users (VS Code):** Install Accessibility Agents directly from the Extensions marketplace.
+**GitHub Copilot users (VS Code):** A VS Code extension is in development that will allow one-click install from the Extensions marketplace. Until then, use the **one-liner install** above or the manual steps in [Getting Started](docs/getting-started.md).
 
-1. **Open Extensions** - Press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (Mac)
-2. **Search** - Type "accessibility-agents"
-3. **Click Install** - One-click install of all 57 agents, 17 skills, 104 prompts, and workspace instructions
-4. **Configure** - Create scan config files for your project (instructions included in README)
-
-**What you get:**
+**What the extension will include:**
 - ✅ 57 fully-integrated agents in GitHub Copilot (VS Code and CLI)
 - ✅ 17 reusable accessibility skills (WCAG rules, severity scoring, scanning patterns)
 - ✅ 104 custom prompts for web audits, document audits, GitHub workflows, and developer tooling
