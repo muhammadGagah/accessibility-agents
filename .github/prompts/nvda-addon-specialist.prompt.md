@@ -32,8 +32,8 @@ Ask the user:
 3. **Target application** (appModule only) -- The executable name (e.g., `notepad`, `chrome`)
 4. **Summary** -- One-line description for the manifest
 5. **Author name and URL** -- For manifest metadata
-6. **Minimum NVDA version** -- Default: `2024.1`
-7. **Last tested NVDA version** -- Default: `2025.1`
+6. **Minimum NVDA version** -- Default: `2025.1`. The absolute floor is `2019.3` (first Python 3 release). If the addon ships native 64-bit DLLs, minimum must be `2026.1`.
+7. **Last tested NVDA version** -- Default: `2026.1`
 
 ### Step 2: Create Project Structure
 
