@@ -31,7 +31,7 @@ The agent asks for:
 
 - Addon name and type (globalPlugin, appModule, synthDriver, brailleDisplayDriver)
 - Target application (for appModules)
-- Summary, author, and NVDA version compatibility (defaults: minimum `2026.1`, last tested `2026.1`; absolute floor is `2019.3` for Python 3)
+- Summary, author, and NVDA version compatibility (defaults: minimum `2025.1`, last tested `2026.1`; absolute floor is `2019.3` for Python 3)
 
 ### Step 2: Project Structure
 
