@@ -1,0 +1,10 @@
+# Symlinks in claude-code-plugin/ point to repo-root content.
+# Windows users must clone with core.symlinks=true (requires Developer Mode).
+claude-code-plugin/CHANGELOG.md      symlink
+claude-code-plugin/LICENSE            symlink
+claude-code-plugin/CONTRIBUTING.md    symlink
+claude-code-plugin/SECURITY.md        symlink
+claude-code-plugin/CODE_OF_CONDUCT.md symlink
+claude-code-plugin/docs/**            symlink
+claude-code-plugin/templates          symlink
+claude-code-plugin/example            symlink
