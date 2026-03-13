@@ -7,6 +7,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0] - 2026-03-13
+
+### Added
+
+#### Playwright Integration (MCP Tools)
+- **5 new Playwright-based accessibility scanning tools** for Claude Desktop MCP extension
+  - `keyboard_scan` - Automated keyboard navigation testing
+  - `state_scan` - ARIA state and property validation
+  - `viewport_scan` - Responsive layout accessibility checks
+  - `contrast_scan` - Automated color contrast analysis
+  - `a11y_tree` - Accessibility tree inspection
+- `playwright-tools.js` external module with graceful degradation when Playwright is not installed
+- URL validation (http/https only) and CSS selector sanitization for security
+
+#### Playwright Agent Ecosystem
+- **playwright-scanner** agent (Copilot + Claude Code) - Orchestrates Playwright-based scanning
+- **playwright-verifier** agent (Copilot + Claude Code) - Verifies fixes against live pages
+- **playwright-testing** skill - Patterns and examples for Playwright accessibility testing
+- Integration docs and cross-platform handoff updates
+
+#### veraPDF PDF/UA Validator
+- `verapdf-tools.js` MCP tool with Matterhorn Protocol severity mapping
+- Uses `execFile` (not `exec`) for command injection prevention
+- Path validation with symlink resolution and 500MB file size limit
+
+#### PDF Form-to-HTML Converter
+- `pdf-form-tools.js` using pdf-lib (pure JS, MIT licensed)
+- XSS prevention via `escapeHtml` on all dynamic values
+- Accessible HTML5 output with labels, fieldsets, ARIA attributes, and focus styles
+
+#### Test Generation
+- `generate-a11y-tests` prompt for CI pipeline scaffolding
+- GitHub Actions template for Playwright accessibility tests (`docs/templates/a11y-tests-ci.md`)
+
+#### askQuestions Integration (all 59 agents)
+- Fixed 31 Claude Code agents: `ask_questions` renamed to `askQuestions` (camelCase)
+- Added `askQuestions` to 10 agent tool lists
+- Added domain-specific `askQuestions` body instructions to 39 agents
+- `shared-instructions.md`: comprehensive `askQuestions` section for 12 GitHub agents
+- Hub agents (developer-hub, github-hub, nexus): `askQuestions` principles and examples
+
+#### Wizard and Fixer Integration
+- web-accessibility-wizard Playwright phase integration
+- web-issue-fixer and cross-page-analyzer Playwright support
+- Severity scoring updates for Playwright findings
+
+### Changed
+- Agent count: 57 to 59 (added playwright-scanner and playwright-verifier)
+- Prompt count: 104 to 106
+- Skill count: 17 to 18 (added playwright-testing)
+- All version numbers bumped to 3.2.0
+
+### Fixed (v3.0.0 to v3.2.0)
+- Plugin distribution drift fixed with symlinks for docs, templates, and example directories (PR #57)
+- Added `.gitattributes` for Windows symlink compatibility
+- Added Windows clone instructions (`git clone -c core.symlinks=true`) to CONTRIBUTING.md
+- NVDA addon specialist: version alignment to 2025.1.0, table introductions, source citations (PR #62)
+- Codex CLI: experimental multi-agent TOML roles support (PR #59)
+- Gemini CLI hooks: five lifecycle hook scripts added
+- Broken URLs and Deque help links migrated to Accessibility Insights
+
 ## [3.0.0] - 2026-03-05
 
 ### Added

@@ -1,8 +1,8 @@
 {
   "name": "accessibility-agents",
   "displayName": "Accessibility Agents",
-  "description": "WCAG AA accessibility specialists for GitHub Copilot Chat — invoke @a11y with slash commands for ARIA, contrast, keyboard, forms, and more. v3.0 adds authoritative source citations.",
-  "version": "3.0.0",
+  "description": "WCAG AA accessibility specialists for GitHub Copilot Chat — invoke @a11y with slash commands for ARIA, contrast, keyboard, forms, and more. v3.2 adds Playwright integration, veraPDF, PDF form converter.",
+  "version": "3.2.0",
   "publisher": "community-access",
   "license": "MIT",
   "repository": {

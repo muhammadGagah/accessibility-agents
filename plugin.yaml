@@ -9,8 +9,8 @@
 
 name: "accessibility-agents"
 title: "Accessibility Agents for GitHub Copilot"
-description: "57 specialized AI agents for web, document, desktop, and developer accessibility auditing. WCAG 2.2 AA compliance, automated remediation, and multi-platform support."
-version: "3.0.0"
+description: "59 specialized AI agents for web, document, desktop, and developer accessibility auditing. WCAG 2.2 AA compliance, automated remediation, and multi-platform support."
+version: "3.2.0"
 author: "Community-Access"
 license: "MIT"
 homepage: "https://github.com/Community-Access/accessibility-agents"

@@ -236,10 +236,10 @@ To reinstall a specific agent from scratch, delete it first and rerun the instal
 **GitHub Copilot users (VS Code):** A VS Code extension is in development that will allow one-click install from the Extensions marketplace. Until then, use the **one-liner install** above or the manual steps in [Getting Started](docs/getting-started.md).
 
 **What the extension will include:**
-- ✅ 57 fully-integrated agents in GitHub Copilot (VS Code and CLI)
-- ✅ 17 reusable accessibility skills (WCAG rules, severity scoring, scanning patterns)
-- ✅ 104 custom prompts for web audits, document audits, GitHub workflows, and developer tooling
-- ✅ 5 workspace instructions (automatic WCAG AA enforcement on every chat)
+- ✅ 59 fully-integrated agents in GitHub Copilot (VS Code and CLI)
+- ✅ 18 reusable accessibility skills (WCAG rules, severity scoring, scanning patterns)
+- ✅ 106 custom prompts for web audits, document audits, GitHub workflows, and developer tooling
+- ✅ 6 workspace instructions (automatic WCAG AA enforcement on every chat)
 - ✅ 100% source citation coverage (all agents cite authoritative standards)
 - ✅ Auto-update mechanism (new agents and features arrive automatically)
 
