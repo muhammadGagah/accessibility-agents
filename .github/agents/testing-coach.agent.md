@@ -451,6 +451,62 @@ Built into Chrome, not as thorough as axe but easy to access:
 
 Note: Lighthouse accessibility tests are a subset of axe-core. A 100 score does NOT mean the page is accessible - it means it passed the automated checks.
 
+### Handling Known Issues (Violation Fingerprinting)
+
+When you have known accessibility issues that cannot be fixed immediately, use **violation fingerprinting** instead of disabling entire rules or excluding elements. This approach from Playwright's documentation allows granular suppression while catching new violations:
+
+```typescript
+// Create a fingerprint of known violations
+function violationFingerprints(violations: any[]) {
+  return violations.map(v => ({
+    rule: v.id,
+    targets: v.nodes.map((n: any) => n.target.join(' ')),
+  }));
+}
+
+test('page has no new accessibility violations', async ({ page }) => {
+  await page.goto('/');
+  
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+    .analyze();
+  
+  // Compare against a known-issues baseline
+  expect(violationFingerprints(results.violations)).toMatchSnapshot('known-a11y-issues');
+});
+```
+
+**Why this is better:**
+
+1. **Rule-level suppression** (`disableRules`) turns off the rule entirely - you'll miss new violations of that rule
+2. **Element exclusion** (`exclude`) skips all checks on that element and its descendants
+3. **Fingerprinting** allows the specific known combination while catching anything new
+
+**Best practice:** Review and reduce your known-issues snapshot quarterly. Each fingerprint should have an associated ticket for eventual remediation.
+
+### WCAG 2.2 Complete Tag Set
+
+For comprehensive WCAG 2.2 AA coverage in axe-core, use these tags together:
+
+```typescript
+const results = await new AxeBuilder({ page })
+  .withTags([
+    'wcag2a',     // WCAG 2.0 Level A
+    'wcag2aa',    // WCAG 2.0 Level AA
+    'wcag21a',    // WCAG 2.1 Level A (new in 2.1)
+    'wcag21aa',   // WCAG 2.1 Level AA (new in 2.1)
+    'wcag22aa',   // WCAG 2.2 Level AA (new in 2.2)
+    'best-practice' // Optional: catches issues that aren't WCAG violations but hurt users
+  ])
+  .analyze();
+```
+
+**WCAG 2.2-specific rules** axe-core checks with `wcag22aa` tag:
+
+- **Target Size (2.5.8)** - Touch targets must be at least 24x24 CSS pixels
+- **Focus Not Obscured (2.4.11)** - Focused elements must not be entirely hidden by sticky content
+- **Dragging Movements (2.5.7)** - Drag operations must have single-pointer alternatives
+
 ### CI/CD Pipeline
 
 ```yaml

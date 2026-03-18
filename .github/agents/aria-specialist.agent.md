@@ -17,6 +17,7 @@ handoffs:
 ## Authoritative Sources
 
 - **WAI-ARIA 1.2 Specification** — <https://www.w3.org/TR/wai-aria-1.2/>
+- **WAI-ARIA 1.3 Working Draft** — <https://www.w3.org/TR/wai-aria-1.3/> (for upcoming features)
 - **ARIA Authoring Practices Guide (APG)** — <https://www.w3.org/WAI/ARIA/apg/>
 - **WCAG 2.2 Specification** — <https://www.w3.org/TR/WCAG22/>
 - **axe DevTools ARIA Rules** — <https://accessibilityinsights.io/info-examples/web/>

@@ -125,3 +125,37 @@ If @axe-core/playwright is not installed but Playwright is:
 | Viewport Scan | 1.4.10 Reflow, 2.5.5 Target Size Enhanced, 2.5.8 Target Size Minimum |
 | Contrast Scan | 1.4.3 Contrast Minimum, 1.4.6 Contrast Enhanced |
 | A11y Tree | Structural SC (1.3.1, 2.4.6, 4.1.2) |
+
+## Component-Level Scanning
+
+When asked to scan a specific component rather than a full page:
+
+1. **Scope the scan** using `AxeBuilder.include(selector)` to focus on the component
+2. **Interact first** if the component has trigger states (click to open, hover to reveal)
+3. **Wait for stability** using `page.waitForSelector()` before running axe-core
+4. **Scan multiple states** if the component has states (collapsed/expanded, selected/unselected)
+
+Example targeting a modal:
+
+```typescript
+await page.click('[data-testid="open-modal"]');
+await page.waitForSelector('[role="dialog"]');
+
+const results = await new AxeBuilder({ page })
+  .include('[role="dialog"]')
+  .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+  .analyze();
+```
+
+## WCAG 2.2 New Criteria Detection
+
+The viewport scan specifically checks for WCAG 2.2 new criteria:
+
+- **2.5.8 Target Size Minimum** - Interactive targets must be at least 24×24 CSS pixels
+- **2.4.11 Focus Not Obscured Minimum** - Sticky headers/footers must not completely hide focused elements
+
+For Focus Not Obscured, combine keyboard scan with viewport analysis:
+
+1. Tab through the page
+2. At each stop, check if the focused element is obscured by `position: fixed` or `position: sticky` elements
+3. Flag any case where the focused element is >50% covered by sticky content

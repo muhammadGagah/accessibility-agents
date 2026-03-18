@@ -51,6 +51,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Runs on PRs and pushes affecting agent/skill files
   - Ensures tool name compatibility across platforms
 
+#### Agent Enhancements
+
+- **testing-coach** - Added modern Playwright patterns
+  - Violation fingerprinting for handling known issues (from Playwright docs)
+  - Complete WCAG 2.2 tag set for axe-core (`wcag22aa`)
+  - WCAG 2.2-specific rules coverage (Target Size 2.5.8, Focus Not Obscured 2.4.11)
+- **playwright-scanner** - Added advanced scanning patterns
+  - Component-level scanning with `AxeBuilder.include()`
+  - WCAG 2.2 new criteria detection (Focus Not Obscured)
+- **aria-specialist** - Added WAI-ARIA 1.3 draft reference for upcoming features
+
 ### Changed
 
 - **Normalized all 59 Copilot agent tool declarations** to use CLI-compatible names:
