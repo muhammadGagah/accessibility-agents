@@ -103,6 +103,8 @@ node stdio.js
 | `scan_pdf_document` | Scan PDF using PDF/UA checks |
 | `extract_document_metadata` | Extract accessibility-relevant metadata |
 | `batch_scan_documents` | Scan multiple documents in one call |
+| `fix_document_metadata` | Fix document metadata (title, language, author) |
+| `fix_document_headings` | Fix heading structure in documents |
 
 ### Advanced Tools (Optional Dependencies)
 
@@ -115,6 +117,13 @@ node stdio.js
 | `run_playwright_viewport_scan` | playwright | Test reflow at multiple widths |
 | `run_verapdf_scan` | veraPDF CLI | PDF/UA-1 conformance validation |
 | `convert_pdf_form_to_html` | pdf-lib | Convert PDF forms to accessible HTML |
+
+### Caching Tools
+
+| Tool | Description |
+|------|-------------|
+| `check_audit_cache` | Check if a cached audit result exists for a file |
+| `update_audit_cache` | Store or update an audit result in the cache |
 
 ### Installing Optional Dependencies
 
@@ -134,7 +143,7 @@ npm install pdf-lib
 
 ```bash
 curl http://127.0.0.1:3100/health
-# {"status":"ok","name":"a11y-agent-team","version":"3.2.0","mode":"stateful"}
+# {"status":"ok","name":"a11y-agent-team","version":"4.0.0","mode":"stateful"}
 ```
 
 ## MCP Prompts

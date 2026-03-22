@@ -40,6 +40,9 @@ This file defines coordinated multi-agent workflows for enterprise accessibility
 - `epub-scan-config` - ePub scan configuration management
 - `document-csv-reporter` - Exports document audit findings to CSV with Microsoft Office and Adobe PDF help links
 
+**Members (PDF Remediation):**
+- `pdf-remediator` - Programmatic and manual PDF remediation via pdf-lib/qpdf/ghostscript and Adobe Acrobat Pro
+
 **Members (ePub):**
 - `epub-accessibility` - EPUB scanning and remediation (EPUB-E*, EPUB-W*, EPUB-T* rules)
 
@@ -88,6 +91,7 @@ This file defines coordinated multi-agent workflows for enterprise accessibility
 - `link-checker` - Link text quality
 - `testing-coach` - Testing guidance
 - `cognitive-accessibility` - WCAG 2.2 cognitive SC, COGA guidance, plain language analysis
+- `i18n-accessibility` - Internationalization, RTL, and multilingual accessibility
 
 **Hidden Helpers:**
 - `cross-page-analyzer` - Cross-page pattern detection, severity scoring, remediation tracking
@@ -163,6 +167,15 @@ This file defines coordinated multi-agent workflows for enterprise accessibility
 
 **Skills:**
 - `python-development` - Python version reference, pyproject.toml patterns, PyInstaller modes, wxPython sizer/event/threading cheat sheets, desktop accessibility API reference, common pitfalls, cross-platform paths, testing, logging
+
+## Team: CI/CD & Education
+
+Specialist agents for CI pipelines, standards education, and screen reader simulation:
+
+- `ci-accessibility` - CI/CD accessibility pipeline setup and management (GitHub Actions, Azure DevOps, GitLab CI, CircleCI, Jenkins)
+- `screen-reader-lab` - Interactive screen reader simulation for education and debugging
+- `wcag3-preview` - WCAG 3.0 draft education and transition planning
+- `wcag-aaa` - WCAG AAA conformance auditing (enhanced contrast, extended audio descriptions, reading level)
 
 **Workflow:**
 1. `developer-hub` receives the user request and classifies intent (debug, package, scaffold, review, optimize, GUI work, desktop a11y, tool building, NVDA addon development, text quality review)

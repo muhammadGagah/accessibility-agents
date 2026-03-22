@@ -44,6 +44,9 @@ This file defines coordinated multi-agent workflows for enterprise accessibility
 - `epub-scan-config` - ePub scan configuration management
 - `document-csv-reporter` - Exports document audit findings to CSV with Microsoft Office and Adobe PDF help links
 
+**Members (PDF Remediation):**
+- `pdf-remediator` - Programmatic and manual PDF remediation via pdf-lib/qpdf/ghostscript and Adobe Acrobat Pro
+
 **Members (ePub):**
 
 - `epub-accessibility` - EPUB scanning and remediation (EPUB-E*, EPUB-W*, EPUB-T* rules)
@@ -99,8 +102,7 @@ This file defines coordinated multi-agent workflows for enterprise accessibility
 - `link-checker` - Link text quality
 - `testing-coach` - Testing guidance
 - `cognitive-accessibility` - WCAG 2.2 cognitive SC, COGA guidance, plain language analysis
-
-**Hidden Helpers:**
+- `i18n-accessibility` - Internationalization, RTL, and multilingual accessibility
 
 - `cross-page-analyzer` - Cross-page pattern detection, severity scoring, remediation tracking
 - `web-issue-fixer` - Automated and guided accessibility fix application
@@ -167,6 +169,33 @@ This file defines coordinated multi-agent workflows for enterprise accessibility
 2. `document-accessibility-wizard` runs the document accessibility audit
 3. `accessibility-lead` compiles a unified report covering both web and document findings
 4. Cross-cutting patterns (e.g., shared templates, design system issues) are highlighted across both audits
+
+## Team: Developer Tools
+
+**Lead:** `developer-hub`
+
+**Members:**
+- `python-specialist` - Python language expert: debugging, packaging, testing, type checking, async, optimization
+- `wxpython-specialist` - wxPython GUI expert: sizers, events, AUI, custom controls, threading, desktop accessibility
+- `desktop-a11y-specialist` - Desktop application accessibility: platform APIs (UIA, MSAA, ATK, NSAccessibility), screen reader interaction, focus management
+- `desktop-a11y-testing-coach` - Desktop accessibility testing: NVDA, JAWS, Narrator, VoiceOver, Orca, Accessibility Insights
+- `a11y-tool-builder` - Accessibility tool building: rule engines, document parsers, report generators
+- `nvda-addon-specialist` - NVDA addon development: architecture, globalPlugins, appModules, manifest format, addon packaging
+- `text-quality-reviewer` - Non-visual text quality review: template variables in alt text, placeholder labels, duplicate labels
+
+**Workflow:**
+1. `developer-hub` receives the user request and classifies intent
+2. Routes to appropriate specialist based on domain
+3. Cross-team handoffs to `web-accessibility-wizard` or `document-accessibility-wizard` as needed
+
+## Team: CI/CD & Education
+
+Specialist agents for CI pipelines, standards education, and screen reader simulation:
+
+- `ci-accessibility` - CI/CD accessibility pipeline setup and management (GitHub Actions, Azure DevOps, GitLab CI, CircleCI, Jenkins)
+- `screen-reader-lab` - Interactive screen reader simulation for education and debugging
+- `wcag3-preview` - WCAG 3.0 draft education and transition planning
+- `wcag-aaa` - WCAG AAA conformance auditing (enhanced contrast, extended audio descriptions, reading level)
 
 ## Enterprise Scanning Patterns
 

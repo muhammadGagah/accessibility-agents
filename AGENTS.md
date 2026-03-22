@@ -2,7 +2,7 @@
 
 > AI agent guidance for this repository. Generated for AgentRC compatibility.
 
-This repository contains 59 accessibility-focused AI agents across multiple platforms (Copilot, Claude Code, Codex, Gemini). This file provides high-level guidance for AI coding assistants working in this codebase.
+This repository contains 65 accessibility-focused AI agents across multiple platforms (Copilot, Claude Code, Codex, Gemini). This file provides high-level guidance for AI coding assistants working in this codebase.
 
 ## Repository Purpose
 
@@ -12,8 +12,8 @@ This repository contains 59 accessibility-focused AI agents across multiple plat
 
 | Path | Purpose |
 |------|---------|
-| `.github/agents/` | Copilot agent definitions (59 agents) |
-| `.github/skills/` | Copilot reusable skills (18 skills) |
+| `.github/agents/` | Copilot agent definitions (65 agents) |
+| `.github/skills/` | Copilot reusable skills (19 skills) |
 | `.github/prompts/` | One-click workflow prompts |
 | `.github/instructions/` | Always-on instruction files |
 | `.claude/agents/` | Claude Code agent definitions |
@@ -39,6 +39,7 @@ Led by `accessibility-lead`, coordinates specialists for comprehensive web audit
 - `tables-data-specialist` - Data table accessibility
 - `link-checker` - Ambiguous link text detection
 - `text-quality-reviewer` - Non-visual text quality review
+- `i18n-accessibility` - Internationalization, RTL, and multilingual accessibility
 
 ### Document Accessibility Team
 Led by `document-accessibility-wizard`, handles Office and PDF audits:
@@ -47,6 +48,7 @@ Led by `document-accessibility-wizard`, handles Office and PDF audits:
 - `powerpoint-accessibility` - Microsoft PowerPoint (.pptx)
 - `pdf-accessibility` - PDF/UA conformance
 - `epub-accessibility` - ePub accessibility
+- `pdf-remediator` - Programmatic and manual PDF remediation
 
 ### GitHub Workflow Team
 Led by `github-hub` / `nexus`, manages repository operations:
@@ -64,6 +66,13 @@ Led by `developer-hub`, handles desktop and Python development:
 - `nvda-addon-specialist` - NVDA screen reader addon development
 - `desktop-a11y-specialist` - Desktop accessibility APIs
 - `a11y-tool-builder` - Building accessibility scanning tools
+
+### CI/CD & Education
+Specialist agents for CI pipelines, standards education, and screen reader simulation:
+- `ci-accessibility` - CI/CD accessibility pipeline setup and management
+- `screen-reader-lab` - Interactive screen reader simulation for education
+- `wcag3-preview` - WCAG 3.0 draft education and transition planning
+- `wcag-aaa` - WCAG AAA conformance auditing
 
 ## Coding Conventions
 
