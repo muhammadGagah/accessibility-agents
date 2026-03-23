@@ -162,6 +162,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **`fix_document_headings` MCP tool** — Was reading raw .docx bytes as UTF-8 string, which fails because .docx files are ZIP archives. Fixed to use `parseZipCd()` + `getZipXml()` to properly extract `word/document.xml` from the OOXML ZIP archive before regex matching.
 - **MCP server test suite** — Added 4 missing tools (`fix_document_metadata`, `fix_document_headings`, `check_audit_cache`, `update_audit_cache`) to the `registers all expected tools` test. All 52 tests pass.
+- **Markdownlint compliance** — Full markdownlint pass across all markdown files in the repository, fixing heading levels, list formatting, and trailing whitespace.
+- **MCP server dependency installation** — MCP server dependencies are now installed automatically during setup, preventing missing-module errors on first run.
+- **Installer manifest initialization** — Fixed `install.sh` to initialize the manifest helper function before the Codex install path, preventing undefined-function errors.
+- **wxPython `SetName()` misuse** — Replaced incorrect `SetName()` calls on wxPython controls with `StaticText` labels for proper NVDA and VoiceOver screen reader announcement.
+- **USER_GUIDE completeness** — Fixed coverage gaps in `docs/USER_GUIDE.md` — added missing `office-remediator` agent entry, `css-accessibility` and `document-generation` instructions, `office-remediation` skill, and 17 prompts not listed in any prompt table.
+- **Stale counts and team members** — Fixed outdated agent/tool counts and added missing team member entries across multiple documentation files. Expanded `.gitignore` for common editor and OS artifacts.
 
 ### Removed
 
@@ -256,6 +262,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated `insiders-a11y-tracker` agents (Copilot + Claude Code) with VS Code 1.112 features section
 - Added VS Code 1.112 features overview to CLAUDE.md, .github/copilot-instructions.md, and GEMINI.md
+
+#### CI & Dependencies
+
+- **actions/checkout** — Bumped from v4 to v6
+- **actions/github-script** — Bumped from v7 to v8
+- **peter-evans/create-pull-request** — Bumped from v7 to v8
+- **actions/setup-node** — Bumped from v4 to v6
+- **actions/setup-python** — Bumped from v4 to v6
+- **@types/node** — Bumped from 25.3.3 to 25.5.0 (vscode-extension)
+- **@types/vscode** — Bumped from 1.109.0 to 1.110.0 (vscode-extension)
+- Removed leftover lint process artifacts from repository
 
 ## [3.2.0] - 2026-03-13
 

@@ -1,6 +1,6 @@
 # Marketplace Submission Guide: Accessibility Agents
 
-**Status:** Ready for publication (March 4, 2026)  
+**Status:** Ready for publication (July 14, 2026)  
 **Target Registries:** awesome-copilot, copilot-plugins  
 **Estimated Timeline:** 2-5 business days for approval
 
@@ -33,7 +33,7 @@ Verify it contains:
 - Name: "accessibility-agents"
 - Title: "Accessibility Agents for GitHub Copilot"
 - Description: (compelling 1-2 sentence summary)
-- Version: "3.0.0"
+- Version: "4.0.0"
 - Author: "Community-Access"
 - License: "MIT"
 - Contents section with agents, skills, prompts paths
@@ -49,12 +49,12 @@ $yaml | Out-String -InputObject $yaml | Select-String "^name:|^title:|^version:"
 
 ### 1.2 Update version in key files
 
-Verify v3.0.0 is set in:
+Verify v4.0.0 is set in:
 
-- ✅ plugin.yaml - `version: "3.0.0"`
-- ✅ prd.md - `**Version:** 3.0.0`
+- ✅ plugin.yaml - `version: "4.0.0"`
+- ✅ prd.md - `**Version:** 4.0.0`
 - ✅ README.md - Check header references
-- ✅ CHANGELOG.md - Section for [3.0.0]
+- ✅ CHANGELOG.md - Section for [4.0.0]
 
 ### 1.3 Documentation Quality Check
 
@@ -251,7 +251,7 @@ Look for a `CONTRIBUTING.md` or submission guide. Requirements typically include
 
 - **Name:** Accessibility Agents
 - **Repository:** https://github.com/Community-Access/accessibility-agents
-- **Version:** 3.0.0
+- **Version:** 4.0.0
 - **Author:** Community-Access
 - **License:** MIT
 - **Plugin YAML:** https://github.com/Community-Access/accessibility-agents/blob/main/plugin.yaml
@@ -279,7 +279,7 @@ Or install from VS Code Extensions marketplace (coming soon #370).
 ✅ **Complete WCAG 2.2 Enforcement** - All 80 agents cite authoritative W3C/ARIA documentation  
 ✅ **Multi-Platform** - Copilot (VS Code & CLI), Claude Code, Gemini with full parity  
 ✅ **Reusable Skills** - 25 portable domain-specific skills (WCAG rules, severity scoring, frameworks)  
-✅ **Custom Prompts** - 119 task-oriented prompts for audits, remediation, workflows  
+✅ **Custom Prompts** - 134 task-oriented prompts for audits, remediation, workflows  
 ✅ **Auto-Updates** - Manifest-based tracking, non-destructive installation, safe updates  
 ✅ **Production-Ready** - 5+ years development, actively maintained, MIT licensed  
 
@@ -381,52 +381,55 @@ Add badges to README:
 Tag a GitHub release:
 
 ```powershell
-git tag -a v3.0.0-marketplace -m "Release v3.0.0: Marketplace publication"
-git push origin v3.0.0-marketplace
+git tag -a v4.0.0-marketplace -m "Release v4.0.0: Marketplace publication"
+git push origin v4.0.0-marketplace
 ```
 
 Then create release notes on GitHub:
 
 ```markdown
-# v3.0.0: Marketplace Release
+# v4.0.0: Marketplace Release
 
-**Accessibility Agents is now available in the VS Code Extensions marketplace!**
+**Accessibility Agents v4.0.0 is now available in the VS Code Extensions marketplace!**
 
-## What's New
+## What's New in v4.0.0
 
-- ✅ **VS Code Plugin** - Install from Extensions marketplace (one-click install)
-- ✅ **Official Registry** - Listed in awesome-copilot and github/copilot-plugins
-- ✅ **80 Agents** - WCAG 2.2 AA compliance for web, document, developer accessibility
-- ✅ **25 Skills** - Reusable domain expertise (severity scoring, framework guidance, scanning patterns)
-- ✅ **134 Prompts** - Task-oriented prompts for audits, remediation, GitHub workflows
-- ✅ **9 Instructions** - Automatic accessibility enforcement on every chat
+- ✅ **80 Agents** — 21 new agents including CI accessibility, screen reader lab, WCAG 3.0 preview, WCAG AAA, i18n/RTL, email, media, web components, compliance mapping, data visualization, performance, accessibility statement, regression detector, office remediator, and 6 GitHub workflow agents (projects, actions, security, releases, notifications, wiki)
+- ✅ **25 Skills** — 7 new reusable skills (CI integration, testing strategy, legal compliance, email, media, data visualization, office remediation)
+- ✅ **134 Prompts** — 27 new task-oriented prompts across all teams
+- ✅ **9 Instructions** — 2 new always-on instructions (CSS accessibility, testing accessibility, document generation)
+- ✅ **24 MCP Tools** — 4 new tools for document metadata, headings, and audit caching
+- ✅ **Copilot CLI Support** — `--cli` installer flag for global agent access
+- ✅ **VS Code 1.112 Features** — Monorepo discovery, agent debugging, image analysis, integrated browser testing
+- ✅ **CI Hardening** — All GitHub Actions bumped to latest major versions
 
 ## Installation
 
-### VS Code Extensions Marketplace (New!)
+### VS Code Extensions Marketplace
 1. Press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (Mac)
 2. Search "accessibility-agents"
 3. Click "Install"
 
 ### Script Installation (Alternative)
 **macOS / Linux**
-`` bash
+```bash
 curl -fsSL https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.sh | bash
 ```
 
 **Windows (PowerShell)**
-
 ```powershell
 irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex
 ```
 
-## Key Improvements in v3.0.0
+## Key Improvements in v4.0.0
 
-- **100% Source Citation** - All agents cite W3C WCAG, ARIA, vendor documentation
-- **Source Currency Automation** - Weekly verification of authoritative source URLs (GitHub Actions)
-- **Agentic Browser Tools (Beta)** - Agents can autonomously verify fixes in integrated browser
-- **Agent Debug Panel Guide** - Troubleshooting workflows for instruction loading, handoffs, tool calls
-- **Complete Documentation** - Getting started guide, per-agent reference, advanced patterns
+- **21 new agents** across web, document, CI/CD, developer tools, and GitHub workflow teams
+- **Copilot CLI compatibility** — All agent tool names normalized for CLI-compatible use
+- **AgentRC modernization** — AGENTS.md, dependabot.yml, validate-agents.js, CI validation workflow
+- **Playwright + WCAG 2.2 enhancements** — Modern scanning patterns, violation fingerprinting, WCAG 2.2 tag support
+- **Server-based MCP server** — HTTP/SSE transport replaces stdio-only desktop extension, 52-test suite
+- **Comprehensive User Guide** — 2,700-line guide covering all 80 agents, 25 skills, 134 prompts
+- **Full cross-platform parity** — All agents synced to Copilot, Claude Code, Plugin, and Gemini
 
 ## Acknowledgments
 
