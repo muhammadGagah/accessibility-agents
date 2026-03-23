@@ -47,6 +47,9 @@ This file defines coordinated multi-agent workflows for enterprise accessibility
 **Members (PDF Remediation):**
 - `pdf-remediator` - Programmatic and manual PDF remediation via pdf-lib/qpdf/ghostscript and Adobe Acrobat Pro
 
+**Members (Office Remediation):**
+- `office-remediator` - Programmatic Office document (Word/Excel/PowerPoint) remediation via python-docx/openpyxl/python-pptx
+
 **Members (ePub):**
 
 - `epub-accessibility` - EPUB scanning and remediation (EPUB-E*, EPUB-W*, EPUB-T* rules)

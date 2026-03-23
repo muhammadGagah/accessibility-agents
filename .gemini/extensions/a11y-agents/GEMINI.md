@@ -39,6 +39,7 @@ The following skills are available in `skills/` and provide domain-specific acce
 - **powerpoint-accessibility** - Microsoft PowerPoint (PPTX) presentation accessibility scanning.
 - **pdf-accessibility** - PDF conformance per PDF/UA and the Matterhorn Protocol.
 - **epub-accessibility** - ePub document accessibility scanning per EPUB Accessibility 1.1.
+- **office-remediator** - Programmatic Office document (Word/Excel/PowerPoint) remediation via python-docx, openpyxl, python-pptx.
 
 ### GitHub Workflow Skills
 

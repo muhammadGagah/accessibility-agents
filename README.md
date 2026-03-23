@@ -325,7 +325,7 @@ The following guides cover web and document accessibility features.
 |-------|---------------|
 | [Getting Started](docs/getting-started.md) | Installation for Claude Code, Copilot (VS Code and CLI), Gemini CLI, Claude Desktop, and Codex CLI |
 | [User Guide](docs/USER_GUIDE.md) | Comprehensive ecosystem guide with per-platform walkthroughs, all agents, skills, prompts, and recipes |
-| [Agent Reference](docs/agents/README.md) | All 79 agents with invocation syntax, examples, and deep dives |
+| [Agent Reference](docs/agents/README.md) | All 80 agents with invocation syntax, examples, and deep dives |
 | [MCP Tools](docs/tools/mcp-tools.md) | Static analysis tools: heading structure, link text, form labels |
 | [axe-core Integration](docs/tools/axe-core-integration.md) | Runtime scanning, agent workflow, CI/CD setup |
 | [VPAT Generation](docs/tools/vpat-generation.md) | VPAT 2.5 / ACR compliance report generation |

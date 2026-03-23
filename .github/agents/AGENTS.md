@@ -116,6 +116,10 @@ At every handoff:
 - `powerpoint-accessibility` - PPTX scanning and remediation (PPTX-* rules)
 - `pdf-accessibility` - PDF scanning and remediation (PDFUA.*, PDFBP.*, PDFQ.* rules)
 
+**Members (Remediation):**
+- `pdf-remediator` - Programmatic and manual PDF remediation
+- `office-remediator` - Programmatic Office document (Word/Excel/PowerPoint) remediation via python-docx/openpyxl/python-pptx
+
 **Internal Helpers (not user-invokable):**
 
 - `office-scan-config` - Office scan config management (invoked via document-accessibility-wizard Phase 0)

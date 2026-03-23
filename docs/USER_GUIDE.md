@@ -33,7 +33,7 @@
 
 ## What Are Accessibility Agents?
 
-Accessibility Agents is a collection of **79 AI-powered specialists** that help you build, audit, and fix accessibility issues in web apps, documents, mobile apps, and desktop software. They enforce **WCAG 2.2 AA** standards — the international benchmark for digital accessibility.
+Accessibility Agents is a collection of **80 AI-powered specialists** that help you build, audit, and fix accessibility issues in web apps, documents, mobile apps, and desktop software. They enforce **WCAG 2.2 AA** standards — the international benchmark for digital accessibility.
 
 **Think of it like a team of accessibility consultants that live inside your code editor.** Each specialist knows one domain deeply:
 
@@ -42,7 +42,7 @@ Accessibility Agents is a collection of **79 AI-powered specialists** that help 
 - Another checks color contrast ratios
 - Another audits Word and PDF documents
 - Another manages your GitHub Projects boards, CI/CD workflows, security alerts, releases, notifications, and wiki pages — bypassing inaccessible GitHub web UI
-- And so on — 79 specialists in total
+- And so on — 80 specialists in total
 
 You don't need to know which agent to call. The system includes **orchestrator agents** (like Accessibility Lead and the Wizards) that coordinate the right specialists automatically.
 
@@ -64,10 +64,10 @@ The system has five layers that work together. Here is how they connect:
 
 | Layer | What It Is | Count |
 |-------|-----------|-------|
-| **Agents** | AI specialists that read, analyze, and fix code | 79 agents in 8 teams |
-| **Skills** | Reference knowledge that agents draw from (WCAG rules, scoring formulas, etc.) | 24 knowledge modules |
-| **Prompts** | Pre-built workflows you can launch with one click | 116 prompt files |
-| **Instructions** | Always-on rules that fire on every code completion | 8 instruction files |
+| **Agents** | AI specialists that read, analyze, and fix code | 80 agents in 8 teams |
+| **Skills** | Reference knowledge that agents draw from (WCAG rules, scoring formulas, etc.) | 25 knowledge modules |
+| **Prompts** | Pre-built workflows you can launch with one click | 119 prompt files |
+| **Instructions** | Always-on rules that fire on every code completion | 9 instruction files |
 | **MCP Server** | Scanning tools that agents can call for automated analysis | 24 tools |
 
 ### How They Connect
@@ -83,14 +83,14 @@ The system has five layers that work together. Here is how they connect:
 
 ### Platform Support
 
-The 79 agents are available on all major AI coding platforms:
+The 80 agents are available on all major AI coding platforms:
 
 | Platform | Agent Format | Count | Location |
 |----------|-------------|-------|----------|
-| GitHub Copilot (VS Code / CLI) | `.agent.md` files | 79 | `.github/agents/` |
-| Claude Code (CLI) | `.md` agent files | 79 | `.claude/agents/` |
-| Claude Code Plugin | `.md` agent files | 79 | `claude-code-plugin/agents/` |
-| Gemini CLI | Skill files | 96 (79 agents + 17 knowledge) | `.gemini/extensions/a11y-agents/skills/` |
+| GitHub Copilot (VS Code / CLI) | `.agent.md` files | 80 | `.github/agents/` |
+| Claude Code (CLI) | `.md` agent files | 80 | `.claude/agents/` |
+| Claude Code Plugin | `.md` agent files | 80 | `claude-code-plugin/agents/` |
+| Gemini CLI | Skill files | 98 (80 agents + 18 knowledge) | `.gemini/extensions/a11y-agents/skills/` |
 | Codex CLI | Role files | 11 | `.codex/` |
 | Claude Desktop | MCP server | 24 tools | `mcp-server/` |
 
@@ -162,10 +162,10 @@ Or use a one-click prompt:
 
 ### How Copilot Agents Work
 
-- **79 agent files** in `.github/agents/*.agent.md`
-- **24 skill folders** in `.github/skills/*/SKILL.md` — loaded automatically when relevant
-- **116 prompt files** in `.github/prompts/*.prompt.md` — appear in the prompt picker
-- **8 instruction files** in `.github/instructions/*.instructions.md` — fire on every completion for matching files
+- **80 agent files** in `.github/agents/*.agent.md`
+- **25 skill folders** in `.github/skills/*/SKILL.md` — loaded automatically when relevant
+- **119 prompt files** in `.github/prompts/*.prompt.md` — appear in the prompt picker
+- **9 instruction files** in `.github/instructions/*.instructions.md` — fire on every completion for matching files
 - **Workspace instructions** in `.github/copilot-instructions.md` — loaded into every chat conversation
 
 Agents are invoked by selecting them from the agent picker or by mentioning `@agent-name` in chat.
@@ -204,7 +204,7 @@ This copies agents to `~/.copilot/agents/` and skills to `~/.copilot/skills/`.
 /skills list
 ```
 
-You should see all 79 agents and 24 skills.
+You should see all 80 agents and 25 skills.
 
 ### Step 4: Your First Audit
 
@@ -245,7 +245,7 @@ Windows (PowerShell):
 irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex
 ```
 
-This installs 79 agents to `~/.claude/agents/` and sets up three enforcement hooks.
+This installs 80 agents to `~/.claude/agents/` and sets up three enforcement hooks.
 
 ### Step 3: Verify
 
@@ -305,9 +305,9 @@ Gemini reads skills from `.gemini/extensions/a11y-agents/skills/*/SKILL.md`.
 
 ### Step 3: Verify
 
-Gemini discovers skills from the extension directory structure. You should have 96 skills available:
-- 79 agent skills (one per agent)
-- 17 knowledge skills (matching 17 of the 24 Copilot skill set — the remaining 7 are inlined)
+Gemini discovers skills from the extension directory structure. You should have 98 skills available:
+- 80 agent skills (one per agent)
+- 18 knowledge skills (matching 18 of the 25 Copilot skill set — the remaining 7 are inlined)
 
 ### Step 4: Your First Audit
 
@@ -432,7 +432,7 @@ The MCP server includes built-in prompts accessible from Claude Desktop's prompt
 
 ## The Agent Teams
 
-The 79 agents are organized into 8 teams. Each team has a lead agent that coordinates the specialists. You usually talk to the lead and let it delegate to the right specialists.
+The 80 agents are organized into 8 teams. Each team has a lead agent that coordinates the specialists. You usually talk to the lead and let it delegate to the right specialists.
 
 ### Web Accessibility Team
 
@@ -492,6 +492,7 @@ This team audits Office documents (Word, Excel, PowerPoint), PDFs, and ePubs for
 | `pdf-accessibility` | PDF/UA conformance checking | PDF files |
 | `epub-accessibility` | ePub accessibility auditing | eBooks |
 | `pdf-remediator` | Programmatic and manual PDF fixes | After PDF audit |
+| `office-remediator` | Programmatic Office document fixes | After Word/Excel/PowerPoint audit |
 | `document-inventory` | File discovery and delta detection | Finding documents to audit |
 | `cross-document-analyzer` | Cross-document patterns and scoring | Multi-document audits |
 | `document-csv-reporter` | Export findings to CSV with help links | Reporting |
@@ -637,7 +638,7 @@ These agents serve specific needs across multiple teams:
 
 ## Every Agent Explained
 
-This section documents every one of the 79 agents with capabilities, sample prompts, and usage scenarios. Agents are grouped alphabetically. For each agent you will find: what it does, when to use it, sample prompts showing different scenarios, and tips for getting the best results.
+This section documents every one of the 80 agents with capabilities, sample prompts, and usage scenarios. Agents are grouped alphabetically. For each agent you will find: what it does, when to use it, sample prompts showing different scenarios, and tips for getting the best results.
 
 ### a11y-tool-builder
 
@@ -1983,10 +1984,10 @@ wxPython GUI development — sizer layouts, event handling, AUI (Advanced User I
 
 ## Skills (Knowledge Libraries)
 
-Skills are **reference knowledge modules** that agents draw from automatically when they need domain-specific information. You don't invoke skills directly — agents load them as needed. There are **24 skills** organized by domain.
+Skills are **reference knowledge modules** that agents draw from automatically when they need domain-specific information. You don't invoke skills directly — agents load them as needed. There are **25 skills** organized by domain.
 
 <details>
-<summary><strong>All 24 Skills</strong> — Click to expand</summary>
+<summary><strong>All 25 Skills</strong> — Click to expand</summary>
 
 | # | Skill | What Knowledge It Contains |
 |---|-------|---------------------------|
@@ -2030,7 +2031,7 @@ Skills are **reference knowledge modules** that agents draw from automatically w
 
 ## Prompts (One-Click Workflows)
 
-Prompts are **pre-built workflows** that you can launch with a single click or command. They combine multiple agents and tools into a structured flow. There are **116 prompt files** organized by category.
+Prompts are **pre-built workflows** that you can launch with a single click or command. They combine multiple agents and tools into a structured flow. There are **119 prompt files** organized by category.
 
 ### How to Use Prompts
 
@@ -2137,7 +2138,7 @@ These are useful when you know exactly which agent you want and want to skip the
 
 ## Always-On Instructions
 
-Instructions are **rules that fire automatically on every code completion** for matching files. You don't invoke them — they work silently in the background. There are **8 instruction files**.
+Instructions are **rules that fire automatically on every code completion** for matching files. You don't invoke them — they work silently in the background. There are **9 instruction files**.
 
 | Instruction | Applies To | What It Enforces |
 |-------------|-----------|------------------|
@@ -2564,21 +2565,21 @@ Step 5: @projects-manager Archive completed items from the previous sprint
 
 | Feature | Copilot (VS Code) | Copilot CLI | Claude Code | Gemini CLI | Codex CLI | Claude Desktop |
 |---------|-------------------|-------------|-------------|------------|-----------|----------------|
-| Agents available | 79 | 79 | 79 | 96 skills | 11 roles | Via MCP |
+| Agents available | 80 | 80 | 80 | 98 skills | 11 roles | Via MCP |
 | Agent picker UI | Dropdown | `/agent` | `/agents` | N/A | `--role` | N/A |
-| One-click prompts | 116 | 116 | Describe | Describe | N/A | 3 MCP prompts |
-| Always-on instructions | 8 | 8 | Via hooks | N/A | N/A | N/A |
-| Skills | 24 auto-loaded | 24 | Inlined | 17 | N/A | N/A |
+| One-click prompts | 119 | 119 | Describe | Describe | N/A | 3 MCP prompts |
+| Always-on instructions | 9 | 9 | Via hooks | N/A | N/A | N/A |
+| Skills | 25 auto-loaded | 25 | Inlined | 18 | N/A | N/A |
 | MCP tools | N/A | N/A | N/A | N/A | N/A | 24 tools |
 | Edit gate enforcement | N/A | N/A | 3 hooks | N/A | N/A | N/A |
 | Image analysis | With setting | N/A | With setting | N/A | N/A | Built-in |
 
 ### Which Platform Should You Use?
 
-- **GitHub Copilot (VS Code)** — Best overall experience. Full agent picker, 116 one-click prompts, always-on instructions for automatic guidance, and inline code completions with accessibility checks.
+- **GitHub Copilot (VS Code)** — Best overall experience. Full agent picker, 119 one-click prompts, always-on instructions for automatic guidance, and inline code completions with accessibility checks.
 - **Claude Code CLI** — Best enforcement. The three-hook system makes accessibility review mandatory for web projects — Claude cannot skip it. Good for teams that want zero-exception compliance.
 - **Claude Desktop + MCP** — Best for document scanning. The 24 MCP tools let Claude directly scan files, check contrast, and run axe-core without manual commands. Good for non-developers who need to audit documents.
-- **Gemini CLI** — Good for teams already using Gemini. 96 skills provide comprehensive coverage, though without the agent picker UI.
+- **Gemini CLI** — Good for teams already using Gemini. 98 skills provide comprehensive coverage, though without the agent picker UI.
 - **Codex CLI** — Lightweight option with 11 core roles. Good for quick checks but limited compared to other platforms.
 
 ---

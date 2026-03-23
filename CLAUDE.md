@@ -59,6 +59,7 @@ Invoke these agents from the Claude Code agent picker (type `/` to browse):
 | Web Component Specialist | Shadow DOM and custom element accessibility - ElementInternals, cross-shadow ARIA, form-associated custom elements, focus delegation |
 | Accessibility Statement Generator | Generates W3C or EU model accessibility statements from audit results - conformance claims, known limitations, feedback mechanism |
 | Compliance Mapping | Maps audit results to legal frameworks - Section 508, EN 301 549, EAA, ADA, AODA. VPAT 2.5 generation |
+| Office Remediator | Programmatic Office document (Word/Excel/PowerPoint) remediation via python-docx, openpyxl, python-pptx |
 | Accessibility Regression Detector | Detects regressions by comparing audit results across commits/branches - score trends, new/fixed/regressed classification |
 | Performance Accessibility | Intersection of web performance and accessibility - lazy loading, skeleton screens, CLS, code splitting, progressive enhancement |
 

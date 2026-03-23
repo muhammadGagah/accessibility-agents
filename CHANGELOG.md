@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Performance accessibility agent** (`performance-accessibility.agent.md`) — Intersection of web performance and accessibility. Covers lazy loading impact, skeleton screens, CLS effects on assistive technology, code splitting, and progressive enhancement patterns.
 - **Accessibility statement generator** (`accessibility-statement.agent.md`) — Generates W3C or EU model accessibility statements from audit results. Includes conformance claims, known limitations, feedback mechanism, and enforcement procedure sections.
 - **Accessibility regression detector** (`accessibility-regression-detector.agent.md`) — Detects regressions by comparing audit results across commits or branches. Tracks score trends, classifies issues as new/fixed/persistent/regressed, and integrates with CI pipelines.
+- **Office remediator agent** (`office-remediator.agent.md`) — Programmatic Office document (Word/Excel/PowerPoint) remediation via python-docx, openpyxl, and python-pptx. Auto-fixable and manual-fix tables for each format, Python script generation, PowerShell COM automation alternative, and 4-phase remediation process.
 - **Projects manager agent** (`projects-manager.agent.md`) — GitHub Projects v2 management with full board, view, custom field, and iteration support. Screen reader-accessible output with structured tables and ARIA-friendly formatting.
 - **Actions manager agent** (`actions-manager.agent.md`) — GitHub Actions workflow run management including logs, re-runs, artifact downloads, and CI debugging. Structured output optimized for assistive technology consumption.
 - **Security dashboard agent** (`security-dashboard.agent.md`) — Dependabot, code scanning, and secret scanning alert triage. Priority-scored vulnerability tables with screen reader-friendly severity indicators.
@@ -49,11 +50,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Email accessibility skill** (`email-accessibility/SKILL.md`) — Email client rendering constraints reference, table-based layout patterns, bulletproof button techniques, dark mode handling, MJML/Foundation template accessibility
 - **Media accessibility skill** (`media-accessibility/SKILL.md`) — WebVTT/SRT/TTML caption format reference, caption quality metrics, audio description requirements, media player ARIA patterns, WCAG 1.2.x criterion mapping
 - **Data visualization accessibility skill** (`data-visualization-accessibility/SKILL.md`) — Chart accessibility patterns, SVG ARIA reference, charting library accessibility APIs (Highcharts/Chart.js/D3/Recharts), color-safe palette generation, keyboard interaction models
+- **Office remediation skill** (`office-remediation/SKILL.md`) — Office document OOXML manipulation patterns for accessibility remediation. Covers python-docx, openpyxl, python-pptx API references, PowerShell COM automation snippets, and direct OOXML XML manipulation.
 
 #### New Instructions
 
 - **CSS accessibility instruction** (`css-accessibility.instructions.md`) — Always-on instruction that fires on `*.css` and `*.scss` files. Enforces focus visibility, motion safety (`prefers-reduced-motion`), high contrast support, touch target sizing, and prevents `outline: none` without alternatives.
 - **Testing accessibility instruction** (`testing-accessibility.instructions.md`) — Always-on instruction that fires on test files (`*.test.*`, `*.spec.*`). Guides test authors to include accessibility assertions (axe-core checks, keyboard navigation, ARIA state verification, screen reader announcement testing).
+- **Document generation instruction** (`document-generation.instructions.md`) — Always-on instruction that fires on `*.py`, `*.js`, `*.ts`, `*.mjs`, `*.cjs` files. Catches imports of document generation libraries (python-docx, openpyxl, python-pptx, docx, pdfkit, etc.) and enforces accessibility metadata, heading structure, alt text, table headers, and language settings at the code level.
 
 #### New Prompts
 
@@ -67,6 +70,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Media content audit prompt** (`audit-media-content.prompt.md`) — Audits video and audio media for captions, audio descriptions, transcripts, and media player control accessibility
 - **Accessibility dashboard prompt** (`accessibility-dashboard.prompt.md`) — Aggregates all audit reports (web, document, markdown) into a unified dashboard view with overall score, trends, and cross-format issue patterns
 - **Accessibility statement generator prompt** (`generate-accessibility-statement.prompt.md`) — Generates W3C or EU model accessibility statements from audit results with conformance claims, known limitations, and feedback mechanisms
+- **PDF remediator prompt** (`pdf-remediator.prompt.md`) — Guided PDF remediation with programmatic and manual fix options
+- **Document conversion audit prompt** (`audit-document-conversion.prompt.md`) — Compares source Office document against exported PDF for accessibility preservation, detecting conversion losses
+- **Document training prompt** (`document-training.prompt.md`) — Generates role-specific accessibility training materials for document authors, editors, designers, and managers
 
 #### Infrastructure
 
@@ -120,16 +126,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **8 gap-analysis agents synced across all platforms** — email-accessibility, media-accessibility, web-component-specialist, compliance-mapping, data-visualization-accessibility, performance-accessibility, accessibility-statement, accessibility-regression-detector added to Copilot (`.github/agents/`), Claude Code (`.claude/agents/`), Plugin (`claude-code-plugin/agents/`), and Gemini (`.gemini/extensions/a11y-agents/skills/`) — 32 new files
 - **6 GitHub workflow agents synced across all platforms** — projects-manager, actions-manager, security-dashboard, release-manager, notifications-manager, wiki-manager added to Copilot (`.github/agents/`), Claude Code (`.claude/agents/`), Plugin (`claude-code-plugin/agents/`), and Gemini (`.gemini/extensions/a11y-agents/skills/`) — 24 new files
 - **5 new knowledge skills synced to Gemini** — testing-strategy, legal-compliance-mapping, email-accessibility, media-accessibility, data-visualization-accessibility added as Gemini extension skills
+- **Office remediator synced across all platforms** — office-remediator added to Copilot (`.github/agents/`), Claude Code (`.claude/agents/`), Plugin (`claude-code-plugin/agents/`), and Gemini (`.gemini/extensions/a11y-agents/skills/`) — 4 new files
+- **Office remediation knowledge skill synced to Gemini** — office-remediation added as Gemini extension skill
 
 #### Documentation
 
-- **Comprehensive User Guide** (`docs/USER_GUIDE.md`) — Instructor-style ecosystem guide covering all 79 agents, 24 skills, 116 prompts, 8 instructions, and 24 MCP tools. Collapsible per-platform sections for GitHub Copilot, Claude Code, Gemini, Codex, and Claude Desktop. Includes team overviews, exhaustive agent reference with sample prompts, skill catalog, prompt directory, MCP server interaction guide, file-based workflows, common workflow recipes, platform comparison, troubleshooting, and glossary.
+- **Comprehensive User Guide** (`docs/USER_GUIDE.md`) — Instructor-style ecosystem guide covering all 80 agents, 25 skills, 119 prompts, 9 instructions, and 24 MCP tools. Collapsible per-platform sections for GitHub Copilot, Claude Code, Gemini, Codex, and Claude Desktop. Includes team overviews, exhaustive agent reference with sample prompts, skill catalog, prompt directory, MCP server interaction guide, file-based workflows, common workflow recipes, platform comparison, troubleshooting, and glossary.
 - **6 GitHub workflow agent documentation pages** — projects-manager, actions-manager, security-dashboard, release-manager, notifications-manager, wiki-manager added to `docs/agents/` with feature descriptions, usage examples, and API scope requirements
+- **4 new agent documentation pages** — office-remediator, pdf-remediator, compliance-mapping, accessibility-statement added to `docs/agents/`
+- **1 new skill documentation page** — office-remediation added to `docs/skills/`
+- **3 new prompt documentation pages** — pdf-remediator, audit-document-conversion, document-training added to `docs/prompts/documents/`
 - **Platform parity check script** (`scripts/check-platform-parity.js`) — Automated script that verifies all agents exist on all 4 platforms (Copilot, Claude Code, Plugin, Gemini) and reports missing entries
 
 #### Metadata Sync
 
-- **Comprehensive count updates across 20+ project files** — Updated agent count (79), skill count (24), prompt count (116), instruction count (8), MCP tool count (24), and Gemini skill count (96) across: AGENTS.md, CLAUDE.md, GEMINI.md, copilot-instructions.md, plugin.yaml, manifest.json, prd.md, MARKETPLACE_SUBMISSION.md, install.sh, docs/getting-started.md, docs/architecture.md, docs/guides/agent-debug-panel.md, docs/advanced/plugin-packaging.md, docs/skills/github-workflow-standards.md, mcp-server/package.json, mcp-server/server.js, mcp-server/anthropic-directory.json, .claude-plugin/marketplace.json, .claude-plugin/plugin.json, claude-code-plugin/README.md
+- **Comprehensive count updates across 20+ project files** — Updated agent count (80), skill count (25), prompt count (119), instruction count (9), MCP tool count (24), and Gemini skill count (98) across: AGENTS.md, CLAUDE.md, GEMINI.md, copilot-instructions.md, plugin.yaml, manifest.json, prd.md, MARKETPLACE_SUBMISSION.md, install.sh, docs/getting-started.md, docs/architecture.md, docs/guides/agent-debug-panel.md, docs/advanced/plugin-packaging.md, docs/skills/github-workflow-standards.md, mcp-server/package.json, mcp-server/server.js, mcp-server/anthropic-directory.json, .claude-plugin/marketplace.json, .claude-plugin/plugin.json, claude-code-plugin/README.md, docs/USER_GUIDE.md, vscode-extension/README.md
 
 ### Fixed
 

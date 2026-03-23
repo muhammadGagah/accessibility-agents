@@ -81,9 +81,13 @@
 ,
 {"path":"docs/agents/nvda-addon-specialist.md","title":"nvda-addon-specialist - NVDA Addon Development"}
 ,
+{"path":"docs/agents/office-remediator.md","title":"office-remediator - Office Document Remediation"}
+,
 {"path":"docs/agents/office-scan-config.md","title":"office-scan-config - Office Scan Configuration"}
 ,
 {"path":"docs/agents/pdf-accessibility.md","title":"pdf-accessibility - PDF Document Accessibility"}
+,
+{"path":"docs/agents/pdf-remediator.md","title":"pdf-remediator - PDF Document Remediation"}
 ,
 {"path":"docs/agents/pdf-scan-config.md","title":"pdf-scan-config - PDF Scan Configuration"}
 ,
@@ -118,6 +122,10 @@
 {"path":"docs/agents/web-accessibility-wizard.md","title":"web-accessibility-wizard - Guided Accessibility Audit"}
 ,
 {"path":"docs/agents/web-csv-reporter.md","title":"web-csv-reporter"}
+,
+{"path":"docs/agents/accessibility-statement.md","title":"accessibility-statement - Accessibility Statement Generator"}
+,
+{"path":"docs/agents/compliance-mapping.md","title":"compliance-mapping - Legal Framework Compliance Mapping"}
 ,
 {"path":"docs/agents/web-issue-fixer.md","title":"web-issue-fixer"}
 ,
@@ -163,6 +171,8 @@
 {"path":"docs/skills/markdown-accessibility.md","title":"markdown-accessibility Skill"}
 ,
 {"path":"docs/skills/mobile-accessibility.md","title":"mobile-accessibility Skill"}
+,
+{"path":"docs/skills/office-remediation.md","title":"office-remediation Skill"}
 ,
 {"path":"docs/skills/python-development.md","title":"python-development Skill"}
 ,
@@ -231,6 +241,12 @@
 {"path":"docs/prompts/documents/quick-document-check.md","title":"quick-document-check"}
 ,
 {"path":"docs/prompts/documents/setup-document-cicd.md","title":"setup-document-cicd"}
+,
+{"path":"docs/prompts/documents/pdf-remediator.md","title":"pdf-remediator"}
+,
+{"path":"docs/prompts/documents/audit-document-conversion.md","title":"audit-document-conversion"}
+,
+{"path":"docs/prompts/documents/document-training.md","title":"document-training"}
 ]},
 {"name":"Prompts: GitHub","id":"prompts-github","items":[
 {"path":"docs/prompts/github/a11y-update.md","title":"a11y-update"}

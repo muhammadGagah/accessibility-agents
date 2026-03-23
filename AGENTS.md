@@ -2,7 +2,7 @@
 
 > AI agent guidance for this repository. Generated for AgentRC compatibility.
 
-This repository contains 79 accessibility-focused AI agents across multiple platforms (Copilot, Claude Code, Codex, Gemini). This file provides high-level guidance for AI coding assistants working in this codebase.
+This repository contains 80 accessibility-focused AI agents across multiple platforms (Copilot, Claude Code, Codex, Gemini). This file provides high-level guidance for AI coding assistants working in this codebase.
 
 ## Repository Purpose
 
@@ -12,8 +12,8 @@ This repository contains 79 accessibility-focused AI agents across multiple plat
 
 | Path | Purpose |
 |------|---------|
-| `.github/agents/` | Copilot agent definitions (79 agents) |
-| `.github/skills/` | Copilot reusable skills (24 skills) |
+| `.github/agents/` | Copilot agent definitions (80 agents) |
+| `.github/skills/` | Copilot reusable skills (25 skills) |
 | `.github/prompts/` | One-click workflow prompts |
 | `.github/instructions/` | Always-on instruction files |
 | `.claude/agents/` | Claude Code agent definitions |
@@ -49,6 +49,7 @@ Led by `document-accessibility-wizard`, handles Office and PDF audits:
 - `pdf-accessibility` - PDF/UA conformance
 - `epub-accessibility` - ePub accessibility
 - `pdf-remediator` - Programmatic and manual PDF remediation
+- `office-remediator` - Programmatic Office document (Word/Excel/PowerPoint) remediation
 
 ### GitHub Workflow Team
 Led by `github-hub` / `nexus`, manages repository operations:
