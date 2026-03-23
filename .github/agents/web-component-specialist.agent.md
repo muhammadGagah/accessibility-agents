@@ -21,7 +21,7 @@ handoffs:
 ## Authoritative Sources
 
 - **ElementInternals API** — <https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals>
-- **ARIA in Shadow DOM** — <https://github.com/nicolo-ribaudo/tc39-proposal-shadowrealm-cross-shadow-aria>
+- **Cross-Root ARIA Delegation** — <https://github.com/leobalter/cross-root-aria-delegation>
 - **Form-Associated Custom Elements** — <https://web.dev/articles/more-capable-form-controls>
 
 ## Using askQuestions

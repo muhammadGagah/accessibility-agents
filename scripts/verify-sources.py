@@ -31,8 +31,8 @@ TIMEOUT = int(os.environ.get('TIMEOUT', 10))
 MAX_RETRIES = int(os.environ.get('MAX_RETRIES', 1))
 VALID_STATUSES = {200, 201, 202, 203, 204, 205, 206}  # Success codes
 REDIRECT_STATUSES = {301, 302, 303, 304, 307, 308}  # Redirects
-# 403/timeout/cloudflare are common for legitimate sites that block bots
-BLOCKED_STATUSES = {403, 408, 429, 520, 521, 522, 523, 524}
+# 401/403/timeout/cloudflare are common for legitimate sites that block bots
+BLOCKED_STATUSES = {401, 403, 406, 408, 429, 451, 520, 521, 522, 523, 524}
 SKIP_PATTERNS = {
     'example.com',  # Example domains
     'yourdomain.com',
@@ -58,7 +58,11 @@ session = requests.Session()
 if token := os.environ.get('GITHUB_TOKEN'):
     session.headers['Authorization'] = f'token {token}'
 
-session.headers['User-Agent'] = 'accessibility-agents-verifier/1.0'
+# Use a realistic User-Agent to avoid bot detection on sites like MDN
+session.headers['User-Agent'] = (
+    'Mozilla/5.0 (compatible; accessibility-agents-verifier/1.0; '
+    '+https://github.com/Community-Access/accessibility-agents)'
+)
 
 
 def should_skip_url(url: str) -> bool:
@@ -136,8 +140,8 @@ def validate_url(url: str) -> Tuple[int, str | None]:
         try:
             response = session.head(url, timeout=TIMEOUT, allow_redirects=False)
             
-            # Try GET if HEAD fails (some servers don't support HEAD)
-            if response.status_code in (405, 403):
+            # Try GET if HEAD fails (some servers block HEAD or require auth)
+            if response.status_code in (401, 403, 405, 406):
                 response = session.get(url, timeout=TIMEOUT, allow_redirects=False, stream=True)
             
             if response.status_code in REDIRECT_STATUSES:

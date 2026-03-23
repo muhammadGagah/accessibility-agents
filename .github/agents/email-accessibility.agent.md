@@ -19,7 +19,6 @@ handoffs:
 
 - **Litmus Accessibility Guide** — <https://www.litmus.com/blog/ultimate-guide-accessible-emails>
 - **Email Markup Consortium** — <https://emailmarkup.org/>
-- **WebAIM: Accessible Email** — <https://webaim.org/techniques/emailclients/>
 - Consult **email-accessibility** skill for client rendering matrix and patterns.
 
 ## Using askQuestions
