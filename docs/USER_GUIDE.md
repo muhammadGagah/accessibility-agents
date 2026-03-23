@@ -66,7 +66,7 @@ The system has five layers that work together. Here is how they connect:
 |-------|-----------|-------|
 | **Agents** | AI specialists that read, analyze, and fix code | 80 agents in 8 teams |
 | **Skills** | Reference knowledge that agents draw from (WCAG rules, scoring formulas, etc.) | 25 knowledge modules |
-| **Prompts** | Pre-built workflows you can launch with one click | 119 prompt files |
+| **Prompts** | Pre-built workflows you can launch with one click | 134 prompt files |
 | **Instructions** | Always-on rules that fire on every code completion | 9 instruction files |
 | **MCP Server** | Scanning tools that agents can call for automated analysis | 24 tools |
 
@@ -164,7 +164,7 @@ Or use a one-click prompt:
 
 - **80 agent files** in `.github/agents/*.agent.md`
 - **25 skill folders** in `.github/skills/*/SKILL.md` — loaded automatically when relevant
-- **119 prompt files** in `.github/prompts/*.prompt.md` — appear in the prompt picker
+- **134 prompt files** in `.github/prompts/*.prompt.md` — appear in the prompt picker
 - **9 instruction files** in `.github/instructions/*.instructions.md` — fire on every completion for matching files
 - **Workspace instructions** in `.github/copilot-instructions.md` — loaded into every chat conversation
 
@@ -2031,7 +2031,7 @@ Skills are **reference knowledge modules** that agents draw from automatically w
 
 ## Prompts (One-Click Workflows)
 
-Prompts are **pre-built workflows** that you can launch with a single click or command. They combine multiple agents and tools into a structured flow. There are **119 prompt files** organized by category.
+Prompts are **pre-built workflows** that you can launch with a single click or command. They combine multiple agents and tools into a structured flow. There are **134 prompt files** organized by category.
 
 ### How to Use Prompts
 
@@ -2567,7 +2567,7 @@ Step 5: @projects-manager Archive completed items from the previous sprint
 |---------|-------------------|-------------|-------------|------------|-----------|----------------|
 | Agents available | 80 | 80 | 80 | 98 skills | 11 roles | Via MCP |
 | Agent picker UI | Dropdown | `/agent` | `/agents` | N/A | `--role` | N/A |
-| One-click prompts | 119 | 119 | Describe | Describe | N/A | 3 MCP prompts |
+| One-click prompts | 134 | 134 | Describe | Describe | N/A | 3 MCP prompts |
 | Always-on instructions | 9 | 9 | Via hooks | N/A | N/A | N/A |
 | Skills | 25 auto-loaded | 25 | Inlined | 18 | N/A | N/A |
 | MCP tools | N/A | N/A | N/A | N/A | N/A | 24 tools |
@@ -2576,7 +2576,7 @@ Step 5: @projects-manager Archive completed items from the previous sprint
 
 ### Which Platform Should You Use?
 
-- **GitHub Copilot (VS Code)** — Best overall experience. Full agent picker, 119 one-click prompts, always-on instructions for automatic guidance, and inline code completions with accessibility checks.
+- **GitHub Copilot (VS Code)** — Best overall experience. Full agent picker, 134 one-click prompts, always-on instructions for automatic guidance, and inline code completions with accessibility checks.
 - **Claude Code CLI** — Best enforcement. The three-hook system makes accessibility review mandatory for web projects — Claude cannot skip it. Good for teams that want zero-exception compliance.
 - **Claude Desktop + MCP** — Best for document scanning. The 24 MCP tools let Claude directly scan files, check contrast, and run axe-core without manual commands. Good for non-developers who need to audit documents.
 - **Gemini CLI** — Good for teams already using Gemini. 98 skills provide comprehensive coverage, though without the agent picker UI.

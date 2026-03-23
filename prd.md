@@ -57,7 +57,7 @@
 
 A11y Agent Team is an accessibility enforcement system for AI-powered coding and authoring tools. It deploys 80 specialized agents across five platforms - Claude Code (terminal), GitHub Copilot (VS Code), Gemini (Google AI Studio and IDX), Codex CLI (terminal), and Claude Desktop (app) - to ensure that web code, Office documents, PDF files, EPUB publications, and markdown documentation meet accessibility standards. The system intercepts the developer workflow at code-generation time, applying WCAG 2.2 AA standards for web content, format-specific rules for Office documents (DOCX/XLSX/PPTX), PDF/UA conformance with Matterhorn Protocol alignment for PDF files, cognitive accessibility guidelines, and assistive technology compatibility checks.
 
-The project includes 24 MCP tools (zero external dependencies for document scanning), 119 custom prompts, 25 reusable skills, nine workspace instruction files, agent team coordination (AGENTS.md), three CI scripts, a source citation policy with automated currency verification, automated installer/uninstaller scripts for all platforms, auto-update capability, an example project with 20+ intentional violations, and SARIF 2.1.0 output for GitHub Code Scanning integration.
+The project includes 24 MCP tools (zero external dependencies for document scanning), 134 custom prompts, 25 reusable skills, nine workspace instruction files, agent team coordination (AGENTS.md), three CI scripts, a source citation policy with automated currency verification, automated installer/uninstaller scripts for all platforms, auto-update capability, an example project with 20+ intentional violations, and SARIF 2.1.0 output for GitHub Code Scanning integration.
 
 Key capabilities added since v2.0:
 
@@ -1166,9 +1166,9 @@ Single configuration file: `.codex/AGENTS.md`
 | `update.sh` | macOS/Linux updater |
 | `update.ps1` | Windows updater |
 
-### Prompts Files (119 prompt files in `.github/prompts/`)
+### Prompts Files (134 prompt files in `.github/prompts/`)
 
-All 119 prompts listed in the Custom Prompts section above, stored as `.github/prompts/{name}.prompt.md`.
+All 134 prompts listed in the Custom Prompts section above, stored as `.github/prompts/{name}.prompt.md`.
 
 ### Skills Files (25 skill folders in `.github/skills/`)
 

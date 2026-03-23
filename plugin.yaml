@@ -54,11 +54,11 @@ contents:
     format: "SKILL.md"
     portable: true
 
-  # Custom prompts and slash commands (119)
+  # Custom prompts and slash commands (134)
   prompts:
     path: ".github/prompts"
     description: "Task-oriented prompts for web audits, document audits, markdown audits, GitHub workflow automation, and remediation"
-    count: 119
+    count: 134
     format: "markdown"
 
   # Workspace instructions and rules
@@ -107,7 +107,7 @@ platforms:
   - name: "GitHub Copilot (VS Code)"
     agents: 80
     skills: 25
-    prompts: 119
+    prompts: 134
     status: "fully-supported"
     
   - name: "Copilot CLI"

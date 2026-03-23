@@ -73,6 +73,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **PDF remediator prompt** (`pdf-remediator.prompt.md`) — Guided PDF remediation with programmatic and manual fix options
 - **Document conversion audit prompt** (`audit-document-conversion.prompt.md`) — Compares source Office document against exported PDF for accessibility preservation, detecting conversion losses
 - **Document training prompt** (`document-training.prompt.md`) — Generates role-specific accessibility training materials for document authors, editors, designers, and managers
+- **CI accessibility prompt** (`ci-accessibility.prompt.md`) — One-click workflow for CI/CD accessibility pipeline setup and configuration
+- **Screen reader lab prompt** (`screen-reader-lab.prompt.md`) — Launch interactive screen reader simulation on a file
+- **WCAG 3.0 preview prompt** (`wcag3-preview.prompt.md`) — Quick access to WCAG 3.0 draft education and comparison
+- **WCAG AAA prompt** (`wcag-aaa.prompt.md`) — One-click AAA conformance audit beyond standard AA target
+- **Scaffold NVDA addon prompt** (`scaffold-nvda-addon.prompt.md`) — Scaffold a new NVDA screen reader addon project
+- **Audit desktop accessibility prompt** (`audit-desktop-a11y.prompt.md`) — Desktop application accessibility audit covering platform APIs, keyboard, and high contrast
+- **Test desktop accessibility prompt** (`test-desktop-a11y.prompt.md`) — Create a desktop accessibility test plan with screen reader test cases
+- **Scaffold wxPython app prompt** (`scaffold-wxpython-app.prompt.md`) — Scaffold an accessible wxPython desktop application
+- **Package Python app prompt** (`package-python-app.prompt.md`) — Package a Python application for distribution
+- **i18n accessibility prompt** (`i18n-accessibility.prompt.md`) — Audit internationalization and RTL accessibility
+- **Web component specialist prompt** (`web-component-specialist.prompt.md`) — Audit Shadow DOM and custom element accessibility
+- **Performance accessibility prompt** (`performance-accessibility.prompt.md`) — Audit performance-accessibility intersection
+- **Data visualization accessibility prompt** (`data-visualization-accessibility.prompt.md`) — Audit chart and dashboard accessibility
+- **Accessibility regression detector prompt** (`accessibility-regression-detector.prompt.md`) — Compare audit results across commits or branches
+- **Wiki manager prompt** (`wiki-manager.prompt.md`) — Manage GitHub Wiki pages with accessibility enforcement
 
 #### Infrastructure
 
@@ -131,16 +146,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Documentation
 
-- **Comprehensive User Guide** (`docs/USER_GUIDE.md`) — Instructor-style ecosystem guide covering all 80 agents, 25 skills, 119 prompts, 9 instructions, and 24 MCP tools. Collapsible per-platform sections for GitHub Copilot, Claude Code, Gemini, Codex, and Claude Desktop. Includes team overviews, exhaustive agent reference with sample prompts, skill catalog, prompt directory, MCP server interaction guide, file-based workflows, common workflow recipes, platform comparison, troubleshooting, and glossary.
+- **Comprehensive User Guide** (`docs/USER_GUIDE.md`) — Instructor-style ecosystem guide covering all 80 agents, 25 skills, 134 prompts, 9 instructions, and 24 MCP tools. Collapsible per-platform sections for GitHub Copilot, Claude Code, Gemini, Codex, and Claude Desktop. Includes team overviews, exhaustive agent reference with sample prompts, skill catalog, prompt directory, MCP server interaction guide, file-based workflows, common workflow recipes, platform comparison, troubleshooting, and glossary.
 - **6 GitHub workflow agent documentation pages** — projects-manager, actions-manager, security-dashboard, release-manager, notifications-manager, wiki-manager added to `docs/agents/` with feature descriptions, usage examples, and API scope requirements
 - **4 new agent documentation pages** — office-remediator, pdf-remediator, compliance-mapping, accessibility-statement added to `docs/agents/`
 - **1 new skill documentation page** — office-remediation added to `docs/skills/`
 - **3 new prompt documentation pages** — pdf-remediator, audit-document-conversion, document-training added to `docs/prompts/documents/`
 - **Platform parity check script** (`scripts/check-platform-parity.js`) — Automated script that verifies all agents exist on all 4 platforms (Copilot, Claude Code, Plugin, Gemini) and reports missing entries
+- **12 new agent documentation pages** — ci-accessibility, screen-reader-lab, wcag3-preview, wcag-aaa, nexus, i18n-accessibility, web-component-specialist, performance-accessibility, data-visualization-accessibility, email-accessibility, media-accessibility, accessibility-regression-detector added to `docs/agents/`
 
 #### Metadata Sync
 
-- **Comprehensive count updates across 20+ project files** — Updated agent count (80), skill count (25), prompt count (119), instruction count (9), MCP tool count (24), and Gemini skill count (98) across: AGENTS.md, CLAUDE.md, GEMINI.md, copilot-instructions.md, plugin.yaml, manifest.json, prd.md, MARKETPLACE_SUBMISSION.md, install.sh, docs/getting-started.md, docs/architecture.md, docs/guides/agent-debug-panel.md, docs/advanced/plugin-packaging.md, docs/skills/github-workflow-standards.md, mcp-server/package.json, mcp-server/server.js, mcp-server/anthropic-directory.json, .claude-plugin/marketplace.json, .claude-plugin/plugin.json, claude-code-plugin/README.md, docs/USER_GUIDE.md, vscode-extension/README.md
+- **Comprehensive count updates across 20+ project files** — Updated agent count (80), skill count (25), prompt count (134), instruction count (9), MCP tool count (24), and Gemini skill count (98) across: AGENTS.md, CLAUDE.md, GEMINI.md, copilot-instructions.md, plugin.yaml, manifest.json, prd.md, MARKETPLACE_SUBMISSION.md, install.sh, docs/getting-started.md, docs/architecture.md, docs/guides/agent-debug-panel.md, docs/advanced/plugin-packaging.md, docs/skills/github-workflow-standards.md, mcp-server/package.json, mcp-server/server.js, mcp-server/anthropic-directory.json, .claude-plugin/marketplace.json, .claude-plugin/plugin.json, claude-code-plugin/README.md, docs/USER_GUIDE.md, vscode-extension/README.md
 
 ### Fixed
 

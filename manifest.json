@@ -13,11 +13,15 @@
 ,
 {"path":"docs/agents/accessibility-lead.md","title":"accessibility-lead - The Orchestrator"}
 ,
+{"path":"docs/agents/accessibility-regression-detector.md","title":"accessibility-regression-detector - Regression Detection"}
+,
 {"path":"docs/agents/alt-text-headings.md","title":"alt-text-headings - Alt Text, SVGs, Headings, and Landmarks"}
 ,
 {"path":"docs/agents/analytics.md","title":"analytics - Team Velocity and Repository Health"}
 ,
 {"path":"docs/agents/aria-specialist.md","title":"aria-specialist - ARIA Roles, States, and Properties"}
+,
+{"path":"docs/agents/ci-accessibility.md","title":"ci-accessibility - CI/CD Accessibility Pipelines"}
 ,
 {"path":"docs/agents/cognitive-accessibility.md","title":"Cognitive Accessibility Agent"}
 ,
@@ -30,6 +34,8 @@
 {"path":"docs/agents/cross-page-analyzer.md","title":"cross-page-analyzer"}
 ,
 {"path":"docs/agents/daily-briefing.md","title":"daily-briefing - Your Morning GitHub Command Center"}
+,
+{"path":"docs/agents/data-visualization-accessibility.md","title":"data-visualization-accessibility - Chart and Dashboard Accessibility"}
 ,
 {"path":"docs/agents/design-system-auditor.md","title":"Design System Auditor Agent"}
 ,
@@ -45,6 +51,8 @@
 ,
 {"path":"docs/agents/document-inventory.md","title":"document-inventory"}
 ,
+{"path":"docs/agents/email-accessibility.md","title":"email-accessibility - HTML Email Accessibility"}
+,
 {"path":"docs/agents/epub-accessibility.md","title":"epub-accessibility - ePub Document Accessibility"}
 ,
 {"path":"docs/agents/epub-scan-config.md","title":"epub-scan-config - ePub Scan Configuration"}
@@ -54,6 +62,8 @@
 {"path":"docs/agents/forms-specialist.md","title":"forms-specialist - Forms, Labels, Validation, and Errors"}
 ,
 {"path":"docs/agents/github-hub.md","title":"github-hub - The GitHub Workflow Orchestrator"}
+,
+{"path":"docs/agents/i18n-accessibility.md","title":"i18n-accessibility - Internationalization and RTL Accessibility"}
 ,
 {"path":"docs/agents/insiders-a11y-tracker.md","title":"insiders-a11y-tracker - VS Code Accessibility Progress Tracker"}
 ,
@@ -71,6 +81,8 @@
 ,
 {"path":"docs/agents/markdown-csv-reporter.md","title":"markdown-csv-reporter"}
 ,
+{"path":"docs/agents/media-accessibility.md","title":"media-accessibility - Video and Audio Accessibility"}
+,
 {"path":"docs/agents/markdown-fixer.md","title":"markdown-fixer"}
 ,
 {"path":"docs/agents/markdown-scanner.md","title":"markdown-scanner"}
@@ -78,6 +90,8 @@
 {"path":"docs/agents/mobile-accessibility.md","title":"Mobile Accessibility Agent"}
 ,
 {"path":"docs/agents/modal-specialist.md","title":"modal-specialist - Dialogs, Drawers, and Overlays"}
+,
+{"path":"docs/agents/nexus.md","title":"nexus - Auto-Routing GitHub Orchestrator"}
 ,
 {"path":"docs/agents/nvda-addon-specialist.md","title":"nvda-addon-specialist - NVDA Addon Development"}
 ,
@@ -90,6 +104,8 @@
 {"path":"docs/agents/pdf-remediator.md","title":"pdf-remediator - PDF Document Remediation"}
 ,
 {"path":"docs/agents/pdf-scan-config.md","title":"pdf-scan-config - PDF Scan Configuration"}
+,
+{"path":"docs/agents/performance-accessibility.md","title":"performance-accessibility - Performance and Accessibility"}
 ,
 {"path":"docs/agents/playwright-scanner.md","title":"playwright-scanner Agent"}
 ,
@@ -107,6 +123,8 @@
 ,
 {"path":"docs/agents/scanner-bridge.md","title":"scanner-bridge - CI Scanner Data Bridge"}
 ,
+{"path":"docs/agents/screen-reader-lab.md","title":"screen-reader-lab - Interactive Screen Reader Simulation"}
+,
 {"path":"docs/agents/tables-data-specialist.md","title":"tables-data-specialist - Data Tables, Grids, and Sortable Columns"}
 ,
 {"path":"docs/agents/team-manager.md","title":"team-manager - Organization Team and Membership Manager"}
@@ -117,9 +135,15 @@
 ,
 {"path":"docs/agents/text-quality-reviewer.md","title":"text-quality-reviewer - Non-Visual Text Quality Review"}
 ,
+{"path":"docs/agents/wcag-aaa.md","title":"wcag-aaa - WCAG AAA Conformance"}
+,
 {"path":"docs/agents/wcag-guide.md","title":"wcag-guide - Understanding the Standard"}
 ,
+{"path":"docs/agents/wcag3-preview.md","title":"wcag3-preview - WCAG 3.0 Preview"}
+,
 {"path":"docs/agents/web-accessibility-wizard.md","title":"web-accessibility-wizard - Guided Accessibility Audit"}
+,
+{"path":"docs/agents/web-component-specialist.md","title":"web-component-specialist - Shadow DOM and Custom Elements"}
 ,
 {"path":"docs/agents/web-csv-reporter.md","title":"web-csv-reporter"}
 ,

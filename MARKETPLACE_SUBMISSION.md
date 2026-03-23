@@ -8,7 +8,7 @@
 
 ## Quick Summary
 
-Accessibility Agents is a VS Code plugin bundling **80 specialized agents**, **25 reusable skills**, **119 custom prompts**, and **9 workspace instructions** for WCAG 2.2 AA compliance auditing across web, document, and developer accessibility domains.
+Accessibility Agents is a VS Code plugin bundling **80 specialized agents**, **25 reusable skills**, **134 custom prompts**, and **9 workspace instructions** for WCAG 2.2 AA compliance auditing across web, document, and developer accessibility domains.
 
 **Key Stats:**
 
@@ -106,7 +106,7 @@ The awesome-copilot README lists plugins by category. Find the **Accessibility**
 ```markdown
 ### Accessibility
 
-- **[Accessibility Agents](https://github.com/Community-Access/accessibility-agents)** - 80 agents for WCAG 2.2 AA web/document/developer accessibility auditing. Includes 25 reusable skills, 119 prompts, workspace instructions, and auto-update mechanism. MIT licensed.
+- **[Accessibility Agents](https://github.com/Community-Access/accessibility-agents)** - 80 agents for WCAG 2.2 AA web/document/developer accessibility auditing. Includes 25 reusable skills, 134 prompts, workspace instructions, and auto-update mechanism. MIT licensed.
 ```
 
 **If no Accessibility section exists, create it:**
@@ -114,7 +114,7 @@ The awesome-copilot README lists plugins by category. Find the **Accessibility**
 ```markdown
 ## Accessibility
 
-- **[Accessibility Agents](https://github.com/Community-Access/accessibility-agents)** - WCAG 2.2 AA agents for web, document, and developer accessibility auditing. 80 agents, 25 skills, 119 prompts, auto-updates. MIT licensed.
+- **[Accessibility Agents](https://github.com/Community-Access/accessibility-agents)** - WCAG 2.2 AA agents for web, document, and developer accessibility auditing. 80 agents, 25 skills, 134 prompts, auto-updates. MIT licensed.
 ```
 
 ### 2.4 Update the plugins.json Index (If Applicable)
@@ -169,7 +169,7 @@ git push origin main
 
 - **80 specialized agents** for WCAG 2.2 AA compliance auditing
 - **25 reusable skills** (severity scoring, framework guidance, scanning patterns)
-- **119 custom prompts** (web audits, document audits, GitHub workflows, developer tooling)
+- **134 custom prompts** (web audits, document audits, GitHub workflows, developer tooling)
 - **9 workspace instructions** (automatic accessibility enforcement)
 - **Auto-update mechanism** with manifest-based installation tracking
 
@@ -258,7 +258,7 @@ Look for a `CONTRIBUTING.md` or submission guide. Requirements typically include
 
 ## Description
 
-Accessibility Agents is a collection of 80 specialized AI agents, 25 reusable skills, 119 custom prompts, and 9 workspace instructions for automating WCAG 2.2 AA compliance auditing across web, document, and developer accessibility domains.
+Accessibility Agents is a collection of 80 specialized AI agents, 25 reusable skills, 134 custom prompts, and 9 workspace instructions for automating WCAG 2.2 AA compliance auditing across web, document, and developer accessibility domains.
 
 All agents cite authoritative sources (W3C WCAG, ARIA, vendor documentation) and are actively maintained by the Community-Access organization.
 
@@ -398,7 +398,7 @@ Then create release notes on GitHub:
 - ✅ **Official Registry** - Listed in awesome-copilot and github/copilot-plugins
 - ✅ **80 Agents** - WCAG 2.2 AA compliance for web, document, developer accessibility
 - ✅ **25 Skills** - Reusable domain expertise (severity scoring, framework guidance, scanning patterns)
-- ✅ **119 Prompts** - Task-oriented prompts for audits, remediation, GitHub workflows
+- ✅ **134 Prompts** - Task-oriented prompts for audits, remediation, GitHub workflows
 - ✅ **9 Instructions** - Automatic accessibility enforcement on every chat
 
 ## Installation
