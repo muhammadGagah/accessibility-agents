@@ -7,70 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [4.5.0] - 2026-03-26
 
+### Added
+
+#### New Documentation
+
+- **`docs/subagent-architecture.md`** — Comprehensive guide covering VS Code 1.113 agent orchestrator patterns, delegation rules, coordinator-worker architecture, explicit allowlisting validation, nested subagent policy (disabled by default), framework integration (Chat Customizations, Agent Debug Log, MCP compatibility), integration patterns for different platforms (Copilot, Claude Code, Copilot CLI, Codex), and troubleshooting guide for orchestration issues.
+- **`docs/troubleshooting.md`** — Detailed troubleshooting guide covering MCP server issues (List Servers command, trust prompts, workspace vs profile configuration, version checking), agent configuration problems (agent picker, frontmatter syntax validation errors, coordinator allowlist validation), platform-specific debugging (Windows/macOS/Linux), performance optimization, and common accessibility workflow issues.
+
+#### New Validation & CI Tools
+
+- **Coordinator allowlist validation rule** — Added to `scripts/validate-agents.js`: agents using the 'agent' tool must now declare an explicit `agents:` frontmatter field listing which specialist agents they can invoke. This prevents unintended delegation and enforces the explicit coordinator-worker pattern.
+- **`scripts/check-release-consistency.js`** — New CLI tool that verifies version alignment across all release manifests (CHANGELOG.md, plugin.yaml, mcp-server/package.json, gemini-extension.json). Returns zero exit code if all versions match, nonzero if drift detected. Used for pre-release validation and CI checks.
+- **`.github/workflows/check-release-consistency.yml`** — GitHub Actions workflow that automatically runs `check-release-consistency.js` on every push to main and pull request to main, catching version drift before merge.
+
 ### Changed
 
-#### Document Accessibility Reporting And Remediation Guidance
+#### Documentation & Messaging
 
-- Reworked document accessibility reporting so Word, Excel, PowerPoint, and PDF outputs now start with native-tool remediation guidance before deeper technical implementation detail.
-- Updated the guided document audit orchestration across Copilot, Claude Code, and Claude Code plugin so reports consistently prioritize platform-native fixes using Microsoft Office and Adobe Acrobat Pro workflows.
-- Updated document specialist agents for Word, Excel, PowerPoint, and PDF so each report now distinguishes:
-  - fundamental fixes using native product UI
-  - deeper technical or programmatic remediation follow-up
-- Updated document CSV/reporting surfaces so exported remediation guidance follows the same native-tool-first ordering.
-- Updated document prompt flows so generated guidance and reports lead with practical remediation in the target authoring tool rather than starting with low-level implementation detail.
+- Updated README.md with links to new `docs/subagent-architecture.md` and `docs/troubleshooting.md` in the documentation table for improved discoverability.
+- Refreshed `manifest.json` timestamp to 2026-03-26 to reflect release date.
+- Enhanced marketplace and setup guidance with explicit VS Code 1.113 baseline call-outs, including MCP server bridging to Copilot CLI and Claude agents, Chat Customizations editor support, nested subagent defaults, and Agent Debug Log enhancements.
 
-#### Installer, Updater, and Uninstaller Experience
+#### Version Consistency
 
-- Expanded installer behavior to support VS Code Stable and VS Code Insiders side-by-side, including explicit targeting for one profile, the other profile, or both.
-- Added matching profile-targeting behavior for MCP configuration paths so Copilot assets and MCP settings stay aligned across VS Code profile selection.
-- Added `--yes` / `-Yes` and `--no-auto-update` / `-NoAutoUpdate` for non-interactive and CI-friendly install flows.
-- Added machine-readable summary output for install, update, and uninstall flows, with predictable per-operation summary/plan locations for project and global scope.
-- Added shared installer helper modules for shell and PowerShell to reduce drift across install, update, and uninstall logic.
-- Added `check` mode and backup metadata generation across installer operations so scripts can resolve targets and emit rollback-planning metadata without making changes.
-- Normalized summary and plan JSON output to include `schemaVersion`, `timestampUtc`, `operation`, `dryRun`, `check`, `requestedOptions`, and `backupMetadataPath`.
-- PowerShell install and update now accept both `-SummaryPath` and `--summary` for summary output.
-- PowerShell uninstall now accepts `-SummaryPath`, `--summary <path>`, and `--summary=...`, including compatibility handling for absolute Windows paths that PowerShell splits across `$args`.
+- Corrected `CHANGELOG.md` version entry from `## [4.50]` to `## [4.5.0]` to follow semantic versioning (X.Y.Z format, not X.YZ).
+- Updated all platform manifest versions (mcp-server/package.json, plugin.yaml, gemini-extension.json) from v4.0.0 to v4.5.0 for consistency.
 
-#### CI, Safety, And Validation
+#### Agent Orchestration & Validation
 
-- Added macOS system Bash coverage using `/bin/bash` to lock in compatibility with the Bash 3.2 runtime shipped by macOS.
-- Added a macOS shell integration-style workflow path that runs project install, check, update-check, uninstall-check, and uninstall in a disposable temp directory.
-- Expanded Windows PowerShell integration checks to assert both summary files and referenced backup metadata files for install, update, and uninstall across project and global scopes.
-- Dry-run CI now validates `check` / `dryRun` consistency in both top-level summaries and backup metadata files.
-- Added safer temp-root validation patterns for PowerShell project and global flows by redirecting `USERPROFILE`, `APPDATA`, and `LOCALAPPDATA` during testing.
-
-#### MCP Installation Performance
-
-- Added a dedicated PowerShell directory-copy helper for bulk installer copies.
-- Limited `robocopy` usage to the MCP server recursive copy path only, with fallback to `Copy-Item` when `robocopy` is unavailable.
-- Excluded top-level `.git` and `node_modules` directories from MCP tree copies to avoid unnecessary payload growth.
-- Benchmarked the MCP copy path before introducing copy-engine changes, keeping the optimization narrowly scoped to the only materially expensive recursive copy in the installer flow.
-
-#### Documentation
-
-- Expanded installer and setup documentation to cover new non-interactive flags, summary/plan files, backup metadata, safe validation patterns, and VS Code profile targeting behavior.
-- Updated uninstall documentation to reflect the supported PowerShell summary-path syntax and the safest form for absolute Windows paths.
-- Updated release documentation to include the broader installer/refactor/validation work completed in this cycle.
-- Refreshed active VS Code guidance to reflect 1.113 changes that matter to this repo, including MCP bridging into Copilot CLI and Claude agents, the Chat Customizations editor, nested subagents, broader Agent Debug Log coverage, and integrated-browser HTTPS testing guidance.
-- Updated broader user-facing documentation so README and marketplace messaging now call out VS Code 1.113 explicitly as the current GitHub Copilot baseline for this repo.
-- Refreshed additional setup and specialist guidance to align 1.112-era image-analysis, integrated-browser, and troubleshooting references with the current 1.113 workflow.
-
-#### Agent Orchestration
-
-- Added explicit subagent allowlisting to `Accessibility Lead` so 1.113-era delegation stays constrained to the intended specialist set.
-- Documented the repo's 1.113 subagent stance more clearly: explicit coordinator-worker delegation is preferred, while nested subagents remain disabled by default unless a workflow is intentionally designed for recursion.
+- Enhanced `scripts/validate-agents.js` with new coordinator allowlist validation rule that flags agents using the 'agent' tool without an `agents:` frontmatter field, ensuring explicit delegation constraints per 1.113 best practices.
+- Reorganized reference documentation: moved AGENTS.md and code-review-standards.md from `.github/agents/` to `.github/` root directory to clarify that these are reference documents, not agent definitions.
 
 ### Fixed
 
-- Fixed document accessibility feedback ordering so native remediation guidance appears first instead of being buried behind technical detail.
-- Fixed reporting consistency across document wizard, document CSV reporter, and the Word/Excel/PowerPoint/PDF specialist agents and prompts.
-- Fixed VS Code profile handling so Copilot and MCP-related installation flows can target Stable and Insiders predictably when both are present.
-- Fixed PowerShell operation-state initialization failures introduced during the installer refactor.
-- Fixed PowerShell boolean argument passing for backup metadata initialization in install, update, and uninstall.
-- Fixed PowerShell uninstall summary override behavior where `--summary=C:\path\file.json` could be truncated to the drive letter.
-- Fixed docs that overstated macOS shell requirements; installer guidance now reflects Bash 3.2 compatibility on macOS.
-- Aligned installer and uninstall documentation with the actual supported summary-path syntax and machine-readable output behavior.
-- Fixed CI coverage gaps so helper-module changes and shell/runtime-specific installer regressions are now part of automated validation.
+- Fixed version drift across release manifests by implementing version consistency validation and automated CI checking to catch misalignment at the point of commit/push.
+- Fixed agent validation to enforce coordinator allowlist pattern, preventing unintended nested subagent invocations that could exceed 1.113 depth limits.
+- Fixed agent directory organization by moving non-agent reference documents (AGENTS.md, code-review-standards.md) out of the agents directory, reducing validator false positives and improving clarity.
 
 ## [4.10.0] - 2026-03-24
 
