@@ -89,7 +89,7 @@ function Copy-A11yDirectoryTree {
     $ExcludedNames = @('node_modules', '.git')
     $RoboCopy = if ($PreferRobocopy) { Get-Command robocopy -ErrorAction SilentlyContinue } else { $null }
     if ($RoboCopy) {
-        & $RoboCopy.Source $SourceDir $DestinationDir /E /R:2 /W:1 /NFL /NDL /NJH /NJS /NC /NS /NP /XD node_modules .git | Out-Null
+        & $RoboCopy.Path $SourceDir $DestinationDir /E /R:2 /W:1 /NFL /NDL /NJH /NJS /NC /NS /NP /XD node_modules .git | Out-Null
         $RoboCopyExitCode = $LASTEXITCODE
         if ($RoboCopyExitCode -le 7) {
             return 'robocopy'
