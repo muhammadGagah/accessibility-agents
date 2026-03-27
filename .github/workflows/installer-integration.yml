@@ -40,7 +40,7 @@ jobs:
           if (Test-Path $projectRoot) { Remove-Item $projectRoot -Recurse -Force }
           New-Item -ItemType Directory -Path $projectRoot | Out-Null
           . (Join-Path $env:GITHUB_WORKSPACE 'scripts\Installer.Common.ps1')
-          $copyMethod = Copy-A11yDirectoryTree -SourceDir $env:GITHUB_WORKSPACE -DestinationDir $projectRoot -PreferRobocopy
+          $copyMethod = Copy-A11yDirectoryTree -SourceDir $env:GITHUB_WORKSPACE -DestinationDir $projectRoot
           Write-Host "Workspace copied with method: $copyMethod"
           Set-Location $projectRoot
 
