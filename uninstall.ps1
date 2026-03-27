@@ -296,7 +296,7 @@ if ($Choice -eq "1" -and $ProjectDir) {
         }
     }
 
-    # Remove Copilot config files — removes our section markers, preserves user content
+    # Remove Copilot config files - removes our section markers, preserves user content
     $GithubDir = Join-Path $ProjectDir ".github"
     foreach ($Config in @("copilot-instructions.md", "copilot-review-instructions.md", "copilot-commit-message-instructions.md")) {
         $ConfigPath = Join-Path $GithubDir $Config

@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 # Accessibility Agents Installer
 # Started by Taylor Arndt - https://github.com/taylorarndt
 #

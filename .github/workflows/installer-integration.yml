@@ -1,4 +1,4 @@
-name: Installer Integration
+﻿name: Installer Integration
 
 on:
   pull_request:
@@ -39,7 +39,9 @@ jobs:
           $projectRoot = Join-Path $env:RUNNER_TEMP 'a11y-project'
           if (Test-Path $projectRoot) { Remove-Item $projectRoot -Recurse -Force }
           New-Item -ItemType Directory -Path $projectRoot | Out-Null
-          Copy-Item -Path (Join-Path $env:GITHUB_WORKSPACE '*') -Destination $projectRoot -Recurse -Force
+          . (Join-Path $env:GITHUB_WORKSPACE 'scripts\Installer.Common.ps1')
+          $copyMethod = Copy-A11yDirectoryTree -SourceDir $env:GITHUB_WORKSPACE -DestinationDir $projectRoot -PreferRobocopy
+          Write-Host "Workspace copied with method: $copyMethod"
           Set-Location $projectRoot
 
           '' | .\install.ps1 -Project -NoAutoUpdate -SummaryPath .a11y-agent-team-install-summary.json
