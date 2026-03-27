@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 # A11y Agent Team - Update Script
 # Built by Taylor Arndt - https://github.com/taylorarndt
 #

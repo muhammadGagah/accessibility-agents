@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 # Shared helper functions for install/update/uninstall shell scripts.
 
