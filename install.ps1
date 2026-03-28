@@ -1,5 +1,5 @@
 # A11y Agent Team Installer (Windows PowerShell)
-# Built by Taylor Arndt - https://github.com/taylorarndt
+# Built by Community Access - https://community-access.org
 #
 # NOTE: Keep this file ASCII-only. Windows PowerShell 5.1 reads .ps1 files
 # as Windows-1252 when no UTF-8 BOM is present, which corrupts non-ASCII
@@ -84,7 +84,7 @@ if ($Agents.Count -eq 0) {
 
 Write-Host ""
 Write-Host "  A11y Agent Team Installer"
-Write-Host "  Built by Taylor Arndt"
+Write-Host "  Built by Community Access"
 Write-Host "  ========================="
 Write-Host ""
 Write-Host "  Where would you like to install?"

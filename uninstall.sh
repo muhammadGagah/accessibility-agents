@@ -1,6 +1,6 @@
 #!/bin/bash
 # Accessibility Agents Uninstaller
-# Started by Taylor Arndt - https://github.com/taylorarndt
+# Built by Community Access - https://community-access.org
 #
 # Usage:
 #   bash uninstall.sh            Interactive mode

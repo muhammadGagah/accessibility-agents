@@ -1,6 +1,6 @@
 #!/bin/bash
 # A11y Agent Team - Update Script
-# Built by Taylor Arndt - https://github.com/taylorarndt
+# Built by Community Access - https://community-access.org
 #
 # Checks for updates from GitHub and installs them.
 # Can be run manually or automatically via LaunchAgent/cron.

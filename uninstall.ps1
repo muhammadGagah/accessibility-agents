@@ -1,5 +1,5 @@
 # A11y Agent Team Uninstaller (Windows PowerShell)
-# Built by Taylor Arndt - https://github.com/taylorarndt
+# Built by Community Access - https://community-access.org
 #
 # Usage:
 #   irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/uninstall.ps1 | iex

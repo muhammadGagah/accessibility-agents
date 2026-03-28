@@ -1,6 +1,6 @@
 #!/bin/bash
 # Accessibility Agents Installer
-# Started by Taylor Arndt - https://github.com/taylorarndt
+# Built by Community Access - https://community-access.org
 #
 # Usage:
 #   bash install.sh                    Interactive mode (prompts for project or global)
@@ -199,7 +199,7 @@ if [ -z "$choice" ]; then
   fi
   echo ""
   echo "  Accessibility Agents Installer"
-  echo "  Started by Taylor Arndt"
+  echo "  Built by Community Access"
   echo "  ================================"
   echo ""
   echo "  Where would you like to install?"
