@@ -638,22 +638,12 @@ function Test-McpHealthSmoke {
 function Test-NodeModuleAvailable {
     param([string]$WorkingDir, [string]$ModuleName)
 
-    $NodeCmd = Get-Command node -ErrorAction SilentlyContinue
-    if (-not $NodeCmd -or -not $WorkingDir -or -not (Test-Path $WorkingDir)) {
+    if (-not $WorkingDir -or -not (Test-Path $WorkingDir)) {
         return $false
     }
 
-    try {
-        Push-Location $WorkingDir
-        node -e "import('$ModuleName').then(() => process.exit(0)).catch(() => process.exit(1))" | Out-Null
-        $Success = ($LASTEXITCODE -eq 0)
-        Pop-Location
-        return $Success
-    }
-    catch {
-        Pop-Location -ErrorAction SilentlyContinue
-        return $false
-    }
+    $ModulePkgPath = Join-Path $WorkingDir "node_modules" $ModuleName "package.json"
+    return (Test-Path $ModulePkgPath)
 }
 
 function Test-PlaywrightChromiumReady {
@@ -666,7 +656,7 @@ function Test-PlaywrightChromiumReady {
 
     try {
         Push-Location $WorkingDir
-        node -e "import('playwright').then(async ({ chromium }) => { const fs = await import('node:fs'); const exe = chromium.executablePath(); process.exit(exe && fs.existsSync(exe) ? 0 : 1); }).catch(() => process.exit(1))" | Out-Null
+        $null = node -e "import('playwright').then(async ({ chromium }) => { const fs = await import('node:fs'); const exe = chromium.executablePath(); process.exit(exe && fs.existsSync(exe) ? 0 : 1); }).catch(() => process.exit(1))" 2>&1
         $Success = ($LASTEXITCODE -eq 0)
         Pop-Location
         return $Success
