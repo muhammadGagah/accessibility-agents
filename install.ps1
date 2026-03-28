@@ -1406,7 +1406,8 @@ if (Test-Path $McpServerSrc) {
                 Write-Host "  Installing MCP server dependencies..."
                 try {
                     Push-Location $McpDest
-                    npm install --omit=dev
+                    npm install --omit=dev 2>&1 | Out-Null
+                    if ($LASTEXITCODE -ne 0) { throw "npm install failed with exit code $LASTEXITCODE" }
                     Pop-Location
                     Write-Host "    + MCP server dependencies installed"
                 }
@@ -1423,7 +1424,8 @@ if (Test-Path $McpServerSrc) {
                 Write-Host "  Setting up PDF form conversion tooling..."
                 try {
                     Push-Location $McpDest
-                    npm install pdf-lib
+                    npm install pdf-lib 2>&1 | Out-Null
+                    if ($LASTEXITCODE -ne 0) { throw "npm install pdf-lib failed with exit code $LASTEXITCODE" }
                     Pop-Location
                     Write-Host "    + pdf-lib installed"
                 }
@@ -1440,8 +1442,10 @@ if (Test-Path $McpServerSrc) {
                 Write-Host "  Setting up Playwright browser tooling..."
                 try {
                     Push-Location $McpDest
-                    npm install playwright @axe-core/playwright
-                    npx playwright install chromium
+                    npm install playwright @axe-core/playwright 2>&1 | Out-Null
+                    if ($LASTEXITCODE -ne 0) { throw "npm install playwright failed with exit code $LASTEXITCODE" }
+                    npx playwright install chromium 2>&1 | Out-Null
+                    if ($LASTEXITCODE -ne 0) { throw "npx playwright install chromium failed with exit code $LASTEXITCODE" }
                     Pop-Location
                     Write-Host "    + Playwright tooling and Chromium installed"
                 }
