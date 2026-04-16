@@ -79,7 +79,7 @@ gh skill health Community-Access/accessibility-agents
 # Result: Clean, modern installation with no legacy files
 ```
 
-### For 4.6.0 Migrating Users
+### For 4.5.x Migrating Users
 
 **Migration path is documented:**
 - One command to install new skill
