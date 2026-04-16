@@ -61,6 +61,7 @@ Important: you do not need Node.js to run `gh skill install`, `gh skill setup`, 
 ### Windows
 
 **Prerequisites:**
+
 - GitHub CLI (gh) installed ([install.cli.github.com](https://cli.github.com))
 - PowerShell 5.0+ or Windows Terminal
 
@@ -73,6 +74,7 @@ pwsh -NoProfile -File scripts/build-go-cli.ps1
 ```
 
 **Installation:**
+
 ```powershell
 # 1. Install skill
 gh skill install Community-Access/accessibility-agents
@@ -85,6 +87,7 @@ gh skill health Community-Access/accessibility-agents
 ```
 
 **After setup:**
+
 - VS Code agents/skills installed ✅
 - Claude Desktop MCP configured (if selected) ✅
 - Git hooks installed (if selected) ✅
@@ -95,6 +98,7 @@ gh skill health Community-Access/accessibility-agents
 ### macOS
 
 **Prerequisites:**
+
 - GitHub CLI (gh) installed (`brew install gh`)
 - Bash 4+ or Zsh
 
@@ -107,6 +111,7 @@ bash scripts/build-go-cli.sh
 ```
 
 **Installation:**
+
 ```bash
 # 1. Install skill
 gh skill install Community-Access/accessibility-agents
@@ -119,6 +124,7 @@ gh skill health Community-Access/accessibility-agents
 ```
 
 **After setup:**
+
 - VS Code agents/skills installed ✅
 - Claude Desktop MCP configured (if selected) ✅
 - Git hooks installed (if selected) ✅
@@ -129,10 +135,12 @@ gh skill health Community-Access/accessibility-agents
 ### Linux
 
 **Prerequisites:**
+
 - GitHub CLI (gh) installed ([install](https://github.com/cli/cli/blob/trunk/docs/install_linux.md))
 - Bash 4+ or Zsh
 
 **Installation:**
+
 ```bash
 # 1. Install skill
 gh skill install Community-Access/accessibility-agents
@@ -145,6 +153,7 @@ gh skill health Community-Access/accessibility-agents
 ```
 
 **After setup:**
+
 - VS Code agents/skills installed ✅
 - Claude Desktop MCP configured (if selected) ✅
 - Git hooks installed (if selected) ✅
@@ -160,7 +169,7 @@ When you run `gh skill setup Community-Access/accessibility-agents`, you'll be p
 
 Choose how you plan to use accessibility agents:
 
-```
+```text
 ? What's your role? (Use arrow keys)
 ❯ Developer (write UI code)
   Code Reviewer (review accessibility)
@@ -178,7 +187,7 @@ Choose how you plan to use accessibility agents:
 
 ### 2. Installation Scope
 
-```
+```text
 ? Where should agents be installed? (Use arrow keys)
 ❯ Global (this machine, all projects)
   Project (only this workspace)
@@ -191,7 +200,7 @@ Choose how you plan to use accessibility agents:
 
 Select which platforms you use:
 
-```
+```text
 ? Which platforms? (Press space to select, enter to confirm)
 ❯ ✔ VS Code
   ✔ Claude Desktop
@@ -201,11 +210,12 @@ Select which platforms you use:
 
 ### 4. Team Configuration (Optional)
 
-```
+```text
 ? Do you have a team configuration file? (y/n)
 ```
 
 If yes, provide path to `accessibility-agents.json`:
+
 ```json
 {
   "team": "your-team-name",
@@ -217,7 +227,7 @@ If yes, provide path to `accessibility-agents.json`:
 
 ### 5. Git Hooks (Optional)
 
-```
+```text
 ? Install git hooks for pre-commit validation? (y/n)
 ```
 
@@ -228,6 +238,7 @@ If yes, accessibility checks run on every commit.
 ## What the Utilities Do
 
 ### `gh skill setup`
+
 Configures agents and skills for your setup.
 
 ```bash
@@ -242,7 +253,8 @@ gh skill setup Community-Access/accessibility-agents --config team-config.json
 ```
 
 **Output:**
-```
+
+```text
 ✅ Configuration saved to ~/.accessibility-agents/config.json
 ✅ VS Code agents installed (80 agents)
 ✅ VS Code skills installed (25 skills)
@@ -254,6 +266,7 @@ gh skill setup Community-Access/accessibility-agents --config team-config.json
 Implementation note: in 5.0.0 this command is intended to be backed by a native Go binary rather than a Node.js script, which keeps setup lightweight on Windows, macOS, and Linux.
 
 ### `gh skill health`
+
 Validates your installation and runtime environment.
 
 ```bash
@@ -261,6 +274,7 @@ gh skill health Community-Access/accessibility-agents
 ```
 
 **Checks:**
+
 - GitHub CLI version ✅
 - Java version (if needed) ✅
 - Playwright Chromium ✅
@@ -273,7 +287,8 @@ gh skill health Community-Access/accessibility-agents
 Node.js is reported only when a user has enabled local MCP server workflows.
 
 **Output:**
-```
+
+```text
 Agent Health Report
 ═══════════════════════════════════════════
 Runtime Environment:
@@ -292,6 +307,7 @@ Status: ✅ All systems operational
 ```
 
 ### `gh skill repair`
+
 Fixes broken installations or validates configuration.
 
 ```bash
@@ -299,6 +315,7 @@ gh skill repair Community-Access/accessibility-agents
 ```
 
 **Can fix:**
+
 - Missing agent/skill files
 - Corrupted configuration
 - Broken Git hooks
@@ -306,7 +323,8 @@ gh skill repair Community-Access/accessibility-agents
 - Version mismatches
 
 **Output:**
-```
+
+```text
 Repair Check
 ═════════════════════════════════════════════
 Issues Found:        1
@@ -320,6 +338,7 @@ Run with --auto-repair to fix automatically:
 ```
 
 ### `gh skill hooks`
+
 Manages Git hooks for pre-commit accessibility validation.
 
 ```bash
@@ -343,6 +362,7 @@ gh skill hooks test Community-Access/accessibility-agents
 ### Before Migration
 
 You have 4.5.0 or 4.5.1 with:
+
 - `install.ps1` / `install.sh` (old installer)
 - Manual configuration
 - Agents in `~/.claude/agents/`
@@ -367,11 +387,13 @@ gh skill health Community-Access/accessibility-agents
 ```
 
 **What stays the same:**
+
 - Your Git history (untouched)
 - Your VS Code user settings (untouched)
 - Your projects (untouched)
 
 **What changes:**
+
 - Installation method (`gh skill install` instead of script)
 - Configuration location (cleaner setup)
 - Update method (`gh skill upgrade` instead of manual)
@@ -438,6 +460,7 @@ gh skill repair Community-Access/accessibility-agents
 ### "skill not found"
 
 **Solution:** Run with full specification:
+
 ```bash
 gh skill install Community-Access/accessibility-agents
 ```
@@ -445,6 +468,7 @@ gh skill install Community-Access/accessibility-agents
 ### Installation stuck or incomplete
 
 **Solution:** Use repair utility:
+
 ```bash
 gh skill repair Community-Access/accessibility-agents --auto-repair
 ```
@@ -452,6 +476,7 @@ gh skill repair Community-Access/accessibility-agents --auto-repair
 ### VS Code agents not showing up
 
 **Solution:** Check health and restart VS Code:
+
 ```bash
 gh skill health Community-Access/accessibility-agents
 # Then restart VS Code (close all windows and reopen)
@@ -460,6 +485,7 @@ gh skill health Community-Access/accessibility-agents
 ### Git hooks not working
 
 **Solution:** Reinstall hooks:
+
 ```bash
 gh skill hooks install Community-Access/accessibility-agents
 ```
@@ -467,6 +493,7 @@ gh skill hooks install Community-Access/accessibility-agents
 ### Need to restore old installation
 
 **Solution:** GitHub CLI installations are separate from old system:
+
 ```bash
 # New system continues working
 gh skill setup Community-Access/accessibility-agents
@@ -490,7 +517,7 @@ gh skill setup Community-Access/accessibility-agents
 
 These files from the legacy installer flow are **no longer needed** in 5.0.0:
 
-```
+```text
 ❌ install.ps1        (replaced by gh skill install)
 ❌ install.sh         (replaced by gh skill install)
 ❌ uninstall.ps1      (replaced by gh skill uninstall)
@@ -507,7 +534,7 @@ The new system is cleaner, simpler, and more reliable.
 
 ### 5.0.0 Process (NEW)
 
-```
+```text
 1 minute setup:
   gh skill install Community-Access/accessibility-agents
   gh skill setup Community-Access/accessibility-agents
@@ -517,7 +544,7 @@ The new system is cleaner, simpler, and more reliable.
 
 ### Legacy Process (OLD - No longer needed)
 
-```
+```text
 Complex setup:
   Run install.ps1 or install.sh with various flags
   Answer multiple prompts or edit configuration files manually
@@ -535,4 +562,3 @@ gh skill install Community-Access/accessibility-agents
 ```
 
 See you after setup! 🚀
-

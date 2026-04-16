@@ -1,6 +1,7 @@
 # 5.0.0 Migration Summary: Nothing Gets Lost
 
 ## Your Question
+>
 > "Should the installer utilize the new gh skill paradigm? But make sure we don't lose anything as a part of this. Aren't there other things that the installer does?"
 
 ## Answer: YES, EVERYTHING IS PRESERVED
@@ -12,26 +13,32 @@ This document proves nothing gets lost in the migration to `gh skill`.
 ## What The Old Installer Does (6,767 lines)
 
 ### 1. Installation Scope Management
+
 **What it does:**
+
 - Global scope (`~/.claude/agents/`)
 - Project scope (`.claude/agents/` in current dir)
 - Multiple VS Code profiles (Stable, Insiders)
 - Multiple MCP profiles
 
 **Where it moves:**
+
 ```bash
 gh skill setup  # New interactive configuration
 → Choose: Global or Project? → User selects
-```
+```text
 
 ### 2. Agent/Skill File Distribution
+
 **What it does:**
+
 - Copy agents to installation directory
 - Copy skills to installation directory
 - Create manifests
 - Verify file integrity
 
 **Where it moves:**
+
 ```bash
 gh skill install  # GitHub handles this
 → Automatic download to ~/.gh/
@@ -40,7 +47,9 @@ gh skill install  # GitHub handles this
 ```
 
 ### 3. Role-Based Installation
+
 **What it does:**
+
 - Developer role (all agents)
 - Reviewer role (read-only)
 - Author role (content creation)
@@ -48,14 +57,17 @@ gh skill install  # GitHub handles this
 - Custom role (pick individual)
 
 **Where it moves:**
+
 ```bash
 gh skill setup  # Interactive wizard
 → What role? [1] Developer [2] Reviewer [3] Author [4] Full [5] Custom
 → Role automatically configures which agents to activate
-```
+```text
 
 ### 4. Platform-Specific Setup
+
 **What it does:**
+
 - VS Code Copilot extension installation
 - Claude Desktop MCP profile setup
 - Codex CLI setup
@@ -63,6 +75,7 @@ gh skill setup  # Interactive wizard
 - Platform detection (Windows/macOS/Linux)
 
 **Where it moves:**
+
 ```bash
 gh skill setup  # Platform setup wizard
 → Configure for: [✓] VS Code [✓] Claude Desktop [ ] Codex [ ] Gemini
@@ -71,28 +84,34 @@ gh skill setup  # Platform setup wizard
 ```
 
 ### 5. Runtime Validation & Checks
+
 **What it does:**
+
 - Node.js version check (MCP server needs it)
 - Java version check (optional)
 - Playwright browser validation
 - MCP health smoke tests
 
 **Where it moves:**
+
 ```bash
 gh skill health  # New health check utility
 → ✓ Node.js v18.12.0
 → ⚠ Java not found (optional)
 → ✓ Playwright Chromium ready
 → ✓ MCP server accessible
-```
+```text
 
 ### 6. Git Hooks Installation
+
 **What it does:**
+
 - Install pre-commit hooks
 - Register hooks globally
 - Validate hook execution
 
 **Where it moves:**
+
 ```bash
 gh skill hooks install  # New hooks utility
 → Installing pre-commit hooks
@@ -101,28 +120,34 @@ gh skill hooks install  # New hooks utility
 ```
 
 ### 7. Repair & Maintenance
+
 **What it does:**
+
 - Post-install validation
 - Auto-repair functionality
 - Manifest regeneration
 - Version consistency checking
 
 **Where it moves:**
+
 ```bash
 gh skill repair  # New repair utility
 → Regenerating manifests
 → Fixing broken installations
 → Validating version consistency
-```
+```text
 
 ### 8. Configuration Management
+
 **What it does:**
+
 - Role-based installation
 - Team config JSON support
 - Config merging
 - Environment variable setup
 
 **Where it moves:**
+
 ```bash
 gh skill setup  # Configuration wizard
 → Load team config.json
@@ -157,14 +182,16 @@ gh skill setup  # Configuration wizard
 ## The New Workflow (After 5.0.0)
 
 ### Step 1: Install skill distribution
+
 ```bash
 $ gh skill install Community-Access/accessibility-agents
 ✓ Downloaded agents/skills
 ✓ Verified checksums
 ✓ Ready to configure
-```
+```text
 
 ### Step 2: Configure (interactive wizard)
+
 ```bash
 $ gh skill setup Community-Access/accessibility-agents
 
@@ -196,6 +223,7 @@ Configuring Claude Desktop MCP...
 ```
 
 ### Step 3: Validate everything works
+
 ```bash
 $ gh skill health Community-Access/accessibility-agents
 ✓ Node.js v18.12.0 (MCP server requirement)
@@ -205,9 +233,10 @@ $ gh skill health Community-Access/accessibility-agents
 ✓ Claude Desktop: MCP accessible
 ✓ Git hooks: Pre-commit registered
 ✓ All systems healthy
-```
+```text
 
 ### Step 4 (If needed): Fix problems
+
 ```bash
 $ gh skill repair Community-Access/accessibility-agents
 Detecting issues...
@@ -222,9 +251,11 @@ Detecting issues...
 ## New vs Old: Side-by-Side
 
 ### Legacy Installation
+
 Legacy script-based installation (removed in 5.0.0) used platform-specific installer scripts with prompt-driven options.
 
 ### 5.0.0 Installation
+
 ```bash
 # Install skill (unified command, all platforms)
 gh skill install Community-Access/accessibility-agents
@@ -241,19 +272,21 @@ gh skill setup Community-Access/accessibility-agents
 
 # Updates are automatic
 gh skill upgrade Community-Access/accessibility-agents
-```
+```text
 
 ---
 
 ## Nothing Gets Deleted Until Replacements Exist
 
 ### Phase 0 (BLOCKING PREREQUISITE)
+
 ✅ Build 4 CLI utilities (setup/health/repair/hooks)
 ✅ Test on Windows, macOS, Linux
 ✅ Verify feature parity with old installer
 ✅ Document each utility
 
-### Only AFTER Phase 0 is Complete:
+### Only AFTER Phase 0 is Complete
+
 - Delete old installers (install.ps1, install.sh, etc.)
 - Delete supporting scripts (Installer.Common.ps1, etc.)
 - Proceed with CI/CD cleanup
@@ -266,12 +299,14 @@ gh skill upgrade Community-Access/accessibility-agents
 ## Risk Mitigation
 
 ### What Could Theoretically Break?
-- Git hook installation 
+
+- Git hook installation
 - MCP profile setup
 - Role-based configuration
 - Runtime validation
 
 ### How We Prevent It?
+
 - **Phase 0:** Build all utilities
 - **Phase 0:** Test on all platforms
 - **Phase 0:** Verify feature parity
@@ -280,6 +315,7 @@ gh skill upgrade Community-Access/accessibility-agents
 - **Phase 0 ≠ Complete:** No deletion happens
 
 ### What's the Worst That Could Happen?
+
 If Phase 0 reveals issues → Don't delete old installers → 5.0.0 ships with both → Users unaffected
 
 ---
@@ -318,4 +354,3 @@ If Phase 0 reveals issues → Don't delete old installers → 5.0.0 ships with b
 6. → Release: 5.0.0 with gh skill
 
 **Everything is carefully planned. Nothing is lost.**
-

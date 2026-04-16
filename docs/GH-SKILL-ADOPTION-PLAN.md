@@ -5,6 +5,7 @@
 Adopt GitHub's native `gh skill` paradigm as the **primary and only** distribution method for Accessibility Agents 5.0.0.
 
 **Impact:**
+
 - Remove 6,767 lines of installer code
 - Simplify CI/CD by 60%
 - Automatic platform-independent updates
@@ -50,6 +51,7 @@ These utilities replace all installer functionality. Building them first ensures
   - [ ] Global hook registration
 
 - [ ] Update `plugin.yaml` with subcommands:
+
   ```yaml
   subcommands:
     - setup
@@ -116,7 +118,8 @@ These utilities replace all installer functionality. Building them first ensures
 ### Phase 4: Documentation Updates (Week 3-4)
 
 - [ ] **README.md:** New "Quick Start" section
-  ```
+
+  ````text
   ## Quick Start
   
   ```bash
@@ -129,7 +132,8 @@ These utilities replace all installer functionality. Building them first ensures
   # Configure (interactive wizard)
   gh skill setup Community-Access/accessibility-agents
   ```
-  ```
+
+  ````
 
 - [ ] **docs/getting-started.md:** Platform-agnostic
 - [ ] **docs/installation.md:** New file with `gh skill` focus
@@ -173,7 +177,7 @@ These utilities replace all installer functionality. Building them first ensures
 
 ### Files to Delete (6,767 lines)
 
-```
+```text
 install.ps1 ............................ DELETE
 install.sh ............................. DELETE
 uninstall.ps1 .......................... DELETE
@@ -187,7 +191,7 @@ scripts/install-hooks.js ............... DELETE
 
 ### Files to Update
 
-```
+```text
 README.md ..................... ADD "gh skill install" quick start
 docs/getting-started.md ....... Rewrite for gh skill
 docs/installation.md .......... NEW FILE - gh skill focused
@@ -198,7 +202,7 @@ CLAUDE.md ..................... Update installation section
 
 ### Files That Stay (Validated)
 
-```
+```text
 plugin.yaml ..................... ✅ Already gh skill compliant
 manifest.json ................... ✅ Auto-generated correctly
 .github/agents/*.agent.md ....... ✅ All 80 agents valid
@@ -219,6 +223,7 @@ go-cli/ ......................... ✅ Go-based cross-platform utility module
 5. **Environment variables** — Some may differ (but documented)
 
 **Migration is straightforward, but not automatic:**
+
 ```bash
 # Users must do this one time:
 gh skill install Community-Access/accessibility-agents
@@ -230,7 +235,7 @@ gh skill install Community-Access/accessibility-agents
 
 ### Before (Legacy Installer Flow)
 
-```
+```text
 1. Validate agents ........................ ~30s
 2. Check versions ......................... ~5s
 3. Build Windows installer ................ ~45s
@@ -247,7 +252,7 @@ Total: ~360 seconds (6 minutes)
 
 ### After (5.0.0)
 
-```
+```text
 1. Validate agents ........................ ~30s
 2. Check versions ......................... ~5s
 3. Create GitHub release .................. ~10s
@@ -264,7 +269,7 @@ Total: ~50 seconds (< 1 minute)
 
 ### Minimum Requirements
 
-```
+```text
 Operating System: Any (macOS, Windows, Linux)
 GitHub CLI: v2.47.0 or later
 Internet: GitHub API access (not air-gapped)
@@ -299,18 +304,21 @@ If `gh skill` integration fails:
 ## Long-term Benefits
 
 ### For Maintainers
+
 - Reduced code debt (6,767 lines eliminated)
 - Faster release cycles (90% time reduction)
 - Less platform-specific bugs
 - Focus on features, not infrastructure
 
 ### For Users
+
 - Simpler onboarding
 - Automatic updates
 - Discoverable in marketplace
 - Professional GitHub integration
 
 ### For the Ecosystem
+
 - Standard GitHub distribution practice
 - Model for other GitHub projects
 - Reduced maintenance burden for open source
@@ -320,15 +328,19 @@ If `gh skill` integration fails:
 ## Questions & Risks
 
 ### Q: What if users don't have `gh` CLI?
+
 **A:** Installation instructions clearly state requirement. GitHub CLI is ubiquitous for devs.
 
 ### Q: What about air-gapped deployments?
+
 **A:** Use the legacy installer branch if you need the script-based path.
 
 ### Q: Will this break CI/CD integrations?
+
 **A:** No. Users who currently use scripts can upgrade to `gh skill` transparently.
 
 ### Q: How do we handle backward compatibility?
+
 **A:** We don't. 5.0.0 is a major version with a clear migration path.
 
 ---
@@ -338,6 +350,7 @@ If `gh skill` integration fails:
 Before 5.0.0 release:
 
 **CRITICAL PREREQUISITE:**
+
 - [ ] Phase 0 COMPLETE: All CLI utilities built and tested
   - [ ] `go-cli/cmd/setup` working
   - [ ] `go-cli/cmd/health` working
@@ -347,6 +360,7 @@ Before 5.0.0 release:
   - [ ] Multi-platform testing complete
 
 **Only after Phase 0 is complete:**
+
 - [ ] All installers properly deleted
 - [ ] All gh skill integration tests pass
 - [ ] README clearly shows new installation method
@@ -364,6 +378,7 @@ Before 5.0.0 release:
 **✅ YES — Adopt `gh skill` for 5.0.0**
 
 **Rationale:**
+
 1. **Simplification:** 90% code reduction
 2. **Professional:** Native GitHub integration  
 3. **Sustainable:** Lower maintenance burden

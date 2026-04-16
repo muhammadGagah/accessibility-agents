@@ -7,7 +7,7 @@
 The 6,767 lines of installer code handle:
 
 1. **Installation Scope Management**
-   - Global scope (`~/.claude/agents/`) 
+   - Global scope (`~/.claude/agents/`)
    - Project scope (`.claude/agents/` in current dir)
    - Multiple VS Code profiles (Stable, Insiders)
    - Multiple MCP profiles
@@ -65,7 +65,7 @@ The 6,767 lines of installer code handle:
 |--------------|----------|-------|
 | Cross-platform distribution | ✅ Yes | Windows/Mac/Linux unified |
 | Version management | ✅ Yes | Semantic versioning enforced |
-| Agent/skill file delivery | ✅ Yes | Downloaded to `~/.gh/`
+| Agent/skill file delivery | ✅ Yes | Downloaded to `~/.gh/` |
 | Installation verification | ✅ Yes | Checksum validation |
 | Automatic updates | ✅ Yes | Built-in upgrade mechanism |
 | Marketplace discovery | ✅ Yes | Listed in `gh skill search` |
@@ -114,12 +114,14 @@ These features **cannot be handled by gh skill** and must be preserved:
 ## Migration Strategy: Preserve All Functionality
 
 ### Phase 1: Core gh skill Installation
+
 ```bash
 gh skill install Community-Access/accessibility-agents
 # Handles: agent/skill distribution, version management, cross-platform
 ```
 
 ### Phase 2: Post-Install Setup (Interactive)
+
 ```bash
 gh skill setup Community-Access/accessibility-agents
 # User prompted for:
@@ -130,6 +132,7 @@ gh skill setup Community-Access/accessibility-agents
 ```
 
 ### Phase 3: Runtime Validation
+
 ```bash
 gh skill health Community-Access/accessibility-agents
 # Checks:
@@ -141,6 +144,7 @@ gh skill health Community-Access/accessibility-agents
 ```
 
 ### Phase 4: Repair & Maintenance
+
 ```bash
 gh skill repair Community-Access/accessibility-agents
 # Actions:
@@ -151,6 +155,7 @@ gh skill repair Community-Access/accessibility-agents
 ```
 
 ### Phase 5: Git Hooks Management
+
 ```bash
 gh skill hooks Community-Access/accessibility-agents install|uninstall
 # Handles:
@@ -163,7 +168,7 @@ gh skill hooks Community-Access/accessibility-agents install|uninstall
 
 ## New Architecture with gh skill
 
-```
+```text
 ┌─────────────────────────────────────┐
 │  GitHub Release (agent/skill files) │
 └──────────────┬──────────────────────┘
@@ -199,7 +204,9 @@ gh skill hooks Community-Access/accessibility-agents install|uninstall
 ## Files to Create
 
 ### 1. `go-cli/cmd/setup` (Post-Install Setup)
+
 Handles:
+
 - Interactive role selection
 - Scope management (global/project)
 - Platform preferences
@@ -212,7 +219,9 @@ go run ./go-cli/cmd/setup
 ```
 
 ### 2. `go-cli/cmd/health` (Runtime Validation)
+
 Checks:
+
 - Node.js version
 - Java version
 - Playwright core
@@ -225,7 +234,9 @@ go run ./go-cli/cmd/health
 ```
 
 ### 3. `go-cli/cmd/repair` (Fix Broken Installations)
+
 Actions:
+
 - Reinstall Git hooks
 - Regenerate manifests
 - Fix configuration
@@ -237,7 +248,9 @@ go run ./go-cli/cmd/repair --auto-repair
 ```
 
 ### 4. `go-cli/cmd/hooks` (Git Hook Management)
+
 Manages:
+
 - Pre-commit hook installation
 - Hook registration
 - Global hook paths
@@ -289,9 +302,11 @@ go run ./go-cli/cmd/hooks --action status
 ## User Experience: Side-by-Side Comparison
 
 ### Legacy Script-Based Flow (Old Way)
+
 Legacy script-based installation (removed in 5.0.0) used platform-specific installers and repair scripts.
 
 ### 5.0.0+ (New Way)
+
 ```bash
 # Install skill (GitHub handles distribution)
 gh skill install Community-Access/accessibility-agents
@@ -339,7 +354,7 @@ All functionality is **preserved**, just moved from monolithic 2,000+ line insta
 
 ## Recommendation
 
-### YES — Adopt gh skill, BUT:
+### YES — Adopt gh skill, BUT
 
 1. **Build the CLI utilities first** (setup/health/repair/hooks)
 2. **Test thoroughly** to ensure feature parity

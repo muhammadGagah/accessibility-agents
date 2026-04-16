@@ -12,7 +12,7 @@ Install Go with WinGet:
 
 ```powershell
 winget install --id GoLang.Go --exact --accept-package-agreements --accept-source-agreements
-```
+```text
 
 Then open a new PowerShell window and verify:
 
@@ -24,7 +24,7 @@ Build the Windows binaries from the repository root:
 
 ```powershell
 pwsh -NoProfile -File scripts/build-go-cli.ps1
-```
+```text
 
 ### macOS
 
@@ -38,7 +38,7 @@ Verify the install:
 
 ```bash
 go version
-```
+```text
 
 Build the macOS binaries from the repository root:
 
@@ -218,7 +218,7 @@ The installer creates a manifest file at `.claude/.a11y-agent-manifest` (project
 
 Example manifest entries:
 
-```
+```text
 agents/accessibility-lead.md
 agents/aria-specialist.md
 skills/web-scanning
@@ -256,7 +256,7 @@ After running the installer, you can verify that files are in the correct locati
 
 For a project-level install, check for these directories and files:
 
-```
+```text
 your-project/
   .claude/
     agents/         (80+ .md files)
@@ -328,7 +328,7 @@ The installer adds this setting to control which directories VS Code scans for C
     ".claude/agents": false
   }
 }
-```
+```text
 
 **What it does:**
 

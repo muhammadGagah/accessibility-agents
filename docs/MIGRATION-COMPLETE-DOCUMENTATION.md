@@ -7,6 +7,7 @@
 ## Documents Created (This PR)
 
 ### 1. **GH-SKILL-MIGRATION.md** — User-Facing Migration Guide
+
 - Why this change makes sense
 - Migration path for legacy installer users
 - FAQ and troubleshooting
@@ -15,6 +16,7 @@
 **Key quote:** "Installation (new): `gh skill install Community-Access/accessibility-agents`"
 
 ### 2. **GH-SKILL-ADOPTION-PLAN.md** — Implementation Roadmap  
+
 - 7-phase implementation plan
 - **CRITICAL: Phase 0 is prerequisite** (build CLI utilities first)
 - Phase 1: Documentation
@@ -24,6 +26,7 @@
 **Key requirement:** Phase 0 complete before anything deleted
 
 ### 3. **INSTALLER-FUNCTIONALITY-AUDIT.md** — What Works Now & Where It Goes
+
 - Audits all 6,767 lines of installer code
 - Maps 8 major responsibilities
 - Shows what gh skill handles automatically
@@ -33,9 +36,11 @@
 **Result:** All 14 features preserved in new architecture
 
 ### 4. **CLI-UTILITIES-SPECIFICATION.md** — The Replacements
+
 Specifies 4 focused utilities (~850 lines total) that replace old installer:
 
 **Go setup binary** — Interactive configuration wizard
+
 - Role selection (developer/reviewer/author/full/custom)
 - Scope selection (global/project)
 - Platform preferences (VS Code/Claude/Codex/Gemini)
@@ -43,6 +48,7 @@ Specifies 4 focused utilities (~850 lines total) that replace old installer:
 - MCP profile setup
 
 **Go health binary** — Runtime validation
+
 - GitHub CLI/Java checks plus optional Node.js verification for MCP users
 - Playwright browser validation
 - Agent/skill file verification
@@ -51,6 +57,7 @@ Specifies 4 focused utilities (~850 lines total) that replace old installer:
 - Git hooks status
 
 **Go repair binary** — Fix broken installations
+
 - Regenerate manifests
 - Reinstall Git hooks
 - Fix configuration
@@ -58,11 +65,13 @@ Specifies 4 focused utilities (~850 lines total) that replace old installer:
 - Fix file permissions
 
 **Go hooks binary** — Git hook management
+
 - Install/uninstall pre-commit hooks
 - Global hook registration
 - Status checking
 
 ### 5. **MIGRATION-SAFETY-GUARANTEE.md** — Proof Nothing is Lost
+
 - Complete feature mapping table
 - Side-by-side comparison (legacy installer flow vs 5.0.0)
 - Risk mitigation strategy
@@ -111,6 +120,7 @@ Specifies 4 focused utilities (~850 lines total) that replace old installer:
 - [ ] Document each utility
 
 **Why Phase 0 must complete first:**
+
 1. Preserves all functionality before deletion
 2. Tests new code before old code is removed
 3. Allows rollback if issues found
@@ -138,7 +148,7 @@ gh skill upgrade Community-Access/accessibility-agents
 
 # 5. Repair (if needed)
 gh skill repair Community-Access/accessibility-agents
-```
+```text
 
 ### For Maintainers
 
@@ -255,6 +265,7 @@ These will be done in Phase 0 (implementation PR):
 ## Questions?
 
 Consult:
+
 - **"What gets preserved?"** → MIGRATION-SAFETY-GUARANTEE.md
 - **"What's the plan?"** → GH-SKILL-ADOPTION-PLAN.md
 - **"How does the old installer work?"** → INSTALLER-FUNCTIONALITY-AUDIT.md
@@ -268,6 +279,7 @@ Consult:
 **You asked:** "Make it so, but make sure we don't lose anything. Aren't there other things the installer does?"
 
 **We've delivered:**
+
 1. ✅ Complete audit of what installer does
 2. ✅ Mapping of where everything moves
 3. ✅ Specifications for replacement utilities
