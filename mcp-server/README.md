@@ -301,7 +301,7 @@ For more background, see [../docs/tools/verapdf-integration.md](../docs/tools/ve
 
 ```bash
 curl http://127.0.0.1:3100/health
-# {"status":"ok","name":"a11y-agent-team","version":"4.6.0","mode":"stateful"}
+# {"status":"ok","name":"a11y-agent-team","version":"5.0.0","mode":"stateful"}
 ```
 
 ## MCP Prompts

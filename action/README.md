@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: Community-Access/accessibility-agents/action@v4.6.0
+      - uses: Community-Access/accessibility-agents/action@v5.0.0
         with:
           scan-type: web
           fail-on: serious
@@ -67,7 +67,7 @@ jobs:
 ### Scan Office documents and PDFs
 
 ```yaml
-- uses: Community-Access/accessibility-agents/action@v4.6.0
+- uses: Community-Access/accessibility-agents/action@v5.0.0
   with:
     scan-type: all
     profile: strict

@@ -233,6 +233,66 @@ What **does** change:
 
 ---
 
+## Technical Features in 5.0
+
+### EPUB Accessibility Scanning
+
+Three new MCP tools bring EPUB Accessibility 1.1 auditing to any MCP client: `scan_epub`, `scan_epub_reading_order`, and `check_epub_metadata`. Includes configurable `.a11y-epub-config.json` with three profiles (strict, moderate, minimal).
+
+### Markdown Accessibility Scanning
+
+Two new MCP tools audit markdown documentation: `scan_markdown` (nine-domain audit) and `scan_markdown_links` (dedicated link checker with anchor validation).
+
+### veraPDF SARIF Output
+
+`run_verapdf_sarif` produces SARIF 2.1.0 output for GitHub code scanning, VS Code SARIF Viewer, and CI/CD pipelines. Each PDF/UA clause maps to a SARIF rule with help URIs.
+
+### VS Code Extension
+
+Full accessibility toolkit with 7 commands, diagnostics, code actions, a chat participant with 64 slash commands, and auto-scanning on save. Supported file types: HTML, JSX, TSX, Vue, Svelte, Astro, CSS.
+
+### Audit Cache Enhancement
+
+Content-based cache invalidation using SHA-256 hashing. Configurable expiry (`maxAgeDays`, default 30). Stores per-file severity counts for trend analysis.
+
+### Sub-Agent Delegation
+
+Claude Code orchestrators now spawn specialist sub-agents via the Task tool. All six orchestrators include platform-aware delegation with graceful fallback for unsupported environments.
+
+### Audit Persistence
+
+Four new MCP tools store scan results in `.a11y-history/` with SARIF-compatible JSON format, timestamps, scores, grades, and individual findings. Tools: `save_audit_result`, `list_audit_history`, `get_audit_result`, `prune_audit_history`.
+
+### Trend Dashboard
+
+`get_audit_trend` computes score progression with direction (improving/stable/declining), score delta, issue velocity, and statistics. Read-only MCP resource `a11y://dashboard/summary` aggregates trends across all targets.
+
+### APCA Contrast (WCAG 3.0 Draft)
+
+Experimental APCA (Accessible Perceptual Contrast Algorithm) support via `check_apca_contrast`. Polarity-aware calculation with font-size recommendations and WCAG 2.x comparison output. Based on APCA-W3 0.0.98G-4g specification.
+
+### veraPDF Installer Helper
+
+`check_verapdf_installation` auto-detects veraPDF CLI availability and reports version. Platform-specific guidance for Windows (winget/Chocolatey), macOS (Homebrew), and Linux (apt/dnf/snap).
+
+### npm Publish Ready
+
+MCP server package (`@a11y-agent-team/mcp-server`) ready for npm. Zero-install: `npx @a11y-agent-team/mcp-server`. Global install: `npm install -g @a11y-agent-team/mcp-server`.
+
+### GitHub Action for CI/CD
+
+Reusable GitHub Action for accessibility scanning. Inputs: `scan-type`, `profile`, `fail-on`. Integrates with GitHub Code Scanning and PR annotations.
+
+### Security Hardening
+
+Six security improvements: XSS escaping, 500 MB ZIP bomb limit, CORS deny-all policy, session cap with TTL, non-loopback bind warning, corrected SSRF documentation.
+
+### Anthropic Directory Update
+
+`anthropic-directory.json` synced with 37+ MCP tools and 4 resources covering all new audit, persistence, trend, and platform tooling.
+
+---
+
 ## The Bigger Picture
 
 Accessibility Agents is part of a movement: **making AI care about inclusion by default.**

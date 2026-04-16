@@ -1,6 +1,6 @@
 # Roadmap
 
-Current version: **4.6.0** | Next major: **5.0**
+Current version: **5.0.0** (released April 2026)
 
 Full planning details: [5.0 Release Plan](docs/5.0-RELEASE-PLAN.md)
 
@@ -19,10 +19,10 @@ Version 5.0 transitions the project from an advisory scanning tool to a full rem
 | Web source auto-fix MCP tool | Critical | -- | |
 | Markdown auto-fix MCP tool | Medium | -- | |
 | Fix verification loop (apply, re-scan, confirm) | Critical | -- | |
-| veraPDF SARIF integration | High | [#10](https://github.com/Community-Access/accessibility-agents/issues/10) | Shipped in 4.6.0 |
-| EPUB MCP scanning tool | Medium | -- | Shipped in 4.6.0 |
-| Markdown MCP scanning tool | Medium | -- | Shipped in 4.6.0 |
-| Component audit caching | Medium | -- | Shipped in 4.6.0 |
+| veraPDF SARIF integration | High | [#10](https://github.com/Community-Access/accessibility-agents/issues/10) | Shipped in 5.0.0 |
+| EPUB MCP scanning tool | Medium | -- | Shipped in 5.0.0 |
+| Markdown MCP scanning tool | Medium | -- | Shipped in 5.0.0 |
+| Component audit caching | Medium | -- | Shipped in 5.0.0 |
 
 ### Theme 2: Ship as a Product
 
@@ -48,8 +48,8 @@ Version 5.0 transitions the project from an advisory scanning tool to a full rem
 
 | Feature | Priority | Issue | Status |
 |---------|----------|-------|--------|
-| Runtime sub-agent delegation across platforms | High | [#83](https://github.com/Community-Access/accessibility-agents/issues/83) | Shipped in 4.6.0 |
-| Full code and security review | High | [#19](https://github.com/Community-Access/accessibility-agents/issues/19) | Shipped in 4.6.0 |
+| Runtime sub-agent delegation across platforms | High | [#83](https://github.com/Community-Access/accessibility-agents/issues/83) | Shipped in 5.0.0 |
+| Full code and security review | High | [#19](https://github.com/Community-Access/accessibility-agents/issues/19) | Shipped in 5.0.0 |
 | Multi-language support (stretch) | Low | [#14](https://github.com/Community-Access/accessibility-agents/issues/14) | |
 
 ---
