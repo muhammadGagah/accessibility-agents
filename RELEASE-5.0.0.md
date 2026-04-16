@@ -11,6 +11,7 @@ That's Accessibility Agents 5.0.
 ## What Changed
 
 ### Before (The Old Way)
+
 - You write code
 - AI suggests features
 - Weeks later, someone reports: "Your website doesn't work with my screen reader"
@@ -18,6 +19,7 @@ That's Accessibility Agents 5.0.
 - Tension. Costs. Regret.
 
 ### Now (The Magic Way)
+
 - You write code
 - AI automatically checks: Is this keyboard-accessible? Is the contrast good? Did you forget alt text?
 - **Issues caught instantly, during development**
@@ -29,25 +31,31 @@ That's Accessibility Agents 5.0.
 ## What You Get: 80 Accessibility Experts in Your Editor
 
 ### Web Accessibility (13 Specialists)
+
 Your AI now understands **ARIA patterns, keyboard navigation, color contrast, form validation, modals, dynamic content, tables, links, and more.** Each specialist owns one domain completely. They can't forget accessibility—it's who they are.
 
 **Examples:**
+
 - Building a form? The Forms Specialist reminds you about error messages and autocomplete.
 - Fixing a modal? The Modal Specialist ensures focus is managed correctly and escape works.
 - Choosing colors? The Contrast Master ensures readability for everyone, including people with color blindness.
 
 ### Document Accessibility (7 Specialists)
+
 Stop worrying about Word docs, Excel spreadsheets, and PDFs that don't work. Your AI scans them, finds issues, and **suggests exactly how to fix them.**
 
 **Examples:**
+
 - PDF missing alt text on figures? The PDF Specialist shows you which ones and how to tag them.
 - Excel sheet with confusing headers? The Excel Specialist suggests proper structure.
 - PowerPoint with reading order issues? Fixed automatically or guided through repair.
 
 ### Markdown & Documentation (1 Specialist)
+
 Even your README files, guides, and tutorials are now accessible by default.
 
 ### Specialized Domains (5 More)
+
 - **Design Systems:** Validate color tokens before they ship to thousands of pages
 - **Mobile Apps:** React Native, iOS, Android—all covered
 - **Desktop Apps:** Native Windows/macOS accessibility
@@ -77,18 +85,21 @@ You're not stressed. You're not hunting documentation. **You just ship something
 ## The Real Impact
 
 ### For Developers
+
 - Ship faster—catch issues before PR review
 - Less technical debt—accessibility isn't bolted on at the end
 - Learn as you go—each suggestion teaches you something
 - Sleep better—you're not worried about accessibility lawsuits
 
 ### For Organizations
+
 - Reach more users—accessible products work for everyone
 - Reduce legal risk—proactive compliance beats reactive lawsuits
 - Save money—fixing accessibility early costs far less than retrofitting
 - Build trust—show users you care about inclusion
 
 ### For People Using Your Products
+
 - Your product works with screen readers, keyboard only, zoom, high contrast
 - Your documents are actually readable
 - Your apps work on their phones and laptops
@@ -99,9 +110,11 @@ You're not stressed. You're not hunting documentation. **You just ship something
 ## The Technology Behind the Magic
 
 ### 80 AI Agents
+
 Each one is a specialist trained on specific accessibility standards (WCAG 2.2, PDF/UA, COGA, etc.). They coordinate automatically—when you need help, they delegate to the right expert.
 
 ### Multi-Platform
+
 - **GitHub Copilot** (VS Code)—inline suggestions as you code
 - **Claude Code**—powerful standalone accessibility audits
 - **Gemini**—skills-based accessibility guidance
@@ -110,6 +123,7 @@ Each one is a specialist trained on specific accessibility standards (WCAG 2.2, 
 - **MCP Server**—programmatic access for any AI platform
 
 ### Powered by Standards, Not Opinions
+
 - WCAG 2.2 (Web Content Accessibility Guidelines)
 - PDF/UA (PDF Universal Accessibility)
 - WAI-ARIA (Accessible Rich Internet Applications)
@@ -122,21 +136,27 @@ Every suggestion traces back to an official standard. We're not making this up.
 ## Who This Is For
 
 ### Individual Developers
+
 Working alone? Use Accessibility Agents locally in Claude Code or Codex CLI. Your personal accessibility consultant.
 
 ### Web Development Teams
+
 Using GitHub Copilot? You get automatic accessibility checking in every PR. Consistency across the team.
 
 ### Content & Documentation Teams
+
 Creating manuals, guides, training materials? Accessibility Agents checks markdown, PDFs, and Office docs automatically.
 
 ### Accessibility Specialists
+
 Auditing a codebase? Running our guided audit tool gives you severity-scored findings, VPAT reports, and remediation scripts.
 
 ### QA Engineers
+
 Integrate accessibility scanning into CI/CD. Fail builds on accessibility regressions, not just syntax errors.
 
 ### Government & Enterprise
+
 Compliance auditors? We track VPAT 2.5, ADA Title II/III, Section 508, EU EN 301 549, AODA. Your documentation is ready.
 
 ---
@@ -144,7 +164,8 @@ Compliance auditors? We track VPAT 2.5, ADA Title II/III, Section 508, EU EN 301
 ## Getting Started: 2 Minutes to Your First Scan
 
 ### Option 1: Claude Desktop (Easiest)
-```
+
+```text
 1. Download Claude Desktop
 2. Click "Tools" → "Add Model Context Protocol"
 3. Paste: github.com/Community-Access/accessibility-agents
@@ -153,7 +174,8 @@ Compliance auditors? We track VPAT 2.5, ADA Title II/III, Section 508, EU EN 301
 ```
 
 ### Option 2: GitHub Copilot (Most Integrated)
-```
+
+```text
 1. Install VS Code extension
 2. Open your project
 3. Type: /accessibility-lead
@@ -161,7 +183,8 @@ Compliance auditors? We track VPAT 2.5, ADA Title II/III, Section 508, EU EN 301
 ```
 
 ### Option 3: Codex CLI (Scriptable)
-```
+
+```text
 bash <(curl -fsSL https://install.accessibility-agents.dev)
 codex /agent accessibility-lead
 ```
@@ -207,12 +230,15 @@ We believe:
 ## Real World Stories
 
 ### Sarah, a Startup Founder
+
 > "Before Accessibility Agents, I didn't even know where to start. Now my AI checks every line of code. We launched with zero accessibility issues. Our customers with disabilities are actually using our product. That changes everything."
 
 ### Marcus, an Enterprise Developer
+
 > "Our compliance team used to audit for Section 508 issues at the end of the quarter. Now we catch them in code review. Cost went down, quality went up. Everyone wins."
 
 ### Priya, an Accessibility Specialist
+
 > "I spent 20 hours manually auditing a website. Now I ask the AI to do it in 2 minutes. It's 95% accurate. I review the findings, generate a VPAT report in 10 minutes, and move on. My job is faster, not gone—I'm just focused on the hard parts."
 
 ---
@@ -220,12 +246,14 @@ We believe:
 ## What Doesn't Change
 
 You still:
+
 - Make design decisions
 - Write business logic
 - Test your product
 - Think about your users
 
 What **does** change:
+
 - You're never alone in those decisions
 - Your AI actively helps you think about accessibility
 - You ship with confidence
