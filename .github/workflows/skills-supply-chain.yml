@@ -43,7 +43,7 @@ jobs:
       - name: Sign manifest (best effort on PRs)
         env:
           GH_SKILLS_SIGNING_KEY: ${{ secrets.GH_SKILLS_SIGNING_KEY }}
-          REQUIRE_SIGNING: ${{ github.ref == 'refs/heads/main' && 'true' || 'false' }}
+          REQUIRE_SIGNING: ${{ secrets.GH_SKILLS_SIGNING_KEY && github.ref == 'refs/heads/main' && 'true' || 'false' }}
         run: node scripts/sign-skills-manifest.js
 
       - name: Upload supply chain artifacts
