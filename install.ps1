@@ -173,6 +173,63 @@ function Write-InstallSummaryFile {
     Write-A11ySummaryFile -Path $Path -Data $Data
 }
 
+function ConvertFrom-Jsonc {
+    # VS Code settings.json is JSONC: it permits // line comments,
+    # /* block comments */, and trailing commas. PowerShell's
+    # ConvertFrom-Json rejects all three. Strip them safely (preserving
+    # any // or /* sequences that appear inside string literals) and
+    # then parse.
+    param([Parameter(Mandatory = $true)] [string]$Text)
+
+    if ([string]::IsNullOrWhiteSpace($Text)) { return $null }
+
+    $sb = New-Object System.Text.StringBuilder
+    $i = 0
+    $len = $Text.Length
+    $inString = $false
+    $escape = $false
+
+    while ($i -lt $len) {
+        $ch = $Text[$i]
+        if ($inString) {
+            [void]$sb.Append($ch)
+            if ($escape) { $escape = $false }
+            elseif ($ch -eq '\') { $escape = $true }
+            elseif ($ch -eq '"') { $inString = $false }
+            $i++
+            continue
+        }
+        if ($ch -eq '"') {
+            $inString = $true
+            [void]$sb.Append($ch)
+            $i++
+            continue
+        }
+        if ($ch -eq '/' -and ($i + 1) -lt $len) {
+            $next = $Text[$i + 1]
+            if ($next -eq '/') {
+                $i += 2
+                while ($i -lt $len -and $Text[$i] -ne "`n" -and $Text[$i] -ne "`r") { $i++ }
+                continue
+            }
+            if ($next -eq '*') {
+                $i += 2
+                while ($i -lt ($len - 1) -and -not ($Text[$i] -eq '*' -and $Text[$i + 1] -eq '/')) { $i++ }
+                $i += 2
+                continue
+            }
+        }
+        [void]$sb.Append($ch)
+        $i++
+    }
+
+    # Remove trailing commas before } or ] (outside strings; the rebuilt
+    # string above already has comments stripped, so a plain regex is safe).
+    $clean = [regex]::Replace($sb.ToString(), ',(\s*[}\]])', '$1')
+
+    return ($clean | ConvertFrom-Json -Depth 20)
+}
+
 function Configure-VSCodeMcpSettings {
     param([string]$SettingsPath, [string]$Url)
 
@@ -182,20 +239,30 @@ function Configure-VSCodeMcpSettings {
     }
 
     $SettingsObject = [PSCustomObject]@{}
+    $HadComments = $false
     if (Test-Path $SettingsPath) {
+        $Raw = $null
         try {
-            $Raw = Get-Content $SettingsPath -Raw
-            if (-not [string]::IsNullOrWhiteSpace($Raw)) {
-                $Parsed = $Raw | ConvertFrom-Json -Depth 20
-                if ($Parsed) {
-                    $SettingsObject = $Parsed
-                }
-            }
+            $Raw = [IO.File]::ReadAllText($SettingsPath, [Text.Encoding]::UTF8)
         }
         catch {
-            Write-Host "    ! Could not parse $SettingsPath"
+            Write-Host "    ! Could not read $SettingsPath"
             Write-Host "      Add this manually later under mcp.servers.a11y-agent-team.url = $Url"
             return
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($Raw)) {
+            if ($Raw -match '(^|[^:"])//' -or $Raw -match '/\*') { $HadComments = $true }
+            $Parsed = $null
+            try {
+                $Parsed = ConvertFrom-Jsonc -Text $Raw
+            }
+            catch {
+                Write-Host "    ! Could not parse $SettingsPath as JSON or JSONC: $($_.Exception.Message)"
+                Write-Host "      Add this manually later under mcp.servers.a11y-agent-team.url = $Url"
+                return
+            }
+            if ($Parsed) { $SettingsObject = $Parsed }
         }
     }
 
@@ -221,38 +288,53 @@ function Configure-VSCodeMcpSettings {
         $A11yServer | Add-Member -NotePropertyName "url" -NotePropertyValue $Url
     }
 
-    $SettingsObject | ConvertTo-Json -Depth 20 | Set-Content $SettingsPath -Encoding UTF8
+    $Json = $SettingsObject | ConvertTo-Json -Depth 20
+    [IO.File]::WriteAllText($SettingsPath, $Json, [Text.UTF8Encoding]::new($false))
     Write-Host "    + MCP server registered in $SettingsPath"
+    if ($HadComments) {
+        Write-Host "      Note: existing // and /* */ comments in settings.json were not preserved."
+    }
 }
 
-function Get-NodeMajorVersion {
-    $NodeCmd = Get-Command node -ErrorAction SilentlyContinue
-    if (-not $NodeCmd) {
-        return $null
+function Get-CommandMajorVersion {
+    # Unified version detection for executables on PATH.
+    # Prefers the FileVersionInfo on the resolved ApplicationInfo object
+    # (Get-Command .Version), which is fast and immune to locale/stderr
+    # formatting quirks. Falls back to invoking the command with a
+    # version flag when FileVersionInfo is missing or zero.
+    param(
+        [Parameter(Mandatory = $true)] [string]$Name,
+        [string[]]$VersionArgs = @('--version')
+    )
+
+    $Cmd = Get-Command $Name -ErrorAction SilentlyContinue
+    if (-not $Cmd) { return $null }
+
+    # 1) Try the .Version property (System.Version from FileVersionInfo).
+    $VersionObj = $null
+    try { $VersionObj = $Cmd.Version } catch { $VersionObj = $null }
+    if ($VersionObj -and $VersionObj.Major -gt 0) {
+        # Java reports 1.x for pre-9 releases via FileVersionInfo too;
+        # collapse 1.N -> N to match the modern "feature version" scheme.
+        if ($VersionObj.Major -eq 1 -and $VersionObj.Minor -gt 0) {
+            return [int]$VersionObj.Minor
+        }
+        return [int]$VersionObj.Major
     }
 
+    # 2) Fallback: invoke the command and parse the first version-looking token.
+    $Output = $null
     try {
-        return [int](& node -p "process.versions.node.split('.')[0]" 2>$null)
+        $Output = & $Cmd.Source @VersionArgs 2>&1 | Out-String
     }
     catch {
         return $null
     }
-}
 
-function Get-JavaMajorVersion {
-    $JavaCmd = Get-Command java -ErrorAction SilentlyContinue
-    if (-not $JavaCmd) {
-        return $null
-    }
+    if ([string]::IsNullOrWhiteSpace($Output)) { return $null }
 
-    try {
-        $JavaVersionLine = (& java -version 2>&1 | Select-Object -First 1)
-    }
-    catch {
-        return $null
-    }
-
-    if ($JavaVersionLine -match '"(?<major>\d+)(?:\.(?<minor>\d+))?') {
+    # Match patterns like  "21.0.1"  v18.17.0  1.8.0_392  21+35
+    if ($Output -match '(?<major>\d+)(?:\.(?<minor>\d+))?(?:\.\d+)?') {
         $Major = [int]$matches['major']
         if ($Major -eq 1 -and $matches['minor']) {
             return [int]$matches['minor']
@@ -260,17 +342,156 @@ function Get-JavaMajorVersion {
         return $Major
     }
 
-    if ($JavaVersionLine -match '\b(?<major>\d+)\b') {
-        return [int]$matches['major']
-    }
-
     return $null
+}
+
+function Get-NodeMajorVersion {
+    return Get-CommandMajorVersion -Name 'node' -VersionArgs @('--version')
+}
+
+function Get-JavaMajorVersion {
+    return Get-CommandMajorVersion -Name 'java' -VersionArgs @('-version')
+}
+
+function Get-NpmMajorVersion {
+    return Get-CommandMajorVersion -Name 'npm' -VersionArgs @('--version')
 }
 
 function Refresh-ProcessPath {
     $MachinePath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
     $UserPath = [System.Environment]::GetEnvironmentVariable("Path", "User")
     $env:Path = ($MachinePath, $UserPath -join ";")
+}
+
+function Add-UserPath {
+    # Add $Dir to the user Path environment variable (persistent) and to the
+    # current process Path. No-op if the directory is already on either path.
+    param([Parameter(Mandatory = $true)] [string]$Dir)
+
+    if (-not (Test-Path $Dir)) { return }
+
+    $UserPath = [System.Environment]::GetEnvironmentVariable("Path", "User")
+    if (-not $UserPath) { $UserPath = "" }
+    $Existing = $UserPath -split ';' | Where-Object { $_ -and ($_.TrimEnd('\') -ieq $Dir.TrimEnd('\')) }
+    if (-not $Existing) {
+        $NewUserPath = if ([string]::IsNullOrWhiteSpace($UserPath)) { $Dir } else { "$UserPath;$Dir" }
+        [System.Environment]::SetEnvironmentVariable("Path", $NewUserPath, "User")
+    }
+
+    if (-not (($env:Path -split ';') | Where-Object { $_ -and ($_.TrimEnd('\') -ieq $Dir.TrimEnd('\')) })) {
+        $env:Path = "$env:Path;$Dir"
+    }
+}
+
+function Install-VeraPdfDirect {
+    # Download and silent-install veraPDF without requiring Chocolatey.
+    # Uses the official IzPack installer from software.verapdf.org with an
+    # auto-install XML descriptor. Returns $true on success, $false otherwise.
+    param(
+        [string]$InstallerUrl = 'https://software.verapdf.org/releases/verapdf-installer.zip',
+        [string]$InstallDir = (Join-Path $env:LOCALAPPDATA 'Programs\verapdf')
+    )
+
+    $JavaCmd = Get-Command java -ErrorAction SilentlyContinue
+    if (-not $JavaCmd) {
+        Write-Host "    ! Java is required to run the veraPDF installer. Install Java 11+ first."
+        return $false
+    }
+
+    $JavaMajor = Get-JavaMajorVersion
+    if ($JavaMajor -and $JavaMajor -lt 11) {
+        Write-Host "    ! Detected Java $JavaMajor. veraPDF requires Java 11 or later."
+        return $false
+    }
+
+    $WorkDir = Join-Path $env:TEMP "verapdf-installer-$(Get-Random)"
+    $ZipPath = Join-Path $WorkDir 'verapdf-installer.zip'
+    $ExtractDir = Join-Path $WorkDir 'extracted'
+    $XmlPath = Join-Path $WorkDir 'auto-install.xml'
+
+    try {
+        New-Item -ItemType Directory -Force -Path $WorkDir | Out-Null
+        New-Item -ItemType Directory -Force -Path $ExtractDir | Out-Null
+
+        Write-Host "    Downloading veraPDF installer..."
+        $OldProgress = $ProgressPreference
+        $ProgressPreference = 'SilentlyContinue'
+        try {
+            Invoke-WebRequest -Uri $InstallerUrl -OutFile $ZipPath -UseBasicParsing -ErrorAction Stop
+        }
+        finally {
+            $ProgressPreference = $OldProgress
+        }
+
+        Write-Host "    Extracting installer..."
+        Expand-Archive -Path $ZipPath -DestinationPath $ExtractDir -Force
+
+        $InstallerJar = Get-ChildItem -Path $ExtractDir -Recurse -Filter 'verapdf-*-installer.jar' -File | Select-Object -First 1
+        if (-not $InstallerJar) {
+            $InstallerJar = Get-ChildItem -Path $ExtractDir -Recurse -Filter '*-installer.jar' -File | Select-Object -First 1
+        }
+        if (-not $InstallerJar) {
+            Write-Host "    ! Could not find verapdf installer jar inside the downloaded zip."
+            return $false
+        }
+
+        # IzPack auto-install descriptor. The pack indices/names match the
+        # veraPDF installer panels documented at docs.verapdf.org.
+        $EscapedInstallDir = [System.Security.SecurityElement]::Escape($InstallDir)
+        $AutoInstallXml = @"
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AutomatedInstallation langpack="eng">
+  <com.izforge.izpack.panels.htmlhello.HTMLHelloPanel id="welcome"/>
+  <com.izforge.izpack.panels.target.TargetPanel id="install_dir">
+    <installpath>$EscapedInstallDir</installpath>
+  </com.izforge.izpack.panels.target.TargetPanel>
+  <com.izforge.izpack.panels.packs.PacksPanel id="sdk_pack_select">
+    <pack index="0" name="veraPDF GUI" selected="true"/>
+    <pack index="1" name="veraPDF Mac and *nix Startup Scripts" selected="false"/>
+    <pack index="2" name="veraPDF Validation models" selected="true"/>
+    <pack index="3" name="veraPDF Documentation" selected="false"/>
+    <pack index="4" name="veraPDF Sample Plugins" selected="false"/>
+  </com.izforge.izpack.panels.packs.PacksPanel>
+  <com.izforge.izpack.panels.install.InstallPanel id="install"/>
+  <com.izforge.izpack.panels.finish.FinishPanel id="finish"/>
+</AutomatedInstallation>
+"@
+        [IO.File]::WriteAllText($XmlPath, $AutoInstallXml, [Text.UTF8Encoding]::new($false))
+
+        Write-Host "    Running silent veraPDF install to $InstallDir..."
+        & java -jar $InstallerJar.FullName $XmlPath 2>&1 | Out-Null
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "    ! veraPDF installer exited with code $LASTEXITCODE."
+            return $false
+        }
+
+        $VeraBin = Join-Path $InstallDir 'verapdf.bat'
+        if (-not (Test-Path $VeraBin)) {
+            $VeraBin = Get-ChildItem -Path $InstallDir -Recurse -Filter 'verapdf.bat' -File -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
+        }
+
+        if ($VeraBin -and (Test-Path $VeraBin)) {
+            $VeraBinDir = Split-Path -Parent $VeraBin
+            Add-UserPath -Dir $VeraBinDir
+            Write-Host "    + veraPDF installed to $InstallDir"
+            Write-Host "    + Added $VeraBinDir to user PATH"
+            Write-Host "    ! Restart your terminal or VS Code so verapdf is available."
+            return $true
+        }
+        else {
+            Write-Host "    ! veraPDF install completed but verapdf.bat was not found under $InstallDir."
+            return $false
+        }
+    }
+    catch {
+        Write-Host "    ! Direct veraPDF install failed: $($_.Exception.Message)"
+        return $false
+    }
+    finally {
+        if (Test-Path $WorkDir) {
+            Remove-Item -Recurse -Force $WorkDir -ErrorAction SilentlyContinue
+        }
+    }
 }
 
 $VsCodeProfileMode = Get-RequestedProfileMode -Stable:$VsCodeStable -Insiders:$VsCodeInsiders -Both:$VsCodeBoth
@@ -1604,7 +1825,21 @@ if (Test-Path $McpServerSrc) {
                 }
             }
 
-            if ($ChocoCmd) {
+            $VeraInstalled = $false
+            $JavaReadyForDirect = ($JavaCmd -and (-not $JavaMajor -or $JavaMajor -ge 11))
+            if ($JavaReadyForDirect) {
+                Write-Host ""
+                if (Read-YesNo -Prompt 'Install veraPDF now by direct download (no Chocolatey needed)?' -DefaultYes:$false) {
+                    if (Install-VeraPdfDirect) {
+                        $VeraInstalled = $true
+                    }
+                    else {
+                        Write-Host "    ! Direct veraPDF install did not complete. You can try Chocolatey or the manual installer."
+                    }
+                }
+            }
+
+            if (-not $VeraInstalled -and $ChocoCmd) {
                 Write-Host ""
                 if (Read-YesNo -Prompt 'Install veraPDF now with Chocolatey?' -DefaultYes:$false) {
                     try {
@@ -1623,6 +1858,7 @@ if (Test-Path $McpServerSrc) {
             Write-Host ""
             Write-Host "  Windows options:"
             Write-Host "    Java runtime via winget: winget install --exact --id EclipseAdoptium.Temurin.21.JRE"
+            Write-Host "    veraPDF direct download: https://software.verapdf.org/releases/verapdf-installer.zip"
             Write-Host "    veraPDF via Chocolatey: choco install verapdf"
             Write-Host "    veraPDF manual install: https://docs.verapdf.org/install/"
             Write-Host "    macOS:   brew install verapdf"
